@@ -5,8 +5,7 @@ import classNames from 'classnames';
 import NavbarTop from 'components/navbar/top/NavbarTop';
 import NavbarVertical from 'components/navbar/vertical/NavbarVertical';
 import Footer from 'components/footer/Footer';
-import ProductProvider from 'components/app/e-commerce/ProductProvider';
-import CourseProvider from 'components/app/e-learning/CourseProvider';
+import CourseProvider from 'components/pages/e-learning/CourseProvider';
 
 const MainLayout = () => {
   const { hash, pathname } = useLocation();
@@ -38,16 +37,14 @@ const MainLayout = () => {
       {(navbarPosition === 'vertical' || navbarPosition === 'combo') && (
         <NavbarVertical />
       )}
-      <ProductProvider>
-        <CourseProvider>
-          <div className={classNames('content', { 'pb-0': isKanban })}>
-            <NavbarTop />
-            {/*------ Main Routes ------*/}
-            <Outlet />
-            {!isKanban && <Footer />}
-          </div>
-        </CourseProvider>
-      </ProductProvider>
+      <CourseProvider>
+        <div className={classNames('content', { 'pb-0': isKanban })}>
+          <NavbarTop />
+          {/*------ Main Routes ------*/}
+          <Outlet />
+          {!isKanban && <Footer />}
+        </div>
+      </CourseProvider>
     </div>
   );
 };
