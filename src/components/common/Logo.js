@@ -26,8 +26,10 @@ const Logo = ({ at, width, className, textClass, ...rest }) => {
           className
         )}
       >
-        <img className="me-2" src={logo} alt="Logo" width={width} />
-        <span className={classNames('font-sans-serif', textClass)}>STQO</span>
+        <img className="me-2 d-none" src={logo} alt="Logo" width={width} />
+        <span className={classNames('font-sans-serif text-black', textClass)}>
+          STQO
+        </span>
       </div>
     </Link>
   );

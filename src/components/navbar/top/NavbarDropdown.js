@@ -34,7 +34,7 @@ const NavbarDropdown = ({ title, children }) => {
         {/* {children} */}
         <Card
           className={classNames('shadow-none dark__bg-1000', {
-            'navbar-card-app': title === 'app',
+            'navbar-card-app': title === 'app' || title === 'Links',
             'navbar-card-pages': title === 'pages',
             'navbar-card-components': title === 'modules'
           })}

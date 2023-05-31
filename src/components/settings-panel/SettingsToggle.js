@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
 import AppContext from '../../context/Context';
+import classNames from 'classnames';
 
-const SettingsToggle = () => {
+const SettingsToggle = prop => {
+  const { isDisabled } = prop;
   const { setConfig } = useContext(AppContext);
 
   const handleClick = () => {
@@ -10,7 +12,12 @@ const SettingsToggle = () => {
   };
 
   return (
-    <Card className="setting-toggle" onClick={handleClick}>
+    <Card
+      className={classNames('setting-toggle', {
+        'd-none': isDisabled
+      })}
+      onClick={handleClick}
+    >
       <Card.Body className="d-flex align-items-center py-md-2 px-2 py-1">
         <div
           className="bg-soft-primary position-relative rounded-start"

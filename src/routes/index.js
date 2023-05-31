@@ -6,7 +6,7 @@ import ErrorLayout from '../layouts/ErrorLayout';
 import Error404 from 'components/errors/Error404';
 import Error500 from 'components/errors/Error500';
 
-import Starter from 'components/pages/Starter';
+// import Starter from 'components/pages/Starter';
 import Courses from 'components/pages/e-learning/course/Courses';
 import CourseDetails from 'components/pages/e-learning/course/course-details';
 import CreateCourse from 'components/pages/e-learning/course/create-a-course';
@@ -23,8 +23,11 @@ const FalconRoutes = () => {
 
       {/* //--- MainLayout Starts  */}
       <Route element={<MainLayout />}>
-        {/*Dashboard*/}
-        <Route path="/" element={<Starter />} />
+        {/*Home*/}
+        <Route
+          path="/"
+          element={<Navigate to="/e-learning/course/course-list" replace />}
+        />
 
         {/* E Learning */}
         <Route path="e-learning/course/:courseLayout" element={<Courses />} />
