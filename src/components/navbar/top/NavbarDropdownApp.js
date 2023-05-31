@@ -4,7 +4,7 @@ import { Nav, Row, Col } from 'react-bootstrap';
 import { getFlatRoutes } from 'helpers/utils';
 import NavbarNavLink from './NavbarNavLink';
 
-const NavbarDropdownPages = ({ items }) => {
+const NavbarDropdownApp = ({ items }) => {
   const routes = getFlatRoutes(items);
 
   return (
@@ -26,7 +26,7 @@ const NavbarDropdownPages = ({ items }) => {
   );
 };
 
-NavbarDropdownPages.propTypes = {
+NavbarDropdownApp.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       icon: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
@@ -37,4 +37,4 @@ NavbarDropdownPages.propTypes = {
   ).isRequired
 };
 
-export default NavbarDropdownPages;
+export default NavbarDropdownApp;

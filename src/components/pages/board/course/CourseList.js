@@ -77,14 +77,9 @@ const CourseList = ({ course }) => {
                       </SoftBadge>
                     ))}
                   </Flex>
-                  <h5 className="fs-0">
-                    <Link to="/e-learning/trainer-profile">{trainer}</Link>
-                  </h5>
+                  <h5 className="fs-0">{trainer}</h5>
                   <h4 className="mt-3 mt-sm-0 fs-0 fs-lg-1">
-                    <Link
-                      to={`/e-learning/course/course-details/${id}`}
-                      className="text-900"
-                    >
+                    <Link to={`/board/details/${id}`} className="text-900">
                       {name}
                     </Link>
                   </h4>
@@ -106,13 +101,15 @@ const CourseList = ({ course }) => {
                   >
                     <div className="mb-lg-4 mt-auto mt-lg-0">
                       <h4 className="fs-1 text-warning d-flex align-items-center">
-                        <span>${price}</span>
+                        지분율 <span>{price}</span>
                         {oldPrice && (
-                          <del className="ms-2 fs--1 text-700">${oldPrice}</del>
+                          <span className="ms-2 fs--1 text-700">
+                            참여자 : {oldPrice}명
+                          </span>
                         )}
                       </h4>
                       <p className="mb-0 fs--1 text-800">
-                        {totalEnrolled.toLocaleString()} Learners Enrolled
+                        {totalEnrolled.toLocaleString()} 참여중
                       </p>
                     </div>
                     <Flex className="mt-3 flex-lg-column gap-2">
@@ -131,9 +128,7 @@ const CourseList = ({ course }) => {
                           })}
                         />
                         <span className="ms-1 d-none d-lg-inline">
-                          {isInFavouriteItems(id)
-                            ? 'Wishlisted'
-                            : 'Add to Wishlist'}
+                          {isInFavouriteItems(id) ? '관심게시물' : '관심등록'}
                         </span>
                       </Button>
                       <Button
@@ -148,7 +143,7 @@ const CourseList = ({ course }) => {
                           }`}
                         />
                         <span className="ms-1 d-none d-lg-inline">
-                          {isInCart(id) ? 'Added' : 'Add to Cart'}
+                          {isInCart(id) ? '참여완료' : '참여하기'}
                         </span>
                       </Button>
                     </Flex>

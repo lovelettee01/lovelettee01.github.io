@@ -24,9 +24,9 @@ const PurchaseCard = () => {
           <Card.Body className="text-center">
             <img src={image} alt="" width={80} />
             <p className="fs--2 mt-2">
-              Loving what you see?
+              주주생각과 APP을 통해서 주주인증이 가능합니다.?
               <br />
-              Get your copy of <Link to="#!">Falcon</Link>
+              APP 다운로드 <Link to="#!">Download</Link>
             </p>
             <div className="d-grid gap-2">
               <Button
@@ -36,7 +36,7 @@ const PurchaseCard = () => {
                 size="sm"
                 className="btn-purchase"
               >
-                Purchase
+                앱구경하기
               </Button>
             </div>
           </Card.Body>

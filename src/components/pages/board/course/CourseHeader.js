@@ -22,7 +22,7 @@ const CourseHeader = ({ layout, setShowFilterOffcanvas }) => {
   return (
     <Card className="mb-3">
       <Card.Header className="position-relative">
-        <h5 className="mb-0 mt-1">All Courses</h5>
+        <h5 className="mb-0 mt-1">주주여론 리스트</h5>
         <Background image={corner6} className="d-none d-md-block bg-card" />
       </Card.Header>
       <Card.Body className="pt-0 pt-md-3">
@@ -73,9 +73,9 @@ const CourseHeader = ({ layout, setShowFilterOffcanvas }) => {
                           handleSortByChange(target.value)
                         }
                       >
-                        <option value="price">Price</option>
-                        <option value="rating">Rating</option>
-                        <option value="review">Review</option>
+                        <option value="rating">지분율</option>
+                        <option value="review">댓글</option>
+                        <option value="like">좋아요</option>
                       </Form.Select>
                       <InputGroup.Text
                         as={Button}
@@ -106,7 +106,7 @@ const CourseHeader = ({ layout, setShowFilterOffcanvas }) => {
                       }
                     >
                       <Link
-                        to="/e-learning/course/course-grid"
+                        to="/board/gird"
                         className={`me-3 ${
                           layout === 'grid' ? 'text-700' : 'text-400 hover-700'
                         }`}
@@ -127,7 +127,7 @@ const CourseHeader = ({ layout, setShowFilterOffcanvas }) => {
                       }
                     >
                       <Link
-                        to="/e-learning/course/course-list"
+                        to="/board/list"
                         className={`me-2 ${
                           layout === 'list' ? 'text-700' : 'text-400 hover-700'
                         }`}

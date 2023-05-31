@@ -5,7 +5,7 @@ export const pageRoutes = {
     {
       name: '주주여론 플랫폼',
       icon: 'flag',
-      to: '/e-learning/course/course-list',
+      to: '/board/list',
       active: true
     }
   ]

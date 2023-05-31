@@ -66,16 +66,11 @@ const CourseGrid = ({ course }) => {
             </Hoverbox>
             <div className="p-3">
               <h5 className="fs-0 mb-2">
-                <Link
-                  to={`/e-learning/course/course-details/${id}`}
-                  className="text-dark"
-                >
+                <Link to={`/board/details/${id}`} className="text-dark">
                   {name}
                 </Link>
               </h5>
-              <h5 className="fs-0">
-                <Link to="/e-learning/trainer-profile">{trainer}</Link>
-              </h5>
+              <h5 className="fs-0">{trainer}</h5>
             </div>
           </div>
           <Row className="g-0 mb-3 align-items-end">

@@ -53,7 +53,7 @@ const Courses = () => {
     setItemsPerPage
   } = usePagination(courses, coursePerPage);
 
-  const layout = courseLayout.split(/-/)[1];
+  const layout = courseLayout;
   const isList = layout === 'list';
   const isGrid = layout === 'grid';
 

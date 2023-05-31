@@ -1,145 +1,57 @@
 import course1 from 'assets/img/e-learning/courses/course1.png';
 import course2 from 'assets/img/e-learning/courses/course2.png';
 import course3 from 'assets/img/e-learning/courses/course3.png';
-import course4 from 'assets/img/e-learning/courses/course4.png';
-import course5 from 'assets/img/e-learning/courses/course5.png';
-import course6 from 'assets/img/e-learning/courses/course6.png';
-import course7 from 'assets/img/e-learning/courses/course7.png';
-import course8 from 'assets/img/e-learning/courses/course8.png';
-import course9 from 'assets/img/e-learning/courses/course9.png';
 import beachVideo from 'assets/video/beach.mp4';
 import beachPoster from 'assets/video/beach.jpg';
-
-import chevronUp from 'assets/img/icons/chevron-up.svg';
-import doubleChevronUp from 'assets/img/icons/double-chevron-up.svg';
-import tripleChevronUp from 'assets/img/icons/triple-chevron-up.svg';
 
 export const courseFilters = [
   {
     label: 'Category',
     options: [
       {
-        label: 'Free',
+        label: '상장사',
         icon: 'file-alt',
         type: 'checkbox',
-        value: 'free course',
-        name: 'free course'
+        value: '상장',
+        name: '상장'
       },
       {
-        label: 'Paid',
+        label: '비상장사',
         icon: 'file-invoice-dollar',
         type: 'checkbox',
-        value: 'paid course',
-        name: 'paid course'
-      },
-      {
-        label: 'On Sale',
-        icon: 'tags',
-        iconShrink: true,
-        type: 'checkbox',
-        value: 'on sale',
-        name: 'on sale'
+        value: '비상장',
+        name: '비상장'
       }
     ]
   },
   {
-    label: 'Subject',
+    label: '거래소',
     options: [
       {
-        label: 'Design',
+        label: 'KOSPI200',
         icon: 'brush',
         type: 'checkbox',
-        value: 'design',
-        name: 'design'
+        value: 'KOSPI200',
+        name: 'KOSPI200'
       },
       {
-        label: 'Web Development',
+        label: 'KOSPI',
         icon: 'globe',
         type: 'checkbox',
-        value: 'development',
-        name: 'development'
+        value: 'KOSPI',
+        name: 'KOSPI'
       },
       {
-        label: 'Software',
+        label: 'KOSDAQ',
         icon: 'code',
         type: 'checkbox',
-        value: 'software',
-        name: 'software'
-      },
-      {
-        label: 'Business',
-        icon: 'balance-scale-left',
-        type: 'checkbox',
-        value: 'business',
-        name: 'business'
-      },
-      {
-        label: 'Marketing',
-        icon: 'comment-dollar',
-        type: 'checkbox',
-        value: 'marketing',
-        name: 'marketing'
-      },
-      {
-        label: 'Self Help',
-        icon: 'hand-holding-water',
-        type: 'checkbox',
-        value: 'self help',
-        name: 'self help'
-      },
-      {
-        label: 'Photography',
-        icon: 'camera-retro',
-        type: 'checkbox',
-        value: 'photograpy',
-        name: 'photograpy'
-      },
-      {
-        label: 'Music',
-        icon: 'music',
-        type: 'checkbox',
-        value: 'music',
-        name: 'music'
-      },
-      {
-        label: 'Writing',
-        icon: 'pen-nib',
-        type: 'checkbox',
-        value: 'writing',
-        name: 'writing'
-      },
-      {
-        label: 'Painting',
-        icon: 'palette',
-        type: 'checkbox',
-        value: 'painting',
-        name: 'painting'
-      },
-      {
-        label: 'Cooking',
-        icon: 'utensils',
-        type: 'checkbox',
-        value: 'cooking',
-        name: 'cooking'
-      },
-      {
-        label: 'Teaching',
-        icon: 'book',
-        type: 'checkbox',
-        value: 'teaching',
-        name: 'teaching'
-      },
-      {
-        label: 'Miscellaneous',
-        icon: 'thumbtack',
-        type: 'checkbox',
-        value: 'misc',
-        name: 'misc'
+        value: 'KOSDAQ',
+        name: 'KOSDAQ'
       }
     ]
   },
   {
-    label: 'Rating',
+    label: '지분율',
     options: [
       {
         label: '4.5 & Up',
@@ -170,111 +82,6 @@ export const courseFilters = [
         value: 3.0
       }
     ]
-  },
-  {
-    label: 'Proficiency',
-    options: [
-      {
-        label: 'Beginner',
-        svg: chevronUp,
-        type: 'checkbox',
-        value: 'beginner',
-        name: 'beginner'
-      },
-      {
-        label: 'Intermediate',
-        svg: doubleChevronUp,
-        type: 'checkbox',
-        value: 'intermediate',
-        name: 'intermediate'
-      },
-      {
-        label: 'Professional',
-        svg: tripleChevronUp,
-        type: 'checkbox',
-        value: 'professional',
-        name: 'professional'
-      },
-      {
-        label: 'Master',
-        icon: 'star',
-        type: 'checkbox',
-        value: 'master',
-        name: 'master'
-      },
-      {
-        label: 'Everyone',
-        icon: 'users',
-        type: 'checkbox',
-        value: 'everyone',
-        name: 'everyone'
-      }
-    ]
-  },
-  {
-    label: 'Language',
-    options: [
-      {
-        label: 'English',
-        type: 'checkbox',
-        selected: true,
-        value: 'english',
-        name: 'english'
-      },
-      {
-        label: 'Spanish',
-        type: 'checkbox',
-        value: 'spanish',
-        name: 'spanish'
-      },
-      {
-        label: 'French',
-        type: 'checkbox',
-        value: 'french',
-        name: 'french'
-      },
-      {
-        label: 'German',
-        type: 'checkbox',
-        value: 'german',
-        name: 'german'
-      },
-      {
-        label: 'Bengali',
-        type: 'checkbox',
-        value: 'bengali',
-        name: 'bengali'
-      },
-      {
-        label: 'Hindi',
-        type: 'checkbox',
-        value: 'hindi',
-        name: 'hindi'
-      },
-      {
-        label: 'Arabic',
-        type: 'checkbox',
-        value: 'arabic',
-        name: 'arabic'
-      }
-    ]
-  },
-  {
-    label: 'Enrolled Courses',
-    options: [
-      {
-        label: 'Show',
-        name: 'enrolledCourses',
-        type: 'radio',
-        value: 'all courses'
-      },
-      {
-        label: 'Dont Show',
-        name: 'enrolledCourses',
-        type: 'radio',
-        value: 'new courses'
-      }
-    ]
   }
 ];
 
@@ -282,13 +89,13 @@ const tags = {
   writing: {
     id: 1,
     type: 'primary',
-    content: 'Writing',
+    content: '상장사',
     icon: 'pen-nib'
   },
   topTrainer: {
     id: 2,
     type: 'success',
-    content: 'Top Trainer',
+    content: '기업',
     icon: 'crown'
   },
   editorsChoice: {
@@ -300,19 +107,19 @@ const tags = {
   misc: {
     id: 4,
     type: 'primary',
-    content: 'Misc.',
+    content: '투표중',
     icon: 'thumbtack'
   },
   design: {
     id: 5,
     type: 'primary',
-    content: 'Design',
+    content: '투표종료',
     icon: 'brush'
   },
   bestSeller: {
     id: 6,
     type: 'success',
-    content: 'Best Seller',
+    content: '인기',
     icon: 'hashtag'
   },
   painting: {
@@ -326,12 +133,12 @@ const tags = {
 export const courseData = [
   {
     id: 'CN000001',
-    name: 'Script Writing Masterclass: Introdution to Industry Cliches',
+    name: '전자투표 및 전자위임 제도 채택 건의',
     price: 69.99,
-    oldPrice: 139.99,
+    oldPrice: 11,
     excerpt:
-      'Explore all the advanced design tools like Photoshop, Illustrator, Krita, Procreate, & Inkscape; trace the evolution of graphic design with us, from the first breakthrough of image development to today’s AI assisted designs. Begin your visual language journey with these advanced design tools.',
-    trainer: 'Bill Finger',
+      '기업의 주식시장 상장으로 투자자는 투자와 매각의 편이성이 높아졌지만, 이로인한 기업 소유 구조의 분산은 최대주주 위주의 지배구조를 더욱 강화시킨다. 이로인해 주주들은 권리의 행사보다는 투자 수익에 초점을 맞춘다. 하지만, 기업이 전자투표 및 전자위임 제도를 채택할 경우, 기업의 지배구조는 더욱 투명성을 가질 수 있고 이를 기반으로 ESG 철학에 부응하는 사업전략을 갖추게 될 수 있다.',
+    trainer: '밸런시움',
     thumbnail: {
       image: course1,
       video: beachVideo,
@@ -344,12 +151,12 @@ export const courseData = [
   },
   {
     id: 'CN000002',
-    name: 'Composition in Comics: Easy to Read Between Panels',
+    name: '트러스톤운용, BYC 주주행동 예고…“ESG 개선돼야”',
     price: 39.99,
-    oldPrice: 139.99,
+    oldPrice: 139,
     excerpt:
-      'Explore all the advanced design tools like Photoshop, Illustrator, Krita, Procreate, & Inkscape; trace the evolution of graphic design with us, from the first breakthrough of image development to today’s AI assisted designs. Begin your visual language journey with these advanced design tools.',
-    trainer: 'Bill Finger',
+      '트러스톤자산운용이 BYC(001460)에 대해 주주행동을 예고했다.트러스톤자산운용은 23일 주주로서 좀 더 적극적인 주주활동을 수행하기 위함이라면서 BYC 보유 목적을 ‘경영참가 목적’으로 변경 공시했다. 22일 기준 BYC 주식을 5만780주(8.13%, 의결권 행사가능주식 8.06%) 보유하고 있다.',
+    trainer: '키키쿵',
     thumbnail: {
       image: course2,
       video: beachVideo,
@@ -362,12 +169,12 @@ export const courseData = [
   },
   {
     id: 'CN000003',
-    name: 'Advanced Design Tools for Modern Designs',
+    name: '명신산업 주식담보대출 반대',
     price: 69.55,
-    oldPrice: 139.99,
+    oldPrice: 12,
     excerpt:
       'Explore all the advanced design tools like Photoshop, Illustrator, Krita, Procreate, & Inkscape; trace the evolution of graphic design with us, from the first breakthrough of image development to today’s AI assisted designs. Begin your visual language journey with these advanced design tools.',
-    trainer: 'Bill Finger',
+    trainer: '포도나무',
     thumbnail: {
       image: course3,
       video: beachVideo,
@@ -378,114 +185,5 @@ export const courseData = [
     review: 108009,
     tags: [tags.design, tags.bestSeller],
     wishlisted: true
-  },
-  {
-    id: 'CN000004',
-    name: 'Comic Page Layout: Analysing The Classics',
-    price: 49.55,
-    oldPrice: 99.99,
-    excerpt:
-      'Explore all the advanced design tools like Photoshop, Illustrator, Krita, Procreate, & Inkscape; trace the evolution of graphic design with us, from the first breakthrough of image development to today’s AI assisted designs. Begin your visual language journey with these advanced design tools.',
-    trainer: 'Bill Finger',
-    thumbnail: {
-      image: course4,
-      video: beachVideo,
-      videoPoster: beachPoster
-    },
-    totalEnrolled: 32106,
-    rating: 4.6,
-    review: 26777,
-    tags: [tags.misc, tags.topTrainer],
-    addedToCart: true
-  },
-  {
-    id: 'CN000005',
-    name: 'Abstract Painting: Zero to Mastery in Traditional Medium',
-    price: 69.99,
-    oldPrice: 109.99,
-    excerpt:
-      'Explore all the advanced design tools like Photoshop, Illustrator, Krita, Procreate, & Inkscape; trace the evolution of graphic design with us, from the first breakthrough of image development to today’s AI assisted designs. Begin your visual language journey with these advanced design tools.',
-    trainer: 'J. H. Williams III',
-    thumbnail: {
-      image: course5,
-      video: beachVideo,
-      videoPoster: beachPoster
-    },
-    totalEnrolled: 2304,
-    rating: 4.8,
-    review: 1527,
-    tags: [tags.design, tags.topTrainer]
-  },
-  {
-    id: 'CN000006',
-    name: 'Inking: Choosing Between Analog vs Digital',
-    price: 39.99,
-    oldPrice: 139.99,
-    excerpt:
-      'Explore all the advanced design tools like Photoshop, Illustrator, Krita, Procreate, & Inkscape; trace the evolution of graphic design with us, from the first breakthrough of image development to today’s AI assisted designs. Begin your visual language journey with these advanced design tools.',
-    trainer: 'Bill Finger',
-    thumbnail: {
-      image: course6,
-      video: beachVideo,
-      videoPoster: beachPoster
-    },
-    totalEnrolled: 9312,
-    rating: 4.7,
-    review: 8179,
-    tags: [tags.painting, tags.topTrainer]
-  },
-  {
-    id: 'CN000007',
-    name: 'Character Design Masterclass: Your First Supervillain',
-    price: 99.9,
-    oldPrice: 139.9,
-    excerpt:
-      'Explore all the advanced design tools like Photoshop, Illustrator, Krita, Procreate, & Inkscape; trace the evolution of graphic design with us, from the first breakthrough of image development to today’s AI assisted designs. Begin your visual language journey with these advanced design tools.',
-    trainer: 'Bill Finger',
-    thumbnail: {
-      image: course7,
-      video: beachVideo,
-      videoPoster: beachPoster
-    },
-    totalEnrolled: 292603,
-    rating: 4.9,
-    review: 201452,
-    tags: [tags.writing, tags.bestSeller, tags.editorsChoice]
-  },
-  {
-    id: 'CN000008',
-    name: 'Character Design Masterclass: Your First Superhero',
-    price: 69.99,
-    oldPrice: 129.99,
-    excerpt:
-      'Explore all the advanced design tools like Photoshop, Illustrator, Krita, Procreate, & Inkscape; trace the evolution of graphic design with us, from the first breakthrough of image development to today’s AI assisted designs. Begin your visual language journey with these advanced design tools.',
-    trainer: 'Bill Finger',
-    thumbnail: {
-      image: course8,
-      video: beachVideo,
-      videoPoster: beachPoster
-    },
-    totalEnrolled: 90304,
-    rating: 4.8,
-    review: 80259,
-    tags: [tags.writing, tags.editorsChoice]
-  },
-  {
-    id: 'CN000009',
-    name: 'Character Design Masterclass: Your First Sidekick',
-    price: 69.99,
-    oldPrice: 139.99,
-    excerpt:
-      'Explore all the advanced design tools like Photoshop, Illustrator, Krita, Procreate, & Inkscape; trace the evolution of graphic design with us, from the first breakthrough of image development to today’s AI assisted designs. Begin your visual language journey with these advanced design tools.',
-    trainer: 'Bill Finger',
-    thumbnail: {
-      image: course9,
-      video: beachVideo,
-      videoPoster: beachPoster
-    },
-    totalEnrolled: 66304,
-    rating: 4.5,
-    review: 55699,
-    tags: [tags.writing, tags.topTrainer]
   }
 ];

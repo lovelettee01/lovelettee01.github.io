@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import NavbarTop from 'components/navbar/top/NavbarTop';
 import NavbarVertical from 'components/navbar/vertical/NavbarVertical';
 import Footer from 'components/footer/Footer';
-import CourseProvider from 'components/pages/e-learning/CourseProvider';
+import CourseProvider from 'components/pages/board/CourseProvider';
 
 const MainLayout = () => {
   const { hash, pathname } = useLocation();
