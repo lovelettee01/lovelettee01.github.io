@@ -45,8 +45,8 @@ const AuthCardLayout = ({ leftSideContent, children, footer = true }) => {
                       </Link>
                       <p className="opacity-75 text-white">
                         With the power of Falcon, you can now focus only on
-                        functionaries for your digital products, while leaving
-                        the UI design on us!
+                        functionaries for your digital posts, while leaving the
+                        UI design on us!
                       </p>
                     </div>
                   </div>

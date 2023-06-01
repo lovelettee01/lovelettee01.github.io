@@ -7,9 +7,12 @@ import Error404 from 'components/errors/Error404';
 import Error500 from 'components/errors/Error500';
 
 // import Starter from 'components/pages/Starter';
-import Courses from 'components/pages/board/course/Courses';
-import CourseDetails from 'components/pages/board/course/course-details';
-import CreateCourse from 'components/pages/board/course/create-a-course';
+import Companys from 'components/pages/company/lists/Companys';
+import CompanyDetails from 'components/pages/company/details';
+import CompanyCreate from 'components/pages/company/create';
+
+import Post from 'components/pages/post/lists/Posts';
+import PostDetails from 'components/pages/post/details/PostDetails';
 
 const FalconRoutes = () => {
   return (
@@ -22,13 +25,17 @@ const FalconRoutes = () => {
       {/* //--- MainLayout Starts  */}
       <Route element={<MainLayout />}>
         {/*Home*/}
-        <Route path="/" element={<Navigate to="/board/list" replace />} />
+        <Route path="/" element={<Navigate to="/company/list" replace />} />
 
-        {/* E Learning */}
-        <Route path="board/:courseLayout" element={<Courses />} />
-        <Route path="board/details" element={<CourseDetails />} />
-        <Route path="board/details/:courseId" element={<CourseDetails />} />
-        <Route path="board/create" element={<CreateCourse />} />
+        {/* Company */}
+        <Route path="company/:companyLayout" element={<Companys />} />
+        <Route path="company/details/:companyId" element={<CompanyDetails />} />
+        <Route path="company/create" element={<CompanyCreate />} />
+
+        {/* Post */}
+        <Route path="post/:postLayout" element={<Post />} />
+        <Route path="post/details/:postId" element={<PostDetails />} />
+        <Route path="post/create" element={<CompanyCreate />} />
       </Route>
 
       {/* //--- MainLayout end  */}

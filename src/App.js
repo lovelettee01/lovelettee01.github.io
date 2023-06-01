@@ -41,7 +41,7 @@ const App = () => {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <FalconRoutes />
-      <SettingsToggle isDisabled />
+      <SettingsToggle isDisabled={false} />
       <SettingsPanel />
       <ToastContainer
         closeButton={CloseButton}

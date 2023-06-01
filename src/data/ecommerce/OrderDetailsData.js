@@ -1,4 +1,4 @@
-export const orderedProductsData = [
+export const orderedPostsData = [
   {
     id: 1,
     name: 'Platinum web hosting package9',

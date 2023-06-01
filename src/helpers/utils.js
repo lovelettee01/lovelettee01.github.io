@@ -183,8 +183,8 @@ export const getSubtotal = items =>
 export const getDiscountPrice = (total, discount) =>
   total - total * (discount / 100);
 
-export const getProductsQuantity = products =>
-  products.reduce((acc, product) => product.quantity + acc, 0);
+export const getPostsQuantity = posts =>
+  posts.reduce((acc, post) => post.quantity + acc, 0);
 
 //===============================
 // Helpers

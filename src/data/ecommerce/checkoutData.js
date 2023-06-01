@@ -1,17 +1,17 @@
 export const orders = [
   {
     id: 1,
-    product: 'Apple MacBook Pro 15"',
+    post: 'Apple MacBook Pro 15"',
     quantity: 1,
-    productKey: 'Z0V20008N',
+    postKey: 'Z0V20008N',
     specification: ['2.9GHz 6-core 8th-Gen Intel Core i9', '32GB RAM'],
     price: 1345
   },
   {
     id: 2,
-    product: 'Apple iMac Pro',
+    post: 'Apple iMac Pro',
     quantity: 1,
-    productKey: '',
+    postKey: '',
     specification: [
       '27-inch with Retina 5K Display',
       '3.0GHz 10-core Intel Xeon W',

@@ -1,9 +1,9 @@
-import course1 from 'assets/img/e-learning/courses/course1.png';
-import course2 from 'assets/img/e-learning/courses/course2.png';
-import course3 from 'assets/img/e-learning/courses/course3.png';
-import course5 from 'assets/img/e-learning/courses/course5.png';
-import course7 from 'assets/img/e-learning/courses/course7.png';
-import course8 from 'assets/img/e-learning/courses/course8.png';
+import company1 from 'assets/img/e-learning/companys/company1.png';
+import company2 from 'assets/img/e-learning/companys/company2.png';
+import company3 from 'assets/img/e-learning/companys/company3.png';
+import company5 from 'assets/img/e-learning/companys/company5.png';
+import company7 from 'assets/img/e-learning/companys/company7.png';
+import company8 from 'assets/img/e-learning/companys/company8.png';
 
 export const spendingsData = [85, 60, 120, 70, 100, 15, 65, 80, 60, 75, 45];
 
@@ -13,7 +13,7 @@ export const assignmentScores = [
   {
     id: 0,
     range: '90-100%',
-    courses: 10,
+    companys: 10,
     color: 'success',
     badge: {
       type: 'success',
@@ -24,7 +24,7 @@ export const assignmentScores = [
   {
     id: 1,
     range: '70-90%',
-    courses: 16,
+    companys: 16,
     color: 'primary',
     badge: {
       type: 'danger',
@@ -35,7 +35,7 @@ export const assignmentScores = [
   {
     id: 2,
     range: '40-70%',
-    courses: 12,
+    companys: 12,
     color: 'info',
     badge: {
       type: 'secondary',
@@ -45,7 +45,7 @@ export const assignmentScores = [
   {
     id: 3,
     range: '0-40%',
-    courses: 2,
+    companys: 2,
     color: 'warning',
     badge: {
       type: 'primary',
@@ -55,12 +55,12 @@ export const assignmentScores = [
   }
 ];
 
-export const courseStatusData = [
+export const companyStatusData = [
   {
     id: 0,
-    title: 'Completed Courses',
+    title: 'Completed Companys',
     color: 'primary',
-    courses: 13,
+    companys: 13,
     badge: {
       type: 'success',
       content: '2.1%',
@@ -69,9 +69,9 @@ export const courseStatusData = [
   },
   {
     id: 1,
-    title: 'Dropped Courses',
+    title: 'Dropped Companys',
     color: 'warning',
-    courses: 10,
+    companys: 10,
     badge: {
       type: 'primary',
       content: '3.5%',
@@ -82,7 +82,7 @@ export const courseStatusData = [
     id: 2,
     title: 'Refund Claimed',
     color: 'success',
-    courses: 7,
+    companys: 7,
     badge: {
       type: 'secondary',
       content: '0.00%'
@@ -90,9 +90,9 @@ export const courseStatusData = [
   },
   {
     id: 3,
-    title: 'On-going Courses',
+    title: 'On-going Companys',
     color: 'info',
-    courses: 20,
+    companys: 20,
     badge: {
       type: 'danger',
       content: '5.1%',
@@ -103,7 +103,7 @@ export const courseStatusData = [
 
 export const payments = [
   {
-    courseId: '123232',
+    companyId: '123232',
     invoice: 'FA613145',
     amount: 39.99,
     date: '01/10/21',
@@ -111,7 +111,7 @@ export const payments = [
     color: 'warning'
   },
   {
-    courseId: '147832',
+    companyId: '147832',
     invoice: 'LC014357',
     amount: 19.99,
     date: '12/12/21',
@@ -119,7 +119,7 @@ export const payments = [
     color: 'success'
   },
   {
-    courseId: '965473',
+    companyId: '965473',
     invoice: 'FC657916',
     amount: 35.99,
     date: '23/08/21',
@@ -127,7 +127,7 @@ export const payments = [
     color: 'warning'
   },
   {
-    courseId: '854763',
+    companyId: '854763',
     invoice: 'TN654236',
     amount: 20.99,
     date: '09/04/21',
@@ -135,7 +135,7 @@ export const payments = [
     color: 'danger'
   },
   {
-    courseId: '232645',
+    companyId: '232645',
     invoice: 'ON820965',
     amount: 45.49,
     date: '03/09/21',
@@ -143,7 +143,7 @@ export const payments = [
     color: 'success'
   },
   {
-    courseId: '232471',
+    companyId: '232471',
     invoice: 'TN755429',
     amount: 99.95,
     date: '31/12/21',
@@ -151,7 +151,7 @@ export const payments = [
     color: 'danger'
   },
   {
-    courseId: '232558',
+    companyId: '232558',
     invoice: 'TN789426',
     amount: 55.95,
     date: '31/12/21',
@@ -170,8 +170,8 @@ export const recentActivities = [
   },
   {
     id: 1,
-    title: 'Added course#123456 to cart',
-    description: 'Added course to cart, Did not pay, Left cart',
+    title: 'Added company#123456 to cart',
+    description: 'Added company to cart, Did not pay, Left cart',
     time: '3h ago',
     icon: 'shopping-cart'
   },
@@ -185,23 +185,23 @@ export const recentActivities = [
   {
     id: 3,
     title: 'Sent a direct mail to Tra_bil37a8',
-    description: 'Tra_bil37a8 is trainer of course#121212 ',
+    description: 'Tra_bil37a8 is trainer of company#121212 ',
     time: '5h ago',
     icon: 'envelope'
   },
   {
     id: 4,
     title: 'Submitted assignment no.3',
-    description: 'Assignment of course#121212 was due yesterday.',
+    description: 'Assignment of company#121212 was due yesterday.',
     time: '5h ago',
     icon: 'file-upload'
   }
 ];
 
-export const enrolledCoursesData = [
+export const enrolledCompanysData = [
   {
     title: 'Advanced Design Tools for Modern Designs',
-    image: course3,
+    image: company3,
     trainer: 'Bill finger',
     enrollmentDate: '01/10/21',
     worked: '12h:50m:00s',
@@ -210,7 +210,7 @@ export const enrolledCoursesData = [
   },
   {
     title: 'Character Design Masterclass: Your First Superhero',
-    image: course8,
+    image: company8,
     trainer: 'Bruce Timm',
     enrollmentDate: '01/10/21',
     worked: '10h:40m:50s',
@@ -219,7 +219,7 @@ export const enrolledCoursesData = [
   },
   {
     title: 'Script Writing Masterclass: Introdution to Industry Cliches',
-    image: course1,
+    image: company1,
     trainer: 'Bill finger',
     enrollmentDate: '01/10/21',
     worked: '12h:50m:00s',
@@ -228,7 +228,7 @@ export const enrolledCoursesData = [
   },
   {
     title: 'Abstract Painting: Zero to Mastery in Traditional Medium',
-    image: course5,
+    image: company5,
     trainer: 'J. H. Williams III',
     enrollmentDate: '03/09/21',
     worked: '38h:10m:09s',
@@ -237,7 +237,7 @@ export const enrolledCoursesData = [
   },
   {
     title: 'Character Design Masterclass: Your First Supervillain',
-    image: course7,
+    image: company7,
     trainer: 'Bill finger',
     enrollmentDate: '01/10/21',
     worked: '02h:29m:00s',
@@ -246,7 +246,7 @@ export const enrolledCoursesData = [
   },
   {
     title: 'Composition in Comics: Easy to Read Between Panels',
-    image: course2,
+    image: company2,
     trainer: 'Bill finger',
     enrollmentDate: '31/12/21',
     worked: '00h:50m:30s',

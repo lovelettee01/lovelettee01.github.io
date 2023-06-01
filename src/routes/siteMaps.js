@@ -3,9 +3,15 @@ export const pageRoutes = {
   labelDisable: true,
   children: [
     {
-      name: '주주여론 플랫폼',
+      name: '종목모임',
       icon: 'flag',
-      to: '/board/list',
+      to: '/company/list',
+      active: true
+    },
+    {
+      name: '주주여론 게시물',
+      icon: 'file-alt',
+      to: '/post/list',
       active: true
     }
   ]

@@ -5,7 +5,8 @@ import classNames from 'classnames';
 import NavbarTop from 'components/navbar/top/NavbarTop';
 import NavbarVertical from 'components/navbar/vertical/NavbarVertical';
 import Footer from 'components/footer/Footer';
-import CourseProvider from 'components/pages/board/CourseProvider';
+import PostProvider from 'components/pages/post/PostProvider';
+import CompanyProvider from 'components/pages/company/CompanyProvider';
 
 const MainLayout = () => {
   const { hash, pathname } = useLocation();
@@ -37,14 +38,16 @@ const MainLayout = () => {
       {(navbarPosition === 'vertical' || navbarPosition === 'combo') && (
         <NavbarVertical />
       )}
-      <CourseProvider>
-        <div className={classNames('content', { 'pb-0': isKanban })}>
-          <NavbarTop />
-          {/*------ Main Routes ------*/}
-          <Outlet />
-          {!isKanban && <Footer />}
-        </div>
-      </CourseProvider>
+      <CompanyProvider>
+        <PostProvider>
+          <div className={classNames('content', { 'pb-0': isKanban })}>
+            <NavbarTop />
+            {/*------ Main Routes ------*/}
+            <Outlet />
+            {!isKanban && <Footer />}
+          </div>
+        </PostProvider>
+      </CompanyProvider>
     </div>
   );
 };

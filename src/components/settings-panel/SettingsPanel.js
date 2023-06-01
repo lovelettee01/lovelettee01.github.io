@@ -222,7 +222,7 @@ const SettingsPanel = () => {
           </p>
           <Button
             color="primary"
-            href="https://themes.getbootstrap.com/product/falcon-admin-dashboard-webapp-template-react/"
+            href="https://themes.getbootstrap.com/post/falcon-admin-dashboard-webapp-template-react/"
           >
             Purchase
           </Button>
