@@ -16,7 +16,6 @@ import CourseContents from './CourseContents';
 import CourseRequirements from './CourseRequirements';
 import CourseTrainer from './CourseTrainer';
 import CourseReviews from './CourseReviews';
-import SimilarCourses from './SimilarCourses';
 import CourseLessonPlan from './CourseLessonPlan';
 import { Navigate, useParams } from 'react-router-dom';
 
@@ -58,7 +57,7 @@ const Coursedetails = () => {
           <CourseRequirements data={courseRequirements} />
           <CourseTrainer />
           <CourseReviews data={courseReviews} />
-          <SimilarCourses />
+          {/* <SimilarCourses /> */}
         </Col>
         <Col lg={4}>
           <div className="course-details-sticky-sidebar mb-lg-8 mt-xl-n10 pe-xl-4 pe-xxl-7">
@@ -76,7 +75,7 @@ const Coursedetails = () => {
       </Row>
     </>
   ) : (
-    <Navigate to={`/e-learning/course/course-details/${courses[0].id}`} />
+    <Navigate to={`/board/details/${courses[0].id}`} />
   );
 };
 

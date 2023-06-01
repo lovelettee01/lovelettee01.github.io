@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
 import trainer from 'assets/img/team/5-thumb.png';
 import FalconCardHeader from 'components/common/FalconCardHeader';
 import IconButton from 'components/common/IconButton';
@@ -41,7 +40,7 @@ const CourseTrainer = () => {
   return (
     <Card className="mb-3">
       <FalconCardHeader
-        title="Trainer"
+        title="Writer"
         titleTag="h5"
         endEl={
           <IconButton
@@ -60,9 +59,7 @@ const CourseTrainer = () => {
             <Avatar size="4xl" src={trainer} />
           </Col>
           <Col>
-            <h5 className="mb-2">
-              <Link to="/e-learning/trainer-profile">Bill Finger</Link>
-            </h5>
+            <h5 className="mb-2">Bill Finger</h5>
             <h6 className="fs--1 text-800 fw-normal mb-3">
               Artist | Professional Comic Writer
             </h6>

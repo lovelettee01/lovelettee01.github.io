@@ -17,10 +17,11 @@ const Bottombar = ({ inViewport }) => {
       <Card.Body className="py-2">
         <Flex className="gap-3 flex-between-center">
           <h2 className="fw-medium d-flex align-items-center">
-            $47.49 <del className="ms-2 fs--1 text-500">$69.99</del>
+            참여지분 : 47.49{' '}
+            <span className="ms-2 fs--1 text-500">주식수 : 100주</span>
           </h2>
           <Button variant="primary" size="lg" className="fs-0 flex-1">
-            Purchase this course
+            가입하기
           </Button>
         </Flex>
       </Card.Body>

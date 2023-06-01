@@ -1,7 +1,7 @@
 {
-    "homepage": "frlive.prium.me",
+    "homepage": "https://lovelettee01.github.io",
     "name": "stoq-web-react",
-    "version": "4.1.0",
+    "version": "1.0.0",
     "private": true,
     "dependencies": {
       "@changey/react-leaflet-markercluster": "^4.0.0-rc1",

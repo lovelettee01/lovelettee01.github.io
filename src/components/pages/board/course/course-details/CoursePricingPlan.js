@@ -91,14 +91,16 @@ const CoursePricingPlan = ({ course }) => {
           <Row>
             <Col md={7} lg={12} className="order-md-1 order-lg-0">
               <h2 className="fw-medium d-flex align-items-center">
-                ${course.price}{' '}
+                지분율 : {course.price}{' '}
                 {course.oldPrice && (
-                  <del className="ms-2 fs--1 text-500">${course.oldPrice}</del>
+                  <span className="ms-2 fs--1 text-500">
+                    참여주식 : {course.oldPrice}주
+                  </span>
                 )}
               </h2>
               <p className="text-danger fs--1 fw-semi-bold">
                 <FontAwesomeIcon icon={['far', 'clock']} className="me-2" />
-                Sale ends in 13h : 25m : 54s
+                invite ends in 13h : 25m : 54s
               </p>
               <Button
                 ref={targetElRef}
@@ -106,7 +108,7 @@ const CoursePricingPlan = ({ course }) => {
                 size="lg"
                 className="w-100 fs-0 mt-1"
               >
-                Purchase this course
+                가입하기
               </Button>
               <p className="text-700 fw-medium fs--1 mt-3 mb-0">
                 14 day Refund Policy
@@ -114,7 +116,7 @@ const CoursePricingPlan = ({ course }) => {
             </Col>
             <Col md={5} lg={12}>
               <hr className="border-top border-dashed d-md-none d-lg-block" />
-              <h6 className="fw-bold">Course Contents</h6>
+              <h6 className="fw-bold">Summary Contents</h6>
               <ul className="list-unstyled fs--1 mb-0">
                 {courseContents.map(({ id, text, icon }) => (
                   <li key={id} className="mb-1">

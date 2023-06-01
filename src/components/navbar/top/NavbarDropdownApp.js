@@ -16,12 +16,6 @@ const NavbarDropdownApp = ({ items }) => {
           ))}
         </Nav>
       </Col>
-      <Col xs={6} md={4}>
-        <NavbarNavLink label="E Learning" title="E Learning" />
-        {routes.eLearning.map(route => (
-          <NavbarNavLink key={route.name} route={route} />
-        ))}
-      </Col>
     </Row>
   );
 };
