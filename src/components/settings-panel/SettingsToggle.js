@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Card } from 'react-bootstrap';
-import AppContext from '../../context/Context';
 import classNames from 'classnames';
+import { useDispatch } from 'react-redux';
+import { SET_CONFIG } from 'store/slices/Config';
 
 const SettingsToggle = prop => {
   const { isDisabled } = prop;
-  const { setConfig } = useContext(AppContext);
-
+  const dispatch = useDispatch();
   const handleClick = () => {
-    setConfig('showSettingPanel', true);
+    dispatch(SET_CONFIG({ key: 'showSettingPanel', value: true }));
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Button,
   Card,
@@ -11,7 +11,6 @@ import {
 } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
-import AppContext, { CompanyContext } from 'context/Context';
 import usePagination from 'hooks/usePagination';
 import CompanyGrid from './CompanyGrid';
 import CompanyList from './CompanyList';
@@ -21,6 +20,9 @@ import Flex from 'components/common/Flex';
 import CompanyFilters from './CompanyFilters';
 import { useBreakpoints } from 'hooks/useBreakpoints';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { SET_CONFIG } from 'store/slices/Config';
+
 const Companys = () => {
   const [showFilterOffcanvas, setShowFilterOffcanvas] = useState(false);
   const [companyPerPage, setCompanyPerPage] = useState(6);
@@ -28,13 +30,14 @@ const Companys = () => {
   const { breakpoints } = useBreakpoints();
   const { companyLayout } = useParams();
   const {
-    companysState: { companys }
-  } = useContext(CompanyContext);
+    company: { companys }
+  } = useSelector(s => s);
 
   const {
-    config: { isNavbarVerticalCollapsed },
-    setConfig
-  } = useContext(AppContext);
+    config: { isNavbarVerticalCollapsed }
+  } = useSelector(state => state);
+  const dispatch = useDispatch();
+
   const companysNavbarVerticalCollapsed = useRef(isNavbarVerticalCollapsed);
 
   const {
@@ -62,12 +65,14 @@ const Companys = () => {
   }, []);
 
   useEffect(() => {
-    setConfig('isNavbarVerticalCollapsed', true);
+    dispatch(SET_CONFIG({ key: 'isNavbarVerticalCollapsed', value: true }));
 
     return () => {
-      setConfig(
-        'isNavbarVerticalCollapsed',
-        companysNavbarVerticalCollapsed.current
+      dispatch(
+        SET_CONFIG({
+          key: 'isNavbarVerticalCollapsed',
+          value: companysNavbarVerticalCollapsed.current
+        })
       );
     };
   }, []);

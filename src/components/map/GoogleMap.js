@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import AppContext from 'context/Context';
 import googleMapStyles from 'helpers/googleMapStyles';
 import {
   GoogleMap as ReactGoogleMap,
@@ -9,6 +8,7 @@ import {
   useJsApiLoader
 } from '@react-google-maps/api';
 import mapMarker from '../../../src/assets/img/icons/map-marker.png';
+import { useSelector } from 'react-redux';
 
 const GoogleMap = ({
   mapStyle,
@@ -24,7 +24,7 @@ const GoogleMap = ({
 
   const {
     config: { isDark }
-  } = useContext(AppContext);
+  } = useSelector(state => state);
 
   const [showInfoWindow, setShowInfoWindow] = useState(false);
   const [mapStyles, setMapStyles] = useState(mapStyle);

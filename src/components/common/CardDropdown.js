@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import AppContext from 'context/Context';
+import { useSelector } from 'react-redux';
 
 const CardDropdown = ({
   btnRevealClass,
@@ -13,7 +13,7 @@ const CardDropdown = ({
 }) => {
   const {
     config: { isRTL }
-  } = useContext(AppContext);
+  } = useSelector(state => state);
 
   return (
     <Dropdown

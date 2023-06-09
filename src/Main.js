@@ -1,58 +1,16 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import AppContext from 'context/Context';
-import { settings } from './config';
-import { getColor, getItemFromStore } from 'helpers/utils';
-import { configReducer } from './reducers/configReducer';
+import { getColor } from 'helpers/utils';
 import useToggleStyle from './hooks/useToggleStyle';
-
-import { Chart as ChartJS, registerables } from 'chart.js';
-ChartJS.register(...registerables);
+import { useSelector, useDispatch } from 'react-redux';
 
 const Main = props => {
-  const configState = {
-    isFluid: getItemFromStore('isFluid', settings.isFluid),
-    isRTL: getItemFromStore('isRTL', settings.isRTL),
-    isDark: getItemFromStore('isDark', settings.isDark),
-    navbarPosition: getItemFromStore('navbarPosition', settings.navbarPosition),
-    disabledNavbarPosition: [],
-    isNavbarVerticalCollapsed: getItemFromStore(
-      'isNavbarVerticalCollapsed',
-      settings.isNavbarVerticalCollapsed
-    ),
-    navbarStyle: getItemFromStore('navbarStyle', settings.navbarStyle),
-    currency: settings.currency,
-    showBurgerMenu: settings.showBurgerMenu,
-    showSettingPanel: false,
-    navbarCollapsed: false
-  };
+  const { config } = useSelector(state => {
+    return state;
+  });
+  const dispatch = useDispatch();
 
-  const [config, configDispatch] = useReducer(configReducer, configState);
-
-  const { isLoaded } = useToggleStyle(
-    config.isRTL,
-    config.isDark,
-    configDispatch
-  );
-
-  const setConfig = (key, value) => {
-    configDispatch({
-      type: 'SET_CONFIG',
-      payload: {
-        key,
-        value,
-        setInStore: [
-          'isFluid',
-          'isRTL',
-          'isDark',
-          'navbarPosition',
-          'isNavbarVerticalCollapsed',
-          'navbarStyle'
-        ].includes(key)
-      }
-    });
-  };
-
+  const { isLoaded } = useToggleStyle(config.isRTL, config.isDark, dispatch);
   if (!isLoaded) {
     return (
       <div
@@ -68,11 +26,8 @@ const Main = props => {
     );
   }
 
-  return (
-    <AppContext.Provider value={{ config, setConfig, configDispatch }}>
-      {props.children}
-    </AppContext.Provider>
-  );
+  console.log(`Rendering Component >> MAIN`);
+  return <>{props.children}</>;
 };
 
 Main.propTypes = { children: PropTypes.node };

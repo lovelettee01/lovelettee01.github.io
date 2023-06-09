@@ -1,20 +1,23 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import is from 'is_js';
-import AppContext from 'context/Context';
-import FalconRoutes from 'routes';
+
 import { CloseButton } from 'components/common/Toast';
 import SettingsToggle from 'components/settings-panel/SettingsToggle';
 import SettingsPanel from 'components/settings-panel/SettingsPanel';
+import is from 'is_js';
+import WebsiteRoutes from 'routes';
+
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-toastify/dist/ReactToastify.min.css';
+
+import { useSelector } from 'react-redux';
 
 const App = () => {
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;
   const {
     config: { navbarPosition }
-  } = useContext(AppContext);
+  } = useSelector(state => state);
 
   useEffect(() => {
     if (is.windows()) {
@@ -38,9 +41,10 @@ const App = () => {
     return () => HTMLClassList.remove('double-top-nav-layout');
   }, [navbarPosition]);
 
+  console.log(`Rendering Component >> APP`);
   return (
     <Router basename={process.env.PUBLIC_URL}>
-      <FalconRoutes />
+      <WebsiteRoutes />
       <SettingsToggle isDisabled={false} />
       <SettingsPanel />
       <ToastContainer

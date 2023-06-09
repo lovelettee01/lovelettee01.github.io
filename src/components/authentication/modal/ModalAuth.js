@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { CloseButton, Modal } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
-import RegistrationForm from 'components/authentication/RegistrationForm';
+import LoginForm from 'components/authentication/LoginForm';
 
-export default function Example() {
+export default function MadalAuth() {
+  //const {show, setShow, }
   let {
     state: { open }
   } = useLocation();
@@ -34,7 +35,7 @@ export default function Example() {
         />
       </Modal.Header>
       <Modal.Body className="p-4">
-        <RegistrationForm layout="split" hasLabel />
+        <LoginForm layout="split" hasLabel />
       </Modal.Body>
     </Modal>
   );

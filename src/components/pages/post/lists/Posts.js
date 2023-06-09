@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   Col,
@@ -14,15 +14,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import PostList from './PostList';
 import PostGrid from './PostGrid';
-import { PostContext } from 'context/Context';
 import usePagination from 'hooks/usePagination';
 import Flex from 'components/common/Flex';
+import { useSelector, useDispatch } from 'react-redux';
+import { SORT_PRODUCT } from 'store/slices/Post';
 
 const Posts = () => {
+  const postsDispatch = useDispatch();
   const {
-    postsState: { posts },
-    postsDispatch
-  } = useContext(PostContext);
+    post: { posts }
+  } = useSelector(s => s);
 
   const [sortBy, setSortBy] = useState('price');
   const [isAsc, setIsAsc] = useState(true);
@@ -52,13 +53,12 @@ const Posts = () => {
   } = usePagination(posts, postPerPage);
 
   useEffect(() => {
-    postsDispatch({
-      type: 'SORT_PRODUCT',
-      payload: {
+    postsDispatch(
+      SORT_PRODUCT({
         sortBy,
         order: isAsc ? 'asc' : 'desc'
-      }
-    });
+      })
+    );
   }, [sortBy, isAsc]);
   const navigate = useNavigate();
 

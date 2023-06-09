@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Navbar, Nav } from 'react-bootstrap';
 import classNames from 'classnames';
-import AppContext from 'context/Context';
 import Logo from 'components/common/Logo';
 import SearchBox from './SearchBox';
 import NavbarTopDropDownMenus from './NavbarTopDropDownMenus';
@@ -11,11 +10,15 @@ import autoCompleteInitialItem from 'data/autocomplete/autocomplete';
 import TopNavRightSideNavItem from './TopNavRightSideNavItem';
 import { useLocation } from 'react-router-dom';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { SET_CONFIG } from 'store/slices/Config';
+
 const NavbarTop = () => {
   const {
-    config: { showBurgerMenu, navbarPosition, navbarCollapsed },
-    setConfig
-  } = useContext(AppContext);
+    config: { showBurgerMenu, navbarPosition, navbarCollapsed }
+  } = useSelector(state => state);
+
+  const dispatch = useDispatch();
 
   const { pathname } = useLocation();
   const isChat = pathname.includes('chat');
@@ -24,9 +27,9 @@ const NavbarTop = () => {
 
   const handleBurgerMenu = () => {
     (navbarPosition === 'top' || navbarPosition === 'double-top') &&
-      setConfig('navbarCollapsed', !navbarCollapsed);
+      dispatch(SET_CONFIG({ key: 'navbarCollapsed', value: !navbarCollapsed }));
     (navbarPosition === 'vertical' || navbarPosition === 'combo') &&
-      setConfig('showBurgerMenu', !showBurgerMenu);
+      dispatch(SET_CONFIG({ key: 'showBurgerMenu', value: !showBurgerMenu }));
   };
 
   const setDropShadow = () => {

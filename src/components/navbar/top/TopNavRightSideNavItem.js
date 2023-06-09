@@ -1,14 +1,23 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ProfileDropdown from 'components/navbar/top/ProfileDropdown';
-import AppContext from 'context/Context';
 import React, { useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Nav, OverlayTrigger, Tooltip } from 'react-bootstrap';
+
+import AuthContext from 'context/Context';
+import ProfileDropdown from 'components/navbar/top/ProfileDropdown';
+import loginAvatar from 'assets/img/team/avatar.png';
+import Avatar from 'components/common/Avatar';
+import { Link } from 'react-router-dom';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { SET_CONFIG } from 'store/slices/Config';
 
 const TopNavRightSideNavItem = () => {
   const {
-    config: { isDark, isRTL },
-    setConfig
-  } = useContext(AppContext);
+    config: { isDark, isRTL }
+  } = useSelector(state => state);
+  const dispatch = useDispatch();
+
+  const { isLogin } = useContext(AuthContext);
   return (
     <Nav
       navbar
@@ -18,7 +27,9 @@ const TopNavRightSideNavItem = () => {
       <Nav.Item as={'li'}>
         <Nav.Link
           className="px-2 theme-control-toggle"
-          onClick={() => setConfig('isDark', !isDark)}
+          onClick={() =>
+            dispatch(SET_CONFIG({ key: 'isDark', value: !isDark }))
+          }
         >
           <OverlayTrigger
             key="left"
@@ -39,7 +50,15 @@ const TopNavRightSideNavItem = () => {
         </Nav.Link>
       </Nav.Item>
 
-      <ProfileDropdown />
+      {isLogin ? (
+        <ProfileDropdown />
+      ) : (
+        <Nav.Item as="li">
+          <Nav.Link as={Link} to="/login" className="px-0 position-relative">
+            <Avatar src={loginAvatar} />
+          </Nav.Link>
+        </Nav.Item>
+      )}
     </Nav>
   );
 };

@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, Col, Image, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { CompanyContext } from 'context/Context';
 import useCompanys from 'hooks/useCompanys';
 import playIcon from 'assets/img/icons/play.svg';
 import ModalVideoContent from '../ModalVideoContent';
@@ -12,6 +11,7 @@ import Flex from 'components/common/Flex';
 import Hoverbox from 'components/common/Hoverbox';
 import SoftBadge from 'components/common/SoftBadge';
 import StarRating from 'components/common/StarRating';
+import { useSelector } from 'react-redux';
 
 const CompanyList = ({ company }) => {
   const [showModal, setShowModal] = useState(false);
@@ -30,7 +30,15 @@ const CompanyList = ({ company }) => {
     review
   } = company;
 
-  const { isInFavouriteItems, isInCart } = useContext(CompanyContext);
+  const {
+    company: { cartItems, favouriteItems }
+  } = useSelector(s => s);
+
+  const isInCart = id => !!cartItems.find(cartItem => cartItem.id === id);
+  const isInFavouriteItems = id =>
+    !!favouriteItems.find(favouriteItem => favouriteItem.id === id);
+
+  //const { isInFavouriteItems, isInCart } = useContext(CompanyContext);
 
   const { handleAddToCart, handleFavouriteClick } = useCompanys(company);
   return (

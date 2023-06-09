@@ -12,15 +12,6 @@ export const CompanyContext = createContext({
   primaryCompanys: []
 });
 
-export const FeedContext = createContext({ feeds: [] });
-
 export const AuthWizardContext = createContext({ user: {} });
-
-export const ChatContext = createContext();
-
-export const KanbanContext = createContext({
-  KanbanColumns: [],
-  kanbanTasks: []
-});
 
 export default AppContext;

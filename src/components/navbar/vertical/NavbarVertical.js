@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Nav, Navbar, Row, Col } from 'react-bootstrap';
 import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
-import AppContext from 'context/Context';
 import Flex from 'components/common/Flex';
 import Logo from 'components/common/Logo';
 import NavbarVerticalMenu from './NavbarVerticalMenu';
@@ -14,6 +13,8 @@ import NavbarTopDropDownMenus from 'components/navbar/top/NavbarTopDropDownMenus
 import PurchaseCard from './PurchaseCard';
 import bgNavbar from 'assets/img/generic/bg-navbar.png';
 
+import { useSelector } from 'react-redux';
+
 const NavbarVertical = () => {
   const {
     config: {
@@ -22,7 +23,7 @@ const NavbarVertical = () => {
       isNavbarVerticalCollapsed,
       showBurgerMenu
     }
-  } = useContext(AppContext);
+  } = useSelector(state => state);
 
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;
 

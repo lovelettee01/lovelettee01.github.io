@@ -1,22 +1,23 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Nav } from 'react-bootstrap';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import AppContext from 'context/Context';
+import { useSelector, useDispatch } from 'react-redux';
+import { SET_CONFIG } from 'store/slices/Config';
 
 const NavbarNavLink = ({ title, route }) => {
   const {
-    config: { navbarCollapsed, showBurgerMenu },
-    setConfig
-  } = useContext(AppContext);
+    config: { navbarCollapsed, showBurgerMenu }
+  } = useSelector(state => state);
 
+  const dispatch = useDispatch();
   const handleClick = () => {
     if (navbarCollapsed) {
-      setConfig('navbarCollapsed', !navbarCollapsed);
+      dispatch(SET_CONFIG({ key: 'navbarCollapsed', value: !navbarCollapsed }));
     }
     if (showBurgerMenu) {
-      setConfig('showBurgerMenu', !showBurgerMenu);
+      dispatch(SET_CONFIG({ key: 'showBurgerMenu', value: !showBurgerMenu }));
     }
   };
   return (

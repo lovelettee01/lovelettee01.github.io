@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Offcanvas, Button, ButtonGroup, Form } from 'react-bootstrap';
 import defaultModeImg from 'assets/img/generic/falcon-mode-default.jpg';
 import darkModeImg from 'assets/img/generic/falcon-mode-dark.jpg';
@@ -12,9 +12,11 @@ import arrowsH from 'assets/img/icons/arrows-h.svg';
 import paragraph from 'assets/img/icons/paragraph.svg';
 import settings from 'assets/img/icons/spot-illustrations/settings.png';
 import Flex from 'components/common/Flex';
-import AppContext from 'context/Context';
 import RadioItem from './RadioItem';
 import SoftBadge from 'components/common/SoftBadge';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { SET_CONFIG, RESET } from 'store/slices/Config';
 
 const SettingsPanel = () => {
   const {
@@ -26,10 +28,9 @@ const SettingsPanel = () => {
       navbarStyle,
       showSettingPanel,
       disabledNavbarPosition
-    },
-    setConfig,
-    configDispatch
-  } = useContext(AppContext);
+    }
+  } = useSelector(state => state);
+  const dispatch = useDispatch();
 
   const [navbars] = useState([
     {
@@ -53,7 +54,9 @@ const SettingsPanel = () => {
   return (
     <Offcanvas
       show={showSettingPanel}
-      onHide={() => setConfig('showSettingPanel', false)}
+      onHide={() =>
+        dispatch(SET_CONFIG({ key: 'showSettingPanel', value: false }))
+      }
       placement="end"
       style={{ maxWidth: '22rem' }}
       className="border-0"
@@ -75,7 +78,7 @@ const SettingsPanel = () => {
               className="rounded-pill mt-0 mb-0"
               style={{ fontSize: '12px' }}
               onClick={() => {
-                configDispatch({ type: 'RESET' });
+                dispatch(RESET());
               }}
             >
               <FontAwesomeIcon
@@ -101,14 +104,18 @@ const SettingsPanel = () => {
             name="theme-mode"
             label="light"
             active={!isDark}
-            onChange={({ target }) => setConfig('isDark', !target.checked)}
+            onChange={({ target }) =>
+              dispatch(SET_CONFIG({ key: 'isDark', value: !target.checked }))
+            }
             image={defaultModeImg}
           />
           <RadioItem
             name="theme-mode"
             label="dark"
             active={isDark}
-            onChange={({ target }) => setConfig('isDark', target.checked)}
+            onChange={({ target }) =>
+              dispatch(SET_CONFIG({ key: 'isDark', value: target.checked }))
+            }
             image={darkModeImg}
           />
         </ButtonGroup>
@@ -130,7 +137,9 @@ const SettingsPanel = () => {
             type="switch"
             id="rtl-switch"
             checked={isRTL}
-            onChange={({ target }) => setConfig('isRTL', target.checked)}
+            onChange={({ target }) =>
+              dispatch(SET_CONFIG({ key: 'isRTL', value: target.checked }))
+            }
           />
         </Flex>
         <hr />
@@ -145,7 +154,9 @@ const SettingsPanel = () => {
             type="switch"
             id="fluid-mode-switch"
             checked={isFluid}
-            onChange={({ target }) => setConfig('isFluid', target.checked)}
+            onChange={({ target }) =>
+              dispatch(SET_CONFIG({ key: 'isFluid', value: target.checked }))
+            }
           />
         </Flex>
         <hr />
@@ -167,7 +178,9 @@ const SettingsPanel = () => {
               size="sm"
               defaultValue={navbarPosition}
               onChange={({ target }) =>
-                setConfig('navbarPosition', target.value)
+                dispatch(
+                  SET_CONFIG({ key: 'navbarPosition', value: target.value })
+                )
               }
             >
               {['vertical', 'top', 'combo', 'double-top'].map(option => (
@@ -195,7 +208,9 @@ const SettingsPanel = () => {
               name="navbar-style"
               label={item.name}
               active={navbarStyle === item.name}
-              onChange={() => setConfig('navbarStyle', item.name)}
+              onChange={() =>
+                dispatch(SET_CONFIG({ key: 'navbarStyle', value: item.name }))
+              }
               image={item.image}
             />
           ))}
@@ -207,7 +222,9 @@ const SettingsPanel = () => {
               name="navbar-style"
               label={item.name}
               active={navbarStyle === item.name}
-              onChange={() => setConfig('navbarStyle', item.name)}
+              onChange={() =>
+                dispatch(SET_CONFIG({ key: 'navbarStyle', value: item.name }))
+              }
               image={item.image}
             />
           ))}

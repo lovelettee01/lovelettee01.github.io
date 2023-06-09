@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Col, Image, Row } from 'react-bootstrap';
 import waveBg from 'assets/img/illustrations/bg-wave.png';
-import AppContext, { CompanyContext } from 'context/Context';
 import {
   companyContents,
   companyFeatures,
@@ -18,16 +17,15 @@ import CompanyTrainer from './CompanyTrainer';
 import CompanyReviews from './CompanyReviews';
 import CompanyLessonPlan from './CompanyLessonPlan';
 import { Navigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { SET_CONFIG } from 'store/slices/Config';
 
 const Companydetails = () => {
   const {
     config: { navbarPosition },
-    setConfig
-  } = useContext(AppContext);
-
-  const {
-    companysState: { companys }
-  } = useContext(CompanyContext);
+    company: { companys }
+  } = useSelector(state => state);
+  const dispatch = useDispatch();
 
   const { companyId } = useParams();
   const prevNavbarPosition = useRef(navbarPosition);
@@ -35,14 +33,27 @@ const Companydetails = () => {
   const company = companys.find(company => company.id === companyId);
 
   useEffect(() => {
-    if (navbarPosition !== 'double-top') setConfig('navbarPosition', 'top');
-    setConfig('disabledNavbarPosition', ['vertical', 'combo']);
+    if (navbarPosition !== 'double-top')
+      dispatch(SET_CONFIG({ key: 'navbarPosition', value: 'top' }));
+    dispatch(
+      SET_CONFIG({
+        key: 'disabledNavbarPosition',
+        value: ['vertical', 'combo']
+      })
+    );
   }, [navbarPosition]);
 
   useEffect(() => {
     return () => {
-      setConfig('disabledNavbarPosition', []);
-      setConfig('navbarPosition', prevNavbarPosition.current);
+      dispatch(
+        SET_CONFIG({
+          key: 'disabledNavbarPosition',
+          value: []
+        })
+      );
+      dispatch(
+        SET_CONFIG({ key: 'navbarPosition', value: prevNavbarPosition.current })
+      );
     };
   }, []);
 

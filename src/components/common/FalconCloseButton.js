@@ -1,8 +1,8 @@
+import React from 'react';
 import classNames from 'classnames';
-import AppContext from 'context/Context';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
 import { CloseButton } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 const FalconCloseButton = ({
   size,
@@ -14,7 +14,7 @@ const FalconCloseButton = ({
 }) => {
   const {
     config: { isDark }
-  } = useContext(AppContext);
+  } = useSelector(state => state);
   return (
     <CloseButton
       variant={variant ? variant : isDark ? 'white' : undefined}

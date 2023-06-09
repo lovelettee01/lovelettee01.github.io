@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
-import AppContext from 'context/Context';
+import { useSelector } from 'react-redux';
 
 const Bottombar = ({ inViewport }) => {
   const {
     config: { navbarCollapsed }
-  } = useContext(AppContext);
+  } = useSelector(state => state);
   return (
     <Card
       className={`bottom-bar rounded-0 d-lg-none ${

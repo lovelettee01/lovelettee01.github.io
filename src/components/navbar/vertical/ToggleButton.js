@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import AppContext from 'context/Context';
+import { useSelector, useDispatch } from 'react-redux';
+import { SET_CONFIG } from 'store/slices/Config';
 
 const renderTooltip = props => (
   <Tooltip style={{ position: 'fixed' }} id="button-tooltip" {...props}>
@@ -10,15 +11,20 @@ const renderTooltip = props => (
 
 const ToggleButton = () => {
   const {
-    config: { isNavbarVerticalCollapsed, isFluid, isRTL },
-    setConfig
-  } = useContext(AppContext);
+    config: { isNavbarVerticalCollapsed, isFluid, isRTL }
+  } = useSelector(state => state);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     document
       .getElementsByTagName('html')[0]
       .classList.toggle('navbar-vertical-collapsed');
-    setConfig('isNavbarVerticalCollapsed', !isNavbarVerticalCollapsed);
+    dispatch(
+      SET_CONFIG({
+        key: 'isNavbarVerticalCollapsed',
+        value: !isNavbarVerticalCollapsed
+      })
+    );
   };
 
   return (

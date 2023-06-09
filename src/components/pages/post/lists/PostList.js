@@ -1,16 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IconButton from 'components/common/IconButton';
-import { PostContext } from 'context/Context';
 import usePostHook from '../usePostHook';
 import PostImage from './PostImage';
 import StarRating from 'components/common/StarRating';
 import Flex from 'components/common/Flex';
-
+import { useSelector } from 'react-redux';
 const PostList = ({ post, index }) => {
   const {
     name,
@@ -28,7 +27,12 @@ const PostList = ({ post, index }) => {
     files
   } = post;
 
-  const { isInFavouriteItems } = useContext(PostContext);
+  const {
+    post: { favouriteItems }
+  } = useSelector(s => s);
+
+  const isInFavouriteItems = id =>
+    !!favouriteItems.find(favouriteItem => favouriteItem.id === id);
 
   const { handleAddToCart, handleFavouriteClick } = usePostHook(post);
 

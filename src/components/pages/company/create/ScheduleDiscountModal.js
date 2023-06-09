@@ -1,12 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { timezones } from 'data/events/timezones';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import AppContext from 'context/Context';
 import DatePicker from 'react-datepicker';
 import { useForm } from 'react-hook-form';
 import CustomDateInput from 'components/common/CustomDateInput';
+import { useSelector } from 'react-redux';
 
 const ScheduleDiscountModal = ({
   setIsOpenScheduleModal,
@@ -14,7 +14,7 @@ const ScheduleDiscountModal = ({
 }) => {
   const {
     config: { isDark }
-  } = useContext(AppContext);
+  } = useSelector(state => state);
 
   const [formData, setFormData] = useState({
     startDate: null,

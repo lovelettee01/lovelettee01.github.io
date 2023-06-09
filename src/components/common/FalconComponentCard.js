@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Tab, Row, Col, Nav, Button } from 'react-bootstrap';
 import FalconCardBody from './FalconCardBody';
@@ -7,7 +7,7 @@ import { HashLink } from 'react-router-hash-link';
 import Flex from './Flex';
 import { useLocation } from 'react-router-dom';
 import { camelize } from '../../helpers/utils';
-import AppContext from 'context/Context';
+import { useSelector } from 'react-redux';
 
 const PreviewCode = () => {
   return (
@@ -40,7 +40,7 @@ const FalconComponentCardHeader = ({
   const location = useLocation();
   const {
     config: { isRTL }
-  } = useContext(AppContext);
+  } = useSelector(state => state);
   return (
     <Card.Header className={classNames({ 'bg-light': light }, className)}>
       <Row

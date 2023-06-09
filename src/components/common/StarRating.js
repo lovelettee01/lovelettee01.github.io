@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext } from 'react';
+import React from 'react';
 import Rating from 'react-rating';
 import PropTypes from 'prop-types';
-import AppContext from 'context/Context';
+import { useSelector } from 'react-redux';
 
 const StarRating = ({ fractions = 2, rating, handleChange, ...rest }) => {
   const {
     config: { isRTL }
-  } = useContext(AppContext);
+  } = useSelector(state => state);
 
   return (
     <Rating

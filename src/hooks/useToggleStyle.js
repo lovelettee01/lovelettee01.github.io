@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { REFRESH } from 'store/slices/Config';
 
 const useToggleStylesheet = (isRTL, isDark, configDispatch) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -37,9 +38,7 @@ const useToggleStylesheet = (isRTL, isDark, configDispatch) => {
 
   useEffect(() => {
     document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-    configDispatch({
-      type: 'REFRESH'
-    });
+    configDispatch(REFRESH());
   }, [isDark]);
 
   return { isLoaded };

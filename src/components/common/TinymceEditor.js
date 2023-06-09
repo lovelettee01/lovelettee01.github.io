@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
-import AppContext from 'context/Context';
 import { getColor } from 'helpers/utils';
+import { useSelector } from 'react-redux';
 
 const TinymceEditor = ({ value, handleChange, height = '50vh' }) => {
   const {
     config: { isDark, isRTL }
-  } = useContext(AppContext);
-  const editorRef = useRef(null);
+  } = useSelector(state => state);
 
+  const editorRef = useRef(null);
   useEffect(() => {
     if (editorRef.current) {
       editorRef.current.dom.addStyle(
