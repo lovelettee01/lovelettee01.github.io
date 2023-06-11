@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 const MainLayout = () => {
   const { hash, pathname } = useLocation();
   const isKanban = pathname.includes('kanban');
-  console.log(`Rendering Component >> MainLayout`);
   const {
     config: { isFluid, navbarPosition }
   } = useSelector(state => state);
@@ -30,6 +29,7 @@ const MainLayout = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  console.log(`Rendering Component >> MainLayout`);
   return (
     <div className={isFluid ? 'container-fluid' : 'container'}>
       {(navbarPosition === 'vertical' || navbarPosition === 'combo') && (

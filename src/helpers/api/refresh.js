@@ -3,34 +3,39 @@ import Cookie from 'js-cookie';
 import moment from 'moment';
 
 import { serverURL } from 'config';
-import { getItemFromStore, setItemToStore } from 'helpers/utils';
+import { getItemFromStore } from 'helpers/utils';
+import { setAccessToken } from 'apis/auth.service';
+
+const callRefreshToken = params => {
+  // 토큰 갱신 서버통신
+  const respoonse = axios.post(
+    `${serverURL}/api/v1/auth/token/refresh`,
+    params
+  );
+  console.log('callRefreshToken', respoonse);
+  return respoonse;
+};
 
 const refresh = async reqConfig => {
   const refreshToken = Cookie.get('refreshToken');
-  const expireAt = getItemFromStore('expiresAt');
-  let token = getItemFromStore('accessToken');
+  const expiredToken = getItemFromStore('expiredToken');
+  let accessToken = getItemFromStore('accessToken');
+  console.log(`refreshResponse ${expiredToken} || ${refreshToken}`, reqConfig);
 
   // 토큰이 만료되었다면
-  if (moment(expireAt).diff(moment()) < 0 && refreshToken) {
+  if (moment(expiredToken).diff(moment()) < 0 && refreshToken) {
+    console.log('AccessTocken Expired!!!', refreshToken);
     const body = {
       refreshToken
     };
 
     // 토큰 갱신 서버통신
-    const { data } = await axios.post(
-      `${serverURL}/api/v1/auth/token/refresh`,
-      body
-    );
-
-    token = data.data.accessToken;
-    setItemToStore('accessToken', token);
-    setItemToStore(
-      'expiresAt',
-      moment().add(1, 'hour').format('yyyy-MM-DD HH:mm:ss')
-    );
+    const { data } = await callRefreshToken(body);
+    accessToken = data.accessToken;
+    setAccessToken(accessToken);
   }
-
-  reqConfig.headers['Authorization'] = `Bearer ${token}`;
+  if (accessToken) reqConfig.headers['Authorization'] = `Bearer ${accessToken}`;
+  else delete reqConfig.headers['Authorization'];
 
   return reqConfig;
 };

@@ -54,7 +54,7 @@ const TopNavRightSideNavItem = () => {
         <ProfileDropdown />
       ) : (
         <Nav.Item as="li">
-          <Nav.Link as={Link} to="/login" className="px-0 position-relative">
+          <Nav.Link as={Link} to="/signin" className="px-0 position-relative">
             <Avatar src={loginAvatar} />
           </Nav.Link>
         </Nav.Item>

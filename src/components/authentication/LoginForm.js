@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import Divider from 'components/common/Divider';
 import PropTypes from 'prop-types';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import SocialAuthButtons from './SocialAuthButtons';
+
+//import Divider from 'components/common/Divider';
+//import SocialAuthButtons from './SocialAuthButtons';
+
+import { useDispatch } from 'react-redux';
+import { signIn } from 'store/slices/Auth';
 
 const LoginForm = ({ hasLabel, layout }) => {
   // State
@@ -14,9 +18,18 @@ const LoginForm = ({ hasLabel, layout }) => {
     remember: false
   });
 
+  const dispatch = useDispatch();
   // Handler
   const handleSubmit = e => {
     e.preventDefault();
+    const params = {
+      phoneNumber: '01000000001',
+      email: formData.email,
+      password: formData.password,
+      remember: formData.remember
+    };
+    dispatch(signIn(params));
+
     toast.success(`Logged in as ${formData.email}`, {
       theme: 'colored'
     });
@@ -94,9 +107,8 @@ const LoginForm = ({ hasLabel, layout }) => {
         </Button>
       </Form.Group>
 
-      <Divider className="mt-4">or log in with</Divider>
-
-      <SocialAuthButtons />
+      {/* <Divider className="mt-4">or log in with</Divider>
+      <SocialAuthButtons /> */}
     </Form>
   );
 };

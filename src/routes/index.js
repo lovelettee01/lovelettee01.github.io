@@ -40,7 +40,7 @@ const WebsiteRoutes = () => {
       {/* //--- MainLayout Starts  */}
       <Route element={<MainLayout />}>
         {/* Default */}
-        <Route path="/" element={<Navigate to="/company/list" replace />} />
+        <Route path="/" element={<Navigate to="/post/list" replace />} />
 
         {/* Company */}
         <Route path="company/:companyLayout" element={<Companys />} />
