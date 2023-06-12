@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import AuthService from 'apis/auth.service';
 import UserService from 'apis/user.service';
 import { setMessage, setErrorMessage } from './Message';
+import Log from 'helpers/logger';
 
 //회원가입
 export const signUp = createAsyncThunk(
@@ -9,7 +10,7 @@ export const signUp = createAsyncThunk(
   async (args, thunkAPI) => {
     try {
       const data = await AuthService.signUp(args);
-      console.log('auth/signup', data);
+      Log.sys('auth/signup', data);
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -23,10 +24,10 @@ export const signIn = createAsyncThunk(
   async (args, thunkAPI) => {
     try {
       const data = await AuthService.signIn(args);
-      console.log('auth/signIn', data);
+      Log.sys('auth/signIn', data);
       if (data.success) {
         const userData = await UserService.getUserProfile();
-        console.log('user/profile', userData);
+        Log.sys('user/profile', userData);
         if (userData.success) {
           data['user'] = userData.data;
           thunkAPI.dispatch(
@@ -44,8 +45,9 @@ export const signIn = createAsyncThunk(
       }
       return data;
     } catch (err) {
+      Log.sys('auth/signIn Catch', err);
       thunkAPI.dispatch(
-        setErrorMessage(err || '[Exception] 오류가 발생하였습니다.')
+        setErrorMessage(err.message || '[Exception] 오류가 발생하였습니다.')
       );
       return thunkAPI.rejectWithValue(err);
     }
@@ -58,13 +60,24 @@ export const signOut = createAsyncThunk(
   async (args, thunkAPI) => {
     try {
       const data = await AuthService.signout(args);
-      console.log('auth/signout', data);
+      Log.sys('auth/signout', data);
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
     }
   }
 );
+
+//로그인 상태체크
+export const authCheck = createAsyncThunk('auth/check', async (_, thunkAPI) => {
+  try {
+    const data = await AuthService.authCheck();
+    Log.sys('auth/check', data);
+    return data;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err);
+  }
+});
 
 const user = null;
 const initialState = user
@@ -76,25 +89,25 @@ export const authSlice = createSlice({
   initialState: initialState,
   extraReducers: {
     [signUp.fulfilled]: (state, action) => {
-      console.log('signUp.fulfilled', state, action);
+      Log.sys('signUp.fulfilled', state, action);
       state.isLoggedIn = false;
     },
     [signUp.rejected]: (state, action) => {
-      console.log('signUp.rejected', state, action);
+      Log.sys('signUp.rejected', state, action);
       state.isLoggedIn = false;
     },
     [signIn.fulfilled]: (state, action) => {
-      console.log('signIn.fulfilled', state, action);
+      Log.sys('signIn.fulfilled', state, action);
       state.isLoggedIn = true;
       state.user = action.payload.user;
     },
     [signIn.rejected]: (state, action) => {
-      console.log('signIn.rejected', state, action);
+      Log.sys('signIn.rejected', state, action);
       state.isLoggedIn = false;
       state.user = null;
     },
     [signOut.fulfilled]: (state, action) => {
-      console.log('signOut.fulfilled', state, action);
+      Log.sys('signOut.fulfilled', state, action);
       state.isLoggedIn = false;
       state.user = null;
     }

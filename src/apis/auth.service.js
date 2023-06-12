@@ -1,7 +1,8 @@
-import callApi, { setAuthrization } from 'helpers/api/callApi';
+import { callApi, setAuthrization } from 'helpers/api/callApi';
 import Cookie from 'js-cookie';
 import moment from 'moment';
 import { setItemToStore } from 'helpers/utils';
+import Log from 'helpers/logger';
 
 /**
  * 회원가입
@@ -9,7 +10,7 @@ import { setItemToStore } from 'helpers/utils';
  * @link https://api.stoq.kr/docs#/Auth/signup_api_v1_auth_signup_post
  */
 const signUp = args => {
-  return callApi.post(`/api/v1/auth/signup`, args);
+  return callApi(false).post(`/api/v1/auth/signup`, args);
 };
 
 /**
@@ -18,17 +19,18 @@ const signUp = args => {
  * @link https://api.stoq.kr/docs#/Auth/signin_api_v1_auth_signin_post
  */
 const signIn = args => {
+  Log.sys('[auth.service] signIn', args);
   const { remember, ...params } = args;
-  console.log('auth.service', args, remember, params);
-  return callApi
+  return callApi(false)
     .post(`/api/v1/auth/signin?remember_auth=${remember}`, params)
     .then(res => {
       const resData = res.data;
       if (resData.success) {
         const accessToken = resData.data.accessToken;
-        setAuthrization(accessToken); //Api Header 등록
-        setAccessToken(accessToken);
+        setAuthrization(accessToken); //Authorization Header 등록
+        setAccessToken(accessToken); //Token 정보 저장
 
+        //Cookie 에 RefreshToken 저장
         const refreshToken = resData.data.refreshToken;
         Cookie.set('refreshToken', refreshToken, { expires: 1, path: '/' });
       }
@@ -42,7 +44,19 @@ const signIn = args => {
  * @link https://api.stoq.kr/docs#/Auth/signout_api_v1_auth_signout_delete
  */
 const signOut = () => {
-  const data = callApi.delete(`/api/v1/auth/signout`);
+  Log.sys('[auth.service] signOut');
+  const data = callApi(false).delete(`/api/v1/auth/signout`);
+  return data;
+};
+
+/**
+ * 로그인 상태 확인
+ * @method GET
+ * @link https://api.stoq.kr/docs#/Auth/check_auth_api_v1_auth_get
+ */
+const authCheck = () => {
+  Log.sys('[auth.service] authCheck');
+  const data = callApi().get(`/api/v1/auth`);
   return data;
 };
 
@@ -55,7 +69,7 @@ export const setAccessToken = token => {
     setItemToStore('accessToken', token);
     setItemToStore(
       'expiredToken',
-      moment().add(1, 'minute').format('yyyy-MM-DD HH:mm:ss')
+      moment().add(1, 'hours').format('yyyy-MM-DD HH:mm:ss')
     );
   }
 };
@@ -63,7 +77,8 @@ export const setAccessToken = token => {
 const AuthService = {
   signUp,
   signIn,
-  signOut
+  signOut,
+  authCheck
 };
 
 export default AuthService;

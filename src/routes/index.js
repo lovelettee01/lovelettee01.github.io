@@ -19,6 +19,7 @@ import CompanyCreate from 'components/pages/company/create';
 
 import Post from 'components/pages/post/lists/Posts';
 import PostDetails from 'components/pages/post/details/PostDetails';
+import ProtectedRoute from './ProtectedRoute';
 
 const WebsiteRoutes = () => {
   return (
@@ -48,7 +49,14 @@ const WebsiteRoutes = () => {
         <Route path="company/create" element={<CompanyCreate />} />
 
         {/* Post */}
-        <Route path="post/:postLayout" element={<Post />} />
+        <Route
+          path="post/:postLayout"
+          element={
+            <ProtectedRoute>
+              <Post />
+            </ProtectedRoute>
+          }
+        />
         <Route path="post/details/:postId" element={<PostDetails />} />
         <Route path="post/create" element={<CompanyCreate />} />
       </Route>

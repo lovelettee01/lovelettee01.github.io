@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 //import Divider from 'components/common/Divider';
@@ -11,6 +11,11 @@ import { useDispatch } from 'react-redux';
 import { signIn } from 'store/slices/Auth';
 
 const LoginForm = ({ hasLabel, layout }) => {
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const { state } = useLocation();
+
   // State
   const [formData, setFormData] = useState({
     email: '',
@@ -18,7 +23,6 @@ const LoginForm = ({ hasLabel, layout }) => {
     remember: false
   });
 
-  const dispatch = useDispatch();
   // Handler
   const handleSubmit = e => {
     e.preventDefault();
@@ -28,11 +32,21 @@ const LoginForm = ({ hasLabel, layout }) => {
       password: formData.password,
       remember: formData.remember
     };
-    dispatch(signIn(params));
-
-    toast.success(`Logged in as ${formData.email}`, {
-      theme: 'colored'
-    });
+    dispatch(signIn(params))
+      .then(res => {
+        console.log(`Login Dispatch Then`, res);
+        const payload = res.payload;
+        if (!payload.success) {
+          toast.error(payload.message, {
+            theme: 'colored'
+          });
+        } else {
+          navigate(state?.path || '/');
+        }
+      })
+      .catch(err => {
+        console.log(`Login Dispatch Catch`, err);
+      });
   };
 
   const handleFieldChange = e => {
