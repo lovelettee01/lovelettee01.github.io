@@ -30,6 +30,9 @@ export const getItemFromStore = (key, defaultValue, store = localStorage) => {
 export const setItemToStore = (key, payload, store = localStorage) =>
   store.setItem(key, payload);
 
+export const removeItemToStore = (key, store = localStorage) =>
+  store.removeItem(key);
+
 export const clearItemStore = (store = localStorage) => store.clear();
 
 export const getStoreSpace = (store = localStorage) =>

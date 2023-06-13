@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import MainLayout from '../layouts/MainLayout';
+import PrivateLayout from '../layouts/PrivateLayout';
+import PublicLayout from '../layouts/PublicLayout';
 import AuthSimpleLayout from '../layouts/AuthSimpleLayout';
 import ErrorLayout from '../layouts/ErrorLayout';
 
@@ -19,7 +20,7 @@ import CompanyCreate from 'components/pages/company/create';
 
 import Post from 'components/pages/post/lists/Posts';
 import PostDetails from 'components/pages/post/details/PostDetails';
-import ProtectedRoute from './ProtectedRoute';
+//import ProtectedRoute from './ProtectedRoute';
 
 const WebsiteRoutes = () => {
   return (
@@ -38,30 +39,29 @@ const WebsiteRoutes = () => {
         <Route path="password_forgot" element={<ForgetPassword />} />
       </Route>
 
-      {/* //--- MainLayout Starts  */}
-      <Route element={<MainLayout />}>
+      {/* //--- PublicLayout Start  */}
+      <Route element={<PublicLayout />}>
         {/* Default */}
         <Route path="/" element={<Navigate to="/post/list" replace />} />
 
+        {/* Post */}
+        <Route path="post/:postLayout" element={<Post />} />
+        <Route path="post/details/:postId" element={<PostDetails />} />
+      </Route>
+      {/* //--- PublicLayout end  */}
+
+      {/* //--- PrivateLayout Start  */}
+      <Route element={<PrivateLayout />}>
+        {/* Company */}
+        <Route path="company/create" element={<CompanyCreate />} />
         {/* Company */}
         <Route path="company/:companyLayout" element={<Companys />} />
         <Route path="company/details/:companyId" element={<CompanyDetails />} />
-        <Route path="company/create" element={<CompanyCreate />} />
 
         {/* Post */}
-        <Route
-          path="post/:postLayout"
-          element={
-            <ProtectedRoute>
-              <Post />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="post/details/:postId" element={<PostDetails />} />
         <Route path="post/create" element={<CompanyCreate />} />
       </Route>
-
-      {/* //--- MainLayout end  */}
+      {/* //--- PrivateLayout end  */}
 
       {/* <Navigate to="/errors/404" /> */}
       <Route path="*" element={<Navigate to="/errors/404" replace />} />

@@ -1,7 +1,7 @@
-import { callApi, setAuthrization } from 'helpers/api/callApi';
+import { callApi, setAuthrization } from 'helpers/api/reqApi';
 import Cookie from 'js-cookie';
 import moment from 'moment';
-import { setItemToStore } from 'helpers/utils';
+import { setItemToStore, removeItemToStore } from 'helpers/utils';
 import Log from 'helpers/logger';
 
 /**
@@ -27,7 +27,7 @@ const signIn = args => {
       const resData = res.data;
       if (resData.success) {
         const accessToken = resData.data.accessToken;
-        setAuthrization(accessToken); //Authorization Header 등록
+        setAuthrization(accessToken); //API Authorization Header 등록
         setAccessToken(accessToken); //Token 정보 저장
 
         //Cookie 에 RefreshToken 저장
@@ -45,7 +45,14 @@ const signIn = args => {
  */
 const signOut = () => {
   Log.sys('[auth.service] signOut');
-  const data = callApi(false).delete(`/api/v1/auth/signout`);
+  const data = callApi(false)
+    .delete(`/api/v1/auth/signout`)
+    .finally(() => {
+      setAuthrization(null); //API Authorization Header 해제
+      removeAccessToken();
+
+      Cookie.remove('refreshToken'); //refresh Token 삭제
+    });
   return data;
 };
 
@@ -56,8 +63,12 @@ const signOut = () => {
  */
 const authCheck = () => {
   Log.sys('[auth.service] authCheck');
-  const data = callApi().get(`/api/v1/auth`);
-  return data;
+  return callApi()
+    .get(`/api/v1/auth`)
+    .then(res => {
+      console.log(`[auth.service] authCheck response`, res);
+      return res;
+    });
 };
 
 /**
@@ -71,6 +82,17 @@ export const setAccessToken = token => {
       'expiredToken',
       moment().add(1, 'hours').format('yyyy-MM-DD HH:mm:ss')
     );
+  }
+};
+
+/**
+ * AccessToken 저장 및 expire Data 생성
+ * @param {string} token 토큰정보
+ */
+export const removeAccessToken = token => {
+  if (token) {
+    removeItemToStore('accessToken');
+    removeItemToStore('expiredToken');
   }
 };
 

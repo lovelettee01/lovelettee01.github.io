@@ -1,4 +1,4 @@
-import { callApi } from 'helpers/api/callApi';
+import { callApi } from 'helpers/api/reqApi';
 
 /**
  * 인증 프로필정보

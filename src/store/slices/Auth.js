@@ -26,18 +26,18 @@ export const signIn = createAsyncThunk(
       const data = await AuthService.signIn(args);
       Log.sys('auth/signIn', data);
       if (data.success) {
-        const userData = await UserService.getUserProfile();
-        Log.sys('user/profile', userData);
-        if (userData.success) {
-          data['user'] = userData.data;
-          thunkAPI.dispatch(
-            setMessage(data.message || '정상적으로 로그인 되었습니다.')
-          );
-        } else {
-          thunkAPI.dispatch(
-            setErrorMessage(data.message || '[Profile] 오류가 발생하였습니다.')
-          );
-        }
+        // const userData = await UserService.getUserProfile();
+        // Log.sys('user/profile', userData);
+        // if (userData.success) {
+        //   data['user'] = userData.data;
+        //   thunkAPI.dispatch(
+        //     setMessage(data.message || '정상적으로 로그인 되었습니다.')
+        //   );
+        // } else {
+        //   thunkAPI.dispatch(
+        //     setErrorMessage(data.message || '[Profile] 오류가 발생하였습니다.')
+        //   );
+        // }
       } else {
         thunkAPI.dispatch(
           setErrorMessage(data.message || '[SignIn] 오류가 발생하였습니다.')

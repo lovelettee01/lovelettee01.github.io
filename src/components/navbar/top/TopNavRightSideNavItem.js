@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Nav, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-import AuthContext from 'context/Context';
 import ProfileDropdown from 'components/navbar/top/ProfileDropdown';
 import loginAvatar from 'assets/img/team/avatar.png';
 import Avatar from 'components/common/Avatar';
@@ -13,11 +12,14 @@ import { SET_CONFIG } from 'store/slices/Config';
 
 const TopNavRightSideNavItem = () => {
   const {
+    auth: { isLoggedIn, user },
     config: { isDark, isRTL }
-  } = useSelector(state => state);
+  } = useSelector(state => {
+    console.log(state);
+    return state;
+  });
   const dispatch = useDispatch();
 
-  const { isLogin } = useContext(AuthContext);
   return (
     <Nav
       navbar
@@ -50,8 +52,8 @@ const TopNavRightSideNavItem = () => {
         </Nav.Link>
       </Nav.Item>
 
-      {isLogin ? (
-        <ProfileDropdown />
+      {isLoggedIn ? (
+        <ProfileDropdown user={user} />
       ) : (
         <Nav.Item as="li">
           <Nav.Link as={Link} to="/signin" className="px-0 position-relative">

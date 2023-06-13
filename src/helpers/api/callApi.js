@@ -6,7 +6,7 @@ import {
   requestErrorHandle as reqError,
   responseConfig as resConfig,
   responseErrorHandle as resError
-} from './apiConfig';
+} from './defaultConfig';
 
 import {
   requestRefreshConfig as reqRefreshConfig,

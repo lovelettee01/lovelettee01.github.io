@@ -9,6 +9,7 @@ const ProtectedRoute = ({ redirectPath = '/signin', children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(`isAllow : ${isAllow}`);
     dispatch(authCheck()).then(response => {
       console.log('ProtectedRoute authCheck', response);
       const { data } = response.payload;
@@ -16,7 +17,6 @@ const ProtectedRoute = ({ redirectPath = '/signin', children }) => {
     });
   }, [dispatch]);
 
-  console.log(`isAllow : ${isAllow}`);
   if (isAllow !== null) {
     if (!isAllow) return <Navigate to={redirectPath} replace />;
     return children ? children : <Outlet />;
