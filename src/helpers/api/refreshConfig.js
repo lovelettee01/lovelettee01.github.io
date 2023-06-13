@@ -32,11 +32,10 @@ const callRefreshToken = params => {
 
 //요청 설정
 const requestRefreshConfig = async request => {
-  const refreshToken = Cookie.get('refreshToken');
+  let accessToken = getItemFromStore('accessToken');
   const expiredToken = getItemFromStore('expiredToken');
+  const refreshToken = null; //Cookie.get('refreshToken');
   Log.debug(`requestRefreshConfig`, { expiredToken }, request);
-
-  let accessToken = '';
   try {
     // 토큰이 만료되었다면
     if (moment(expiredToken).diff(moment()) < 0 && refreshToken) {

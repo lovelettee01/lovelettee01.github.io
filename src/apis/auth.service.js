@@ -10,6 +10,7 @@ import Log from 'helpers/logger';
  * @link https://api.stoq.kr/docs#/Auth/signup_api_v1_auth_signup_post
  */
 const signUp = args => {
+  Log.info('[auth.service] signUp', args);
   return callApi(false).post(`/api/v1/auth/signup`, args);
 };
 
@@ -19,7 +20,7 @@ const signUp = args => {
  * @link https://api.stoq.kr/docs#/Auth/signin_api_v1_auth_signin_post
  */
 const signIn = args => {
-  Log.sys('[auth.service] signIn', args);
+  Log.info('[auth.service] signIn', args);
   const { remember, ...params } = args;
   return callApi(false)
     .post(`/api/v1/auth/signin?remember_auth=${remember}`, params)
@@ -44,7 +45,7 @@ const signIn = args => {
  * @link https://api.stoq.kr/docs#/Auth/signout_api_v1_auth_signout_delete
  */
 const signOut = () => {
-  Log.sys('[auth.service] signOut');
+  Log.info('[auth.service] signOut');
   const data = callApi(false)
     .delete(`/api/v1/auth/signout`)
     .finally(() => {
@@ -62,11 +63,11 @@ const signOut = () => {
  * @link https://api.stoq.kr/docs#/Auth/check_auth_api_v1_auth_get
  */
 const authCheck = () => {
-  Log.sys('[auth.service] authCheck');
+  Log.info('[auth.service] authCheck');
   return callApi()
     .get(`/api/v1/auth`)
     .then(res => {
-      console.log(`[auth.service] authCheck response`, res);
+      Log.debug(`[auth.service] authCheck response`, res);
       return res;
     });
 };

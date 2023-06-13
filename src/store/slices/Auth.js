@@ -87,6 +87,14 @@ const initialState = user
 export const authSlice = createSlice({
   name: 'auth',
   initialState: initialState,
+  reducers: {
+    LoginSuccess: state => {
+      state.isLoggedIn = true;
+    },
+    LoginFail: state => {
+      state.isLoggedIn = false;
+    }
+  },
   extraReducers: {
     [signUp.fulfilled]: (state, action) => {
       Log.sys('signUp.fulfilled', state, action);
@@ -114,6 +122,6 @@ export const authSlice = createSlice({
   }
 });
 
-//export const { LoginSuccess, LoginFail } = authSlice.actions;
+export const { LoginSuccess, LoginFail } = authSlice.actions;
 
 export default authSlice.reducer;

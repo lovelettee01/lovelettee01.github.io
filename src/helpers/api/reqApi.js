@@ -23,23 +23,21 @@ const axiosOptions = {
   params: {}
 };
 
-const basic = axios.create(axiosOptions);
-basic.interceptors.request.use(reqConfig, reqError);
-basic.interceptors.response.use(resConfig, resError);
+const publicApi = axios.create(axiosOptions);
+publicApi.interceptors.request.use(reqConfig, reqError);
+publicApi.interceptors.response.use(resConfig, resError);
 
-const auth = axios.create(axiosOptions);
-auth.interceptors.request.use(reqRefreshConfig, reqRefreshError);
-auth.interceptors.response.use(resRefreshConfig, resRefreshError);
+const privateApi = axios.create(axiosOptions);
+privateApi.interceptors.request.use(reqRefreshConfig, reqRefreshError);
+privateApi.interceptors.response.use(resRefreshConfig, resRefreshError);
 
 export const callApi = (isAuth = true) => {
-  if (!isAuth) return basic;
-  return auth;
+  if (!isAuth) return publicApi;
+  return privateApi;
 };
 
 export const setAuthrization = token => {
   if (token) {
-    auth.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  } else delete auth.defaults.headers.common['Authorization'];
+    privateApi.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else delete privateApi.defaults.headers.common['Authorization'];
 };
-
-export default { basic, auth };

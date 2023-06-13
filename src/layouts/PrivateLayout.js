@@ -30,14 +30,11 @@ const PrivateLayout = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  const { isAuth } = AuthHealthCheck(pathname);
-  if (isAuth === 'Failed') {
-    return <Navigate to="/signin" replace />;
-  } else if (isAuth === 'Loading') {
-    return <Loading />;
-  }
+  const { isAuth } = AuthHealthCheck({ isHealthCheck: true, key: pathname });
+  if (isAuth === 'Loading') return <Loading />;
+  else if (isAuth === 'Failed') return <Navigate to="/signin" replace />;
 
-  console.log(`Rendering Component >> PrivateLayout`);
+  console.log(`Rendering Component >> PrivateLayout : ${isAuth}`);
   return (
     <div className={isFluid ? 'container-fluid' : 'container'}>
       {(navbarPosition === 'vertical' || navbarPosition === 'combo') && (

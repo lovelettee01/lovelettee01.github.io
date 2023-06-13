@@ -5,6 +5,9 @@ import NavbarTop from 'components/navbar/top/NavbarTop';
 import NavbarVertical from 'components/navbar/vertical/NavbarVertical';
 import Footer from 'components/footer/Footer';
 import { useSelector } from 'react-redux';
+import { AuthHealthCheck } from 'components/authentication/AuthCheck';
+import Loading from 'components/common/Loading';
+
 const PublicLayout = () => {
   const { hash, pathname } = useLocation();
   const {
@@ -27,7 +30,10 @@ const PublicLayout = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  console.log(`Rendering Component >> PublicLayout`);
+  const { isAuth } = AuthHealthCheck({ isHealthCheck: true, key: pathname });
+  if (isAuth === 'Loading') return <Loading />;
+
+  console.log(`Rendering Component >> PublicLayout : ${isAuth}`);
   return (
     <div className={isFluid ? 'container-fluid' : 'container'}>
       {(navbarPosition === 'vertical' || navbarPosition === 'combo') && (
