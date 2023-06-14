@@ -1,7 +1,7 @@
-import { callApi, setAuthrization } from 'helpers/api/reqApi';
 import Cookie from 'js-cookie';
 import moment from 'moment';
 import { setItemToStore, removeItemToStore } from 'helpers/utils';
+import { callApi, setAuthrization } from 'helpers/api/reqApi';
 import Log from 'helpers/logger';
 
 /**
@@ -25,17 +25,21 @@ const signIn = args => {
   return callApi(false)
     .post(`/api/v1/auth/signin?remember_auth=${remember}`, params)
     .then(res => {
-      const resData = res.data;
-      if (resData.success) {
-        const accessToken = resData.data.accessToken;
+      const { data } = res;
+      if (data.success) {
+        const accessToken = data.data.accessToken;
         setAuthrization(accessToken); //API Authorization Header 등록
         setAccessToken(accessToken); //Token 정보 저장
 
         //Cookie 에 RefreshToken 저장
-        const refreshToken = resData.data.refreshToken;
-        Cookie.set('refreshToken', refreshToken, { expires: 1, path: '/' });
+        const refreshToken = data.data.refreshToken;
+        Cookie.set('refreshToken', refreshToken, {
+          secure: true,
+          expires: 1,
+          path: '/'
+        });
       }
-      return resData;
+      return data;
     });
 };
 
@@ -46,13 +50,17 @@ const signIn = args => {
  */
 const signOut = () => {
   Log.info('[auth.service] signOut');
-  const data = callApi(false)
+  const data = callApi()
     .delete(`/api/v1/auth/signout`)
-    .finally(() => {
-      setAuthrization(null); //API Authorization Header 해제
-      removeAccessToken();
+    .then(res => {
+      const { data } = res;
+      if (data?.success) {
+        setAuthrization(null); //API Authorization Header 해제
+        removeAccessToken();
+        Cookie.remove('refreshToken'); //refresh Token 삭제
 
-      Cookie.remove('refreshToken'); //refresh Token 삭제
+        return data;
+      }
     });
   return data;
 };
@@ -68,7 +76,7 @@ const authCheck = () => {
     .get(`/api/v1/auth`)
     .then(res => {
       Log.debug(`[auth.service] authCheck response`, res);
-      return res;
+      return res.data;
     });
 };
 
@@ -87,14 +95,12 @@ export const setAccessToken = token => {
 };
 
 /**
- * AccessToken 저장 및 expire Data 생성
+ * AccessToken 저장 및 expire Data 삭제
  * @param {string} token 토큰정보
  */
-export const removeAccessToken = token => {
-  if (token) {
-    removeItemToStore('accessToken');
-    removeItemToStore('expiredToken');
-  }
+export const removeAccessToken = () => {
+  removeItemToStore('accessToken');
+  removeItemToStore('expiredToken');
 };
 
 const AuthService = {

@@ -22,6 +22,9 @@ import Post from 'components/pages/post/lists/Posts';
 import PostDetails from 'components/pages/post/details/PostDetails';
 //import ProtectedRoute from './ProtectedRoute';
 
+import Profile from 'components/pages/user/profile/Profile';
+import Settings from 'components/pages/user/settings/Settings';
+
 const WebsiteRoutes = () => {
   return (
     <Routes>
@@ -44,6 +47,10 @@ const WebsiteRoutes = () => {
         {/* Default */}
         <Route path="/" element={<Navigate to="/post/list" replace />} />
 
+        {/* Company */}
+        <Route path="company/:companyLayout" element={<Companys />} />
+        <Route path="company/details/:companyId" element={<CompanyDetails />} />
+
         {/* Post */}
         <Route path="post/:postLayout" element={<Post />} />
         <Route path="post/details/:postId" element={<PostDetails />} />
@@ -52,11 +59,12 @@ const WebsiteRoutes = () => {
 
       {/* //--- PrivateLayout Start  */}
       <Route element={<PrivateLayout />}>
+        {/* User */}
+        <Route path="user/profile" element={<Profile />} />
+        <Route path="user/settings" element={<Settings />} />
+
         {/* Company */}
         <Route path="company/create" element={<CompanyCreate />} />
-        {/* Company */}
-        <Route path="company/:companyLayout" element={<Companys />} />
-        <Route path="company/details/:companyId" element={<CompanyDetails />} />
 
         {/* Post */}
         <Route path="post/create" element={<CompanyCreate />} />

@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Nav, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import ProfileDropdown from 'components/navbar/top/ProfileDropdown';
-import loginAvatar from 'assets/img/team/avatar.png';
-import Avatar from 'components/common/Avatar';
 import { Link } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,7 +10,7 @@ import { SET_CONFIG } from 'store/slices/Config';
 
 const TopNavRightSideNavItem = () => {
   const {
-    auth: { isLoggedIn, user },
+    auth: { isLoggedIn },
     config: { isDark, isRTL }
   } = useSelector(state => {
     console.log(state);
@@ -53,11 +51,15 @@ const TopNavRightSideNavItem = () => {
       </Nav.Item>
 
       {isLoggedIn ? (
-        <ProfileDropdown user={user} />
+        <ProfileDropdown />
       ) : (
         <Nav.Item as="li">
           <Nav.Link as={Link} to="/signin" className="px-0 position-relative">
-            <Avatar src={loginAvatar} />
+            <FontAwesomeIcon
+              icon="sign-in-alt"
+              transform="shrink-7"
+              className="fs-4"
+            />
           </Nav.Link>
         </Nav.Item>
       )}

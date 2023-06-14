@@ -27,26 +27,21 @@ const LoginForm = ({ hasLabel, layout }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const params = {
-      phoneNumber: '01000000001',
+      //phoneNumber: '01000000001',
       email: formData.email,
       password: formData.password,
       remember: formData.remember
     };
-    dispatch(signIn(params))
-      .then(res => {
-        console.log(`Login Dispatch Then`, res);
-        const payload = res.payload;
-        if (!payload.success) {
-          toast.error(payload.message, {
-            theme: 'colored'
-          });
-        } else {
-          navigate(state?.path || '/');
-        }
-      })
-      .catch(err => {
-        console.log(`Login Dispatch Catch`, err);
-      });
+    dispatch(signIn(params)).then(res => {
+      const payload = res.payload;
+      if (!payload.success) {
+        toast.error(payload.message, {
+          theme: 'colored'
+        });
+      } else {
+        navigate(state?.path || '/');
+      }
+    });
   };
 
   const handleFieldChange = e => {

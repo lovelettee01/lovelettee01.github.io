@@ -1,5 +1,5 @@
 let isLog = true;
-let logLevel = 4; //1:sys, 2:warn, 3:info, 4:debug
+let logLevel = process.env.REACT_APP_LOG_LEVEL; //1:sys, 2:warn, 3:info, 4:debug
 
 const sys = (message, ...obj) => {
   if (isLog && logLevel >= 1) console.log(`${message}`, ...obj);

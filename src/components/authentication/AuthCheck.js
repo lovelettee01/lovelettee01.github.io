@@ -14,8 +14,7 @@ export function AuthHealthCheck({ isHealthCheck = true, key }) {
     const checkAuthToken = async () => {
       if (isHealthCheck) {
         dispatch(authCheck()).then(response => {
-          const { data } = response.payload;
-          console.log('ProtectedRoute authCheck', data);
+          const data = response.payload;
           if (data?.success) {
             setIsAuth('Success');
             dispatch(LoginSuccess());

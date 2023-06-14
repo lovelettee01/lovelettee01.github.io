@@ -31,11 +31,11 @@ const callRefreshToken = params => {
 };
 
 //요청 설정
-const requestRefreshConfig = async request => {
+const requestRefreshConfig = async reqConfig => {
   let accessToken = getItemFromStore('accessToken');
   const expiredToken = getItemFromStore('expiredToken');
   const refreshToken = null; //Cookie.get('refreshToken');
-  Log.debug(`requestRefreshConfig`, { expiredToken }, request);
+  Log.debug(`requestRefreshConfig`, { expiredToken }, reqConfig);
   try {
     // 토큰이 만료되었다면
     if (moment(expiredToken).diff(moment()) < 0 && refreshToken) {
@@ -43,7 +43,6 @@ const requestRefreshConfig = async request => {
 
       // 토큰 갱신 서버통신
       const data = await callRefreshToken({ refreshToken });
-      console.log('callRefreshToken response', data);
       if (data?.success) {
         accessToken = data.accessToken;
       } else {
@@ -52,18 +51,18 @@ const requestRefreshConfig = async request => {
         );
       }
     }
-    if (accessToken) request.headers['Authorization'] = `Bearer ${accessToken}`;
-    else delete request.headers['Authorization'];
+    if (accessToken)
+      reqConfig.headers['Authorization'] = `Bearer ${accessToken}`;
+    else delete reqConfig.headers['Authorization'];
   } catch (err) {
     new Error(err);
   }
-  return request;
+  return reqConfig;
 };
 
 //요청 에러 처리
 const requestRefreshErrorHandle = error => {
   Log.debug(`requestRefreshErrorHandle`, error);
-  Cookie.remove('refreshToken');
   return Promise.reject(
     errorStatus(`[Internal Server Error] ${error.message}`)
   );
