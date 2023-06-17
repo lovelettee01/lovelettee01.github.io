@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -18,4 +19,8 @@ const LabelTootip = ({ label, tooltip }) => {
   );
 };
 
+LabelTootip.propTypes = {
+  label: PropTypes.bool.isRequired,
+  tooltip: PropTypes.func.isRequired
+};
 export default LabelTootip;

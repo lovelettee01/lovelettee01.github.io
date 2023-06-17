@@ -4,21 +4,21 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
 import Flex from 'components/common/Flex';
 import Avatar from 'components/common/Avatar';
 import FalconDropzone from 'components/common/FalconDropzone';
 import FalconCardHeader from 'components/common/FalconCardHeader';
 
-import InputField from '../InputField';
-import LabelTootip from '../LabelTootip';
+import InputField from 'components/common/WizardInput';
+import LabelTootip from 'components/common/LabelTootip';
 
 import { isIterableArray } from 'helpers/utils';
 import avatarImg from 'assets/img/team/avatar.png';
 import cloudUpload from 'assets/img/icons/cloud-upload.svg';
-import { countrys } from 'data/country';
+//import { countrys } from 'data/country';
 
-import { useDispatch } from 'react-redux';
 import { updateProfile } from 'store/slices/User';
 
 const ProfileSettings = ({ user }) => {
@@ -38,7 +38,6 @@ const ProfileSettings = ({ user }) => {
   } = useForm();
 
   const watchShowForeigner = watch('isForeigner', user.isForeigner);
-  const validation = true;
 
   const dispatch = useDispatch();
   const onSubmitData = data => {
@@ -51,8 +50,6 @@ const ProfileSettings = ({ user }) => {
     }
     dispatch(updateProfile(data)).then(res => {
       const resData = res.payload;
-      console.log(resData);
-
       if (!resData.success) {
         toast.error(resData.message, {
           theme: 'colored'
@@ -62,11 +59,8 @@ const ProfileSettings = ({ user }) => {
       }
     });
   };
-  const onError = () => {
-    if (!validation) {
-      clearErrors();
-    }
-  };
+
+  const onError = () => {};
 
   return (
     <Card>

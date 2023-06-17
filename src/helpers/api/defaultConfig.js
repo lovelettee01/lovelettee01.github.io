@@ -9,9 +9,7 @@ const requestConfig = request => {
 //요청 에러 처리
 const requestErrorHandle = error => {
   Log.debug(`requestErrorHandle`, error);
-  return Promise.reject(
-    errorStatus(`[Internal Server Error] ${error.message}`)
-  );
+  return Promise.reject(errorStatus(error, 'request'));
 };
 
 //응답 설정
@@ -24,19 +22,31 @@ const responseConfig = response => {
 const responseErrorHandle = error => {
   Log.debug('responseErrorHandle', error);
   if (error?.success === false) return Promise.reject(error);
-  return Promise.reject(
-    errorStatus(`[Internal Server Error] ${error.message}`)
-  );
+  return Promise.reject(errorStatus(error, 'response'));
 };
 
-const errorStatus = message => {
-  const error = {
-    data: {
-      success: false,
-      message
+//에러 객체 설정
+const errorStatus = (error, type) => {
+  const {
+    [type]: {
+      data: { detail },
+      status,
+      statusText
     }
+  } = error;
+
+  let message = '';
+  if (typeof detail === 'object') message = detail[0].msg || error.message;
+  else message = detail || error.message;
+
+  return {
+    status: {
+      code: status,
+      text: statusText
+    },
+    success: false,
+    message: `[Internal Server Error] ${message}`
   };
-  return error;
 };
 
 export {

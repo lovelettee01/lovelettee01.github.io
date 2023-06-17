@@ -27,15 +27,14 @@ const LoginForm = ({ hasLabel, layout }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const params = {
-      //phoneNumber: '01000000001',
       email: formData.email,
       password: formData.password,
       remember: formData.remember
     };
     dispatch(signIn(params)).then(res => {
-      const payload = res.payload;
-      if (!payload.success) {
-        toast.error(payload.message, {
+      const resData = res.payload;
+      if (!resData.success) {
+        toast.error(resData.message, {
           theme: 'colored'
         });
       } else {

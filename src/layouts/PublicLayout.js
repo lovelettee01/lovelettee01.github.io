@@ -42,7 +42,7 @@ const PublicLayout = () => {
       <div className={classNames('content')}>
         <NavbarTop />
         {/*------ Main Routes ------*/}
-        <Outlet />
+        {/* <Outlet /> */}
         <Footer />
       </div>
     </div>

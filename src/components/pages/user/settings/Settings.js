@@ -22,27 +22,7 @@ const Settings = () => {
     }
   }, []);
   if (!currentUser) return;
-  // const currentUser = {
-  //   id: 23,
-  //   email: 'user1@example.com',
-  //   ci: 'AZFPtUt9cWKTzOJpGscstBflEKcTd4gHuFqjWfB9fXNb+dK+49xo4O+mhF7VIs7daUFROppZWdsh7+Ajkg0C8A==',
-  //   nickName: 'user123',
-  //   realName: '일23',
-  //   phoneNumber: '01000000001',
-  //   gender: 'female',
-  //   isForeigner: false,
-  //   isCertificatedSelf: true,
-  //   nationality: '',
-  //   birthDate: '1983-02-01',
-  //   profileImageUrl:
-  //     'https://stoq-public.s3.ap-northeast-2.amazonaws.com/1abb9456-af8f-4bf1-b2e1-a626e1312569.jpg',
-  //   snsType: null,
-  //   telecomCode: '04',
-  //   encryptedName: 'tDrsE2c5I0t7qG90OZEB9Q==',
-  //   encryptedBirthday: 'Qhbv+RTlDY+agX733v3q4w==',
-  //   encryptedPhoneNumber: 'idJ3Sd/TrQUzpQTkMh2RTg==',
-  //   createdAt: '2022-12-20T10:15:31.309153+00:00'
-  // };
+
   //프로필 이미지
   const profileImg = currentUser.profileImageUrl || avatar;
   return (

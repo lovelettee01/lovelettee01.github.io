@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import Loading from 'components/common/Loading';
-import { toast } from 'react-toastify';
 
 import VerifiedBadge from 'components/common/VerifiedBadge';
 import { Button } from 'react-bootstrap';
@@ -10,41 +8,19 @@ import ProfileBanner from '../ProfileBanner';
 import coverSrc from 'assets/img/generic/4.jpg';
 import avatar from 'assets/img/team/avatar.png';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { userProfile } from 'store/slices/User';
+import { useSelector } from 'react-redux';
 
 const ProfileInfo = () => {
   const navigate = useNavigate();
-
   const { currentUser } = useSelector(state => state.user);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!currentUser) {
-      dispatch(userProfile())
-        .then(res => {
-          console.log('ProfileInfo Then', res);
-          const data = res.payload;
-          if (!data.success) {
-            toast.error('회원정보 조회 중 오류가 발생하였습니다.', {
-              theme: 'colored'
-            });
-            setTimeout(() => {
-              navigate('/errors/500');
-            }, 500);
-          }
-        })
-        .catch(error => {
-          console.log('ProfileInfo error', error);
-          const { data } = error;
-          toast.error(data.message, {
-            theme: 'colored'
-          });
-          navigate('/errors/500');
-        });
+      alert('회원정보가 존재하지 않습니다.\n메인페이지로 이동합니다.');
+      navigate('/');
     }
-  }, [dispatch]);
-  if (!currentUser) return <Loading />;
+  }, []);
+  if (!currentUser) return;
 
   //프로필 이미지
   const profileImg = currentUser.profileImageUrl || avatar;
