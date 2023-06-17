@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import UserService from 'apis/user.service';
+import { getItemFromStore } from 'helpers/utils';
 import Log from 'helpers/logger';
 
 //회원정보확인
@@ -8,7 +9,7 @@ export const userProfile = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const data = await UserService.getUserProfile();
-      Log.debug('user/profile', data);
+      Log.debug('[User] user/profile', data);
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -19,10 +20,10 @@ export const userProfile = createAsyncThunk(
 //회원정보수정
 export const updateProfile = createAsyncThunk(
   'user/updateProfile',
-  async (_, thunkAPI) => {
+  async (args, thunkAPI) => {
     try {
-      const data = await UserService.updateUserProfile();
-      Log.debug('user/updateProfile', data);
+      const data = await UserService.updateUserProfile(args);
+      Log.debug('[User] user/updateProfile', data);
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -30,7 +31,25 @@ export const updateProfile = createAsyncThunk(
   }
 );
 
-const initialState = { currentUser: null };
+//회원탈퇴
+export const withdrawalUser = createAsyncThunk(
+  'user/withdrawalUser',
+  async (_, thunkAPI) => {
+    try {
+      const data = await UserService.withdrawalUser();
+      Log.debug('[User] user/withdrawalUser', data);
+      return data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
+const user = getItemFromStore('user', null, {
+  store: sessionStorage,
+  isCrypto: true
+});
+const initialState = user ? { currentUser: user } : { currentUser: null };
 export const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
@@ -50,7 +69,7 @@ export const userSlice = createSlice({
     },
     [updateProfile.fulfilled]: (state, action) => {
       Log.debug('updateProfile.fulfilled', state, action);
-      //state.currentUser = action.payload.data;
+      state.currentUser = action.payload.data;
     },
     [updateProfile.rejected]: (state, action) => {
       Log.debug('updateProfile.rejected', state, action);

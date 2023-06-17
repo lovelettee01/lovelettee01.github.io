@@ -1,11 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap';
-//import Avatar from 'components/common/Avatar';
-//import loginAvatar from 'assets/img/team/avatar.png';
+import Avatar from 'components/common/Avatar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ProfileDropdown = () => {
+const ProfileDropdown = ({ user }) => {
   return (
     <Dropdown navbar={true} as="li">
       <Dropdown.Toggle
@@ -14,12 +14,15 @@ const ProfileDropdown = () => {
         to="#!"
         className="pe-0 ps-2 nav-link"
       >
-        {/* <Avatar src={loginAvatar} /> */}
-        <FontAwesomeIcon
-          icon="user-circle"
-          className="me-2 text-700"
-          style={{ height: '29px', width: '29px' }}
-        />
+        {user?.profileImageUrl ? (
+          <Avatar className="mt-1" src={user.profileImageUrl} />
+        ) : (
+          <FontAwesomeIcon
+            icon="user-circle"
+            className="mt-1 text-700"
+            style={{ height: '29px', width: '29px' }}
+          />
+        )}
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="dropdown-caret dropdown-menu-card  dropdown-menu-end">
@@ -41,6 +44,10 @@ const ProfileDropdown = () => {
       </Dropdown.Menu>
     </Dropdown>
   );
+};
+
+ProfileDropdown.propTypes = {
+  user: PropTypes.object
 };
 
 export default ProfileDropdown;

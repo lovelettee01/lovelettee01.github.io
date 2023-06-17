@@ -20,6 +20,7 @@
         "axios": "^1.4.0",
         "bootstrap": "^5.2.2",
         "classnames": "^2.3.1",
+        "crypto-js": "^4.1.1",
         "dayjs": "^1.10.6",
         "emoji-mart": "^5.3.3",
         "fuse.js": "^6.4.6",

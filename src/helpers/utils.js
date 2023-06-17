@@ -1,13 +1,14 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import crypto from './crypto';
 
 dayjs.extend(duration);
 
 export const isIterableArray = array => Array.isArray(array) && !!array.length;
 
-//===============================
+//========================================
 // Breakpoints
-//===============================
+//========================================
 export const breakpoints = {
   xs: 0,
   sm: 576,
@@ -17,18 +18,37 @@ export const breakpoints = {
   xxl: 1540
 };
 
-export const getItemFromStore = (key, defaultValue, store = localStorage) => {
+//========================================
+// Local Storage & Session Storage
+//========================================
+const setPlainText = (text, isCrypto = false) => {
+  const result = text && (isCrypto ? crypto.encrypt(text) : text);
+  //console.log('setPlainText', { isCrypto, text, result });
+  return result;
+};
+
+const getPlainText = (text, isCrypto = false) => {
+  const result = text && (isCrypto ? crypto.decrypt(text) : text);
+  //console.log('getPlainText', { isCrypto, text, result });
+  return result;
+};
+
+export const getItemFromStore = (key, defaultValue, options = {}) => {
+  const { store = localStorage, isCrypto = false } = options;
+  const item = getPlainText(store.getItem(key), isCrypto);
+  //console.log('getItemFromStore', { isCrypto, key, defaultValue, store });
   try {
-    return store.getItem(key) === null
-      ? defaultValue
-      : JSON.parse(store.getItem(key));
+    return item === null ? defaultValue : JSON.parse(item);
   } catch {
-    return store.getItem(key) || defaultValue;
+    return item || defaultValue;
   }
 };
 
-export const setItemToStore = (key, payload, store = localStorage) =>
-  store.setItem(key, payload);
+export const setItemToStore = (key, payload, options = {}) => {
+  const { store = localStorage, isCrypto = false } = options;
+  //console.log('setItemToStore', { isCrypto, key, payload, store });
+  store.setItem(key, setPlainText(payload, isCrypto));
+};
 
 export const removeItemToStore = (key, store = localStorage) =>
   store.removeItem(key);

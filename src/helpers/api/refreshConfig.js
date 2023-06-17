@@ -32,7 +32,7 @@ const callRefreshToken = params => {
 
 //요청 설정
 const requestRefreshConfig = async reqConfig => {
-  let accessToken = getItemFromStore('accessToken');
+  let accessToken = getItemFromStore('accessToken', null, { isCrypto: true });
   const expiredToken = getItemFromStore('expiredToken');
   const refreshToken = null; //Cookie.get('refreshToken');
   Log.debug(`requestRefreshConfig`, { expiredToken }, reqConfig);

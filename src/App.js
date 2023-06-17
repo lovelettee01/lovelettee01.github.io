@@ -8,10 +8,15 @@ import SettingsPanel from 'components/settings-panel/SettingsPanel';
 import is from 'is_js';
 import WebsiteRoutes from 'routes';
 
+import { useSelector } from 'react-redux';
+
+//React-datepicker 설정
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-toastify/dist/ReactToastify.min.css';
-
-import { useSelector } from 'react-redux';
+import { registerLocale, setDefaultLocale } from 'react-datepicker';
+import { ko } from 'date-fns/locale/';
+registerLocale('ko', ko);
+setDefaultLocale('ko');
 
 const App = () => {
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;

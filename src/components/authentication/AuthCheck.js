@@ -13,7 +13,7 @@ export function AuthHealthCheck({ isHealthCheck = true, key }) {
     console.log(`AuthHealthCheck : ${isAuth}`);
     const checkAuthToken = async () => {
       if (isHealthCheck) {
-        dispatch(authCheck()).then(response => {
+        await dispatch(authCheck()).then(response => {
           const data = response.payload;
           if (data?.success) {
             setIsAuth('Success');
@@ -24,7 +24,9 @@ export function AuthHealthCheck({ isHealthCheck = true, key }) {
           }
         });
       } else {
-        const accessToken = getItemFromStore('accessToken');
+        const accessToken = getItemFromStore('accessToken', null, {
+          isCrypto: true
+        });
         const expiredToken = getItemFromStore('expiredToken');
         if (accessToken && moment(expiredToken).diff(moment()) >= 0) {
           setIsAuth('Success');

@@ -11,6 +11,7 @@ import { SET_CONFIG } from 'store/slices/Config';
 const TopNavRightSideNavItem = () => {
   const {
     auth: { isLoggedIn },
+    user: { currentUser },
     config: { isDark, isRTL }
   } = useSelector(state => {
     console.log(state);
@@ -51,7 +52,7 @@ const TopNavRightSideNavItem = () => {
       </Nav.Item>
 
       {isLoggedIn ? (
-        <ProfileDropdown />
+        <ProfileDropdown user={currentUser} />
       ) : (
         <Nav.Item as="li">
           <Nav.Link as={Link} to="/signin" className="px-0 position-relative">

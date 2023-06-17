@@ -23,21 +23,24 @@ const ProfileInfo = () => {
     if (!currentUser) {
       dispatch(userProfile())
         .then(res => {
-          console.log('ProfileInfo', res);
-          const { data } = res.payload;
+          console.log('ProfileInfo Then', res);
+          const data = res.payload;
           if (!data.success) {
-            toast.error(data.message, {
+            toast.error('회원정보 조회 중 오류가 발생하였습니다.', {
               theme: 'colored'
             });
-            navigate('errors/500');
+            setTimeout(() => {
+              navigate('/errors/500');
+            }, 500);
           }
         })
         .catch(error => {
+          console.log('ProfileInfo error', error);
           const { data } = error;
           toast.error(data.message, {
             theme: 'colored'
           });
-          navigate('errors/500');
+          navigate('/errors/500');
         });
     }
   }, [dispatch]);
