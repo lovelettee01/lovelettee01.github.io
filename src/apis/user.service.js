@@ -1,6 +1,6 @@
 import { callApi } from 'helpers/api/reqApi';
 import { setItemToStore } from 'helpers/utils';
-import { removeAccessToken } from 'apis/auth.service';
+import { clearAllAccessData } from 'apis/auth.service';
 import Log from 'helpers/logger';
 
 /**
@@ -59,7 +59,8 @@ const withdrawalUser = () => {
       const { data } = res;
       Log.debug(`[user.service] withdrawalUser response`, data);
 
-      removeAccessToken(true);
+      //데이터 모두 삭제
+      clearAllAccessData(true);
       return data;
     });
 };

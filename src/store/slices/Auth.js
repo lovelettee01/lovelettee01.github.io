@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import AuthService, { removeAccessToken } from 'apis/auth.service';
+import AuthService, { clearAllAccessData } from 'apis/auth.service';
 import { userProfile } from './User';
 import Log from 'helpers/logger';
 
@@ -25,7 +25,9 @@ export const signIn = createAsyncThunk(
       const data = await AuthService.signIn(args);
       Log.debug('[Auth] auth/signIn', data);
       if (data.success) {
-        await thunkAPI.dispatch(userProfile()); //User Profile Dispath 호출
+        const userData = await thunkAPI.dispatch(userProfile()); //User Profile Dispath 호출
+        const result = userData.payload;
+        if (!result.succes) return thunkAPI.rejectWithValue(result);
       }
       return data;
     } catch (err) {
@@ -52,8 +54,11 @@ export const authCheck = createAsyncThunk('auth/check', async (_, thunkAPI) => {
     Log.debug('[Auth] auth/check', data);
     if (data.success) {
       //유저정보가 없는경우 새로 호출
-      if (!thunkAPI.getState().user.currentUser)
-        await thunkAPI.dispatch(userProfile()); //User Profile Dispath 호출
+      if (!thunkAPI.getState().user.currentUser) {
+        const userData = await thunkAPI.dispatch(userProfile()); //User Profile Dispath 호출
+        const result = userData.payload;
+        if (!result.succes) return thunkAPI.rejectWithValue(result);
+      }
     }
     return data;
   } catch (err) {
@@ -103,7 +108,10 @@ export const passwordReset = createAsyncThunk(
   }
 );
 
-const initialState = { isLoggedIn: false };
+const initialState = {
+  isLoggedIn: false,
+  regist: { step: 1, user: {} }
+};
 export const authSlice = createSlice({
   name: 'auth',
   initialState: initialState,
@@ -113,6 +121,14 @@ export const authSlice = createSlice({
     },
     LoginFail: state => {
       state.isLoggedIn = false;
+    },
+    SetRegistInfo: (state, action) => {
+      console.log('SetRegistStep', { state, action });
+      const {
+        payload: { step, user }
+      } = action;
+      state.regist.step = step;
+      if (user) state.regist.user = user;
     }
   },
   extraReducers: {
@@ -147,7 +163,7 @@ export const authSlice = createSlice({
     [authCheck.rejected]: (state, action) => {
       Log.debug('authCheck.rejected', state, action);
       state.isLoggedIn = false;
-      removeAccessToken(true); //기존 Store 삭제
+      clearAllAccessData(false); //기존 Store 삭제
     },
     /** 비밀번호 변경 **/
     [passwordChange.fulfilled]: (state, action) => {
@@ -173,6 +189,6 @@ export const authSlice = createSlice({
   }
 });
 
-export const { LoginSuccess, LoginFail } = authSlice.actions;
+export const { LoginSuccess, LoginFail, SetRegistInfo } = authSlice.actions;
 
 export default authSlice.reducer;

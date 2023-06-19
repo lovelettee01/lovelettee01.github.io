@@ -16,17 +16,14 @@ const callRefreshToken = params => {
       Log.debug('callRefreshToken', response);
       const { data } = response;
 
-      let success = false;
       let accessToken = '';
       if (data?.success) {
         accessToken = data.data.accessToken;
         setAccessToken(accessToken);
-        success = true;
       } else {
         removeAccessToken();
-        success = false;
       }
-      return { success, accessToken };
+      return data;
     });
 };
 
@@ -44,18 +41,16 @@ const requestRefreshConfig = async reqConfig => {
       // 토큰 갱신 서버통신
       const data = await callRefreshToken({ refreshToken });
       if (data?.success) {
-        accessToken = data.accessToken;
-      } else {
-        throw new Error(
-          errorStatus(`[Internal Server Error] Token Refresh Fail!`)
-        );
+        accessToken = data.data.accessToken;
       }
     }
     if (accessToken)
       reqConfig.headers['Authorization'] = `Bearer ${accessToken}`;
-    //else delete reqConfig.headers['Authorization'];
+    else {
+      throw new Error(`Access Token is not Exist`);
+    }
   } catch (err) {
-    new Error(err);
+    return Promise.reject(errorStatus(err, 'request'));
   }
   return reqConfig;
 };
@@ -84,18 +79,12 @@ const responseRefreshErrorHandle = async error => {
       let accessToken = '';
       const data = await callRefreshToken({ refreshToken });
       if (data?.success) {
-        accessToken = data.accessToken;
-      } else {
-        throw new Error(
-          errorStatus(`[Internal Server Error] Token Refresh Fail!`)
-        );
+        accessToken = data.data.accessToken;
+        if (accessToken)
+          reqConfig.headers['Authorization'] = `Bearer ${accessToken}`;
+
+        return await axios(reqConfig);
       }
-
-      if (accessToken)
-        reqConfig.headers['Authorization'] = `Bearer ${accessToken}`;
-      else delete reqConfig.headers['Authorization'];
-
-      return await axios(reqConfig);
     } catch (err) {
       new Error(err);
     }
@@ -106,26 +95,36 @@ const responseRefreshErrorHandle = async error => {
 
 //에러 객체 설정
 const errorStatus = (error, type) => {
-  const {
-    [type]: {
-      data: { detail },
-      status,
-      statusText
-    }
-  } = error;
-  let message = '';
-  if (typeof detail === 'object') message = detail[0].msg || error.message;
-  else message = detail || error.message;
-  console.log(detail, status, statusText);
+  try {
+    const {
+      [type]: {
+        data: { detail },
+        status,
+        statusText
+      }
+    } = error;
+    let message = '';
+    if (typeof detail === 'object') message = detail[0].msg || error.message;
+    else message = detail || error.message;
 
-  return {
-    status: {
-      code: status,
-      text: statusText
-    },
-    success: false,
-    message: `[Internal Server Error] ${message}`
-  };
+    return {
+      status: {
+        code: status,
+        text: statusText
+      },
+      success: false,
+      message: `[API Server Error] ${message}`
+    };
+  } catch (err) {
+    return {
+      status: {
+        code: 500,
+        text: 'Network Error'
+      },
+      success: false,
+      message: `[Internal Server Error] ${error.message}`
+    };
+  }
 };
 
 export {

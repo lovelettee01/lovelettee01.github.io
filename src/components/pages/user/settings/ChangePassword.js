@@ -52,11 +52,11 @@ const ChangePassword = () => {
               ...register('oldPassword', {
                 required: 'You must specify a Old password',
                 minLength: {
-                  value: 2,
+                  value: 8,
                   message: 'Password must have at least 8 characters'
                 },
                 maxLength: {
-                  value: 10,
+                  value: 20,
                   message: 'Password must be no more than 20 characters'
                 }
               })
@@ -72,11 +72,11 @@ const ChangePassword = () => {
               ...register('newPassword', {
                 required: 'You must specify a New password',
                 minLength: {
-                  value: 2,
+                  value: 8,
                   message: 'Password must have at least 8 characters'
                 },
                 maxLength: {
-                  value: 10,
+                  value: 20,
                   message: 'Password must be no more than 20 characters'
                 },
                 validate: value =>

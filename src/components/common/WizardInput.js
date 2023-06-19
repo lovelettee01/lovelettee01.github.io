@@ -62,6 +62,10 @@ const WizardInput = ({
             setDate(date);
             setValue(name, moment(date).format(dateFormat));
           }}
+          peekNextMonth
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
           customInput={
             <CustomDateInput
               formControlProps={formControlProps}
@@ -81,7 +85,7 @@ const WizardInput = ({
       <Form.Group {...formGroupProps}>
         <Form.Check type={type} id={name + Math.floor(Math.random() * 100)}>
           <Form.Check.Input
-            type={type === 'switch' && 'checkbox'}
+            type={type === 'switch' ? 'checkbox' : type}
             {...formControlProps}
             isInvalid={!!errors[name]}
             isValid={Object.keys(errors).length > 0 && !errors[name]}

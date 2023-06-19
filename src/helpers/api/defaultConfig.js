@@ -27,26 +27,36 @@ const responseErrorHandle = error => {
 
 //에러 객체 설정
 const errorStatus = (error, type) => {
-  const {
-    [type]: {
-      data: { detail },
-      status,
-      statusText
-    }
-  } = error;
+  try {
+    const {
+      [type]: {
+        data: { detail },
+        status,
+        statusText
+      }
+    } = error;
+    let message = '';
+    if (typeof detail === 'object') message = detail[0].msg || error.message;
+    else message = detail || error.message;
 
-  let message = '';
-  if (typeof detail === 'object') message = detail[0].msg || error.message;
-  else message = detail || error.message;
-
-  return {
-    status: {
-      code: status,
-      text: statusText
-    },
-    success: false,
-    message: `[Internal Server Error] ${message}`
-  };
+    return {
+      status: {
+        code: status,
+        text: statusText
+      },
+      success: false,
+      message: `[API Server Error] ${message}`
+    };
+  } catch (err) {
+    return {
+      status: {
+        code: 500,
+        text: 'Network Error'
+      },
+      success: false,
+      message: `[Internal Server Error] ${error.message}`
+    };
+  }
 };
 
 export {

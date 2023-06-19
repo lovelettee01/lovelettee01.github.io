@@ -22,11 +22,13 @@ const ConfirmPop = ({ modal, setModal }) => {
     formState: { errors }
   } = useForm();
 
-  const validate = true;
+  const validate = currentUser.ci || currentUser.di;
   const dispatch = useDispatch();
   const onSubmitData = data => {
-    alert('삭제는 확인해보고 API 호출 예정');
-    if (validate) return;
+    if (validate) {
+      alert('CI / DI가 존재하는경우 삭제 막음.');
+      return;
+    }
     dispatch(withdrawalUser(data)).then(res => {
       const resData = res.payload;
       if (!resData.success) {
@@ -58,7 +60,7 @@ const ConfirmPop = ({ modal, setModal }) => {
       >
         <Modal.Header>
           <Modal.Title id="contained-modal-title-vcenter">
-            Deactivate Profile
+            Deactivate Account
           </Modal.Title>
           <CloseButton
             className="btn btn-circle btn-sm transition-base p-0"
@@ -120,9 +122,9 @@ const DangerZone = () => {
       <Card>
         <FalconCardHeader title="Danger Zone" />
         <Card.Body className="bg-light">
-          <h5 className="mb-0">Delete this Profile</h5>
+          <h5 className="mb-0">Delete this Account</h5>
           <p className="fs--1">
-            Once you delete a Profile, there is no going back. Please be
+            Once you delete a Account, there is no going back. Please be
             certain.
           </p>
           <Button
@@ -130,7 +132,7 @@ const DangerZone = () => {
             variant="falcon-danger"
             className="w-100"
           >
-            Deactivate Profile
+            Deactivate Account
           </Button>
         </Card.Body>
       </Card>

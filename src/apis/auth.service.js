@@ -11,7 +11,22 @@ import Log from 'helpers/logger';
  */
 const signUp = args => {
   Log.info('[auth.service] signUp', args);
-  return callApi(false).post(`/api/v1/auth/signup`, args);
+  return callApi(false)
+    .post(`/api/v1/auth/signup`, args)
+    .then(res => {
+      const { data } = res;
+      Log.debug(`[auth.service] signIn response`, data);
+      if (data.success) {
+        const accessToken = data.data.accessToken;
+        setAuthrization(accessToken); //API Authorization Header 등록
+        setAccessToken(accessToken); //Token 정보 저장
+
+        //Cookie 에 RefreshToken 저장
+        const refreshToken = data.data.refreshToken;
+        setRefreshToken(refreshToken);
+      }
+      return data;
+    });
 };
 
 /**
@@ -34,11 +49,7 @@ const signIn = args => {
 
         //Cookie 에 RefreshToken 저장
         const refreshToken = data.data.refreshToken;
-        Cookie.set('refreshToken', refreshToken, {
-          secure: true,
-          expires: 1,
-          path: '/'
-        });
+        setRefreshToken(refreshToken);
       }
       return data;
     });
@@ -57,10 +68,11 @@ const signOut = () => {
       const { data } = res;
       Log.debug(`[auth.service] signOut response`, data);
       if (data?.success) {
-        setAuthrization(null); //API Authorization Header 해제
-        removeAccessToken(true);
-        Cookie.remove('refreshToken'); //refresh Token 삭제
+        //API Authorization Header 해제
+        setAuthrization(null);
 
+        //데이터 모두 삭제
+        clearAllAccessData(true);
         return data;
       }
     });
@@ -152,16 +164,43 @@ export const setAccessToken = token => {
 };
 
 /**
+ * RefreshToken 저장
+ * @param {string} token 토큰정보
+ */
+export const setRefreshToken = token => {
+  if (token) {
+    Cookie.set('refreshToken', token, {
+      secure: true,
+      expires: 1,
+      path: '/'
+    });
+  }
+};
+
+/**
  * AccessToken 저장 및 expire Data 삭제
  * @param {boolean} isRemoveUser 유저정보삭제여부
  */
-export const removeAccessToken = (isRemoveUser = false) => {
+export const removeAccessToken = () => {
+  //Local Storage Token 정보삭제
+  removeItemToStore('accessToken');
+  removeItemToStore('expiredToken');
+};
+
+/**
+ * LocalStorage 및 Session스토리지 Cookie 데이터 모두 삭제
+ * @param {boolean} isRemoveCookie 쿠키 삭제 여부
+ */
+export const clearAllAccessData = (isRemoveCookie = false) => {
   //Local Storage Token 정보삭제
   removeItemToStore('accessToken');
   removeItemToStore('expiredToken');
 
   //Session Storage user 정보삭제
-  if (isRemoveUser) removeItemToStore('user', sessionStorage);
+  removeItemToStore('user', sessionStorage);
+
+  //refresh Token 삭제
+  if (isRemoveCookie) Cookie.remove('refreshToken');
 };
 
 const AuthService = {

@@ -10,7 +10,8 @@ import Error500 from 'components/errors/Error500';
 
 import Login from 'components/authentication/simple/Login';
 import Logout from 'components/authentication/simple/Logout';
-import Registration from 'components/authentication/simple/Registration';
+//import Registration from 'components/authentication/simple/Registration';
+import Registration from 'components/authentication/simple/regist/Registration';
 import ForgetPassword from 'components/authentication/simple/ForgetPassword';
 import PasswordReset from 'components/authentication/simple/PasswordReset';
 
@@ -33,11 +34,12 @@ const WebsiteRoutes = () => {
         <Route path="errors/500" element={<Error500 />} />
       </Route>
 
+      <Route path="signup" element={<Registration />} />
+
       {/* //--- AuthLayout Starts  */}
       <Route element={<AuthSimpleLayout />}>
         <Route path="signin" element={<Login />} />
         <Route path="signout" element={<Logout />} />
-        <Route path="signup" element={<Registration />} />
         <Route path="password_reset" element={<PasswordReset />} />
         <Route path="password_forgot" element={<ForgetPassword />} />
       </Route>

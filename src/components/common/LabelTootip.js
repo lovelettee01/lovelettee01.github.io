@@ -20,7 +20,7 @@ const LabelTootip = ({ label, tooltip }) => {
 };
 
 LabelTootip.propTypes = {
-  label: PropTypes.bool.isRequired,
-  tooltip: PropTypes.func.isRequired
+  label: PropTypes.string.isRequired,
+  tooltip: PropTypes.string.isRequired
 };
 export default LabelTootip;
