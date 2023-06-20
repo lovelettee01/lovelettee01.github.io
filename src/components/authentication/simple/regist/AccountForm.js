@@ -3,14 +3,27 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 import WizardInput from 'components/common/WizardInput';
+import AgreementModal from 'components/agreement/AgreementModal';
+import { useState } from 'react';
 
 const AccountForm = ({ register, errors, watch }) => {
   const user = {};
+  const [agree, setAgree] = useState('');
+  const [modal, showModal] = useState(false);
+
+  const handleAgreeClick = type => {
+    setAgree(type);
+    showModal(true);
+  };
+
   return (
     <>
+      {modal && (
+        <AgreementModal modal={modal} showModal={showModal} type={agree} />
+      )}
       <WizardInput
         type="text"
-        label="Name"
+        label="Name*"
         name="name"
         errors={errors}
         formGroupProps={{ className: 'mb-3' }}
@@ -93,8 +106,24 @@ const AccountForm = ({ register, errors, watch }) => {
         errors={errors}
         label={
           <>
-            I accept the <Link to="#!"> terms</Link> and{' '}
-            <Link to="#!"> privacy policy</Link>
+            I accept the{' '}
+            <Link
+              onClick={() => {
+                handleAgreeClick('terms');
+              }}
+            >
+              {' '}
+              terms
+            </Link>{' '}
+            and{' '}
+            <Link
+              onClick={() => {
+                handleAgreeClick('policy');
+              }}
+            >
+              {' '}
+              privacy policy
+            </Link>
           </>
         }
         name="agreedToTerms"

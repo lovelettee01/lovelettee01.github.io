@@ -32,7 +32,7 @@ const WizardModal = ({ modal, setModal, message }) => {
 WizardModal.propTypes = {
   modal: PropTypes.bool.isRequired,
   setModal: PropTypes.func.isRequired,
-  message: PropTypes.string.isRequired
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired
 };
 
 export default WizardModal;

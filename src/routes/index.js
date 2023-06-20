@@ -26,6 +26,10 @@ import PostDetails from 'components/pages/post/details/PostDetails';
 import Profile from 'components/pages/user/profile/Profile';
 import Settings from 'components/pages/user/settings/Settings';
 
+import Terms from 'components/agreement/Terms';
+import PrivacyPolicy from 'components/agreement/PrivacyPolicy';
+import PrivacyPolicy2 from 'components/agreement/PrivacyPolicy2';
+
 const WebsiteRoutes = () => {
   return (
     <Routes>
@@ -35,6 +39,9 @@ const WebsiteRoutes = () => {
       </Route>
 
       <Route path="signup" element={<Registration />} />
+      <Route path="/agree/terms" element={<Terms />} />
+      <Route path="/agree/policy" element={<PrivacyPolicy />} />
+      <Route path="/agree/policy2" element={<PrivacyPolicy2 />} />
 
       {/* //--- AuthLayout Starts  */}
       <Route element={<AuthSimpleLayout />}>
