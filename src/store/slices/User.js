@@ -58,23 +58,26 @@ export const userSlice = createSlice({
       state.currentUser = action.payload.data;
     }
   },
-  extraReducers: {
-    [userProfile.fulfilled]: (state, action) => {
+  extraReducers: builder => {
+    /** 회원정보 **/
+    builder.addCase(userProfile.fulfilled, (state, action) => {
       Log.debug('userProfile.fulfilled', state, action);
       state.currentUser = action.payload.data;
-    },
-    [userProfile.rejected]: (state, action) => {
+    });
+    builder.addCase(userProfile.rejected, (state, action) => {
       Log.debug('userProfile.rejected', state, action);
       state.currentUser = null;
-    },
-    [updateProfile.fulfilled]: (state, action) => {
+    });
+
+    /** 회원정보수정 **/
+    builder.addCase(updateProfile.fulfilled, (state, action) => {
       Log.debug('updateProfile.fulfilled', state, action);
       state.currentUser = action.payload.data;
-    },
-    [updateProfile.rejected]: (state, action) => {
+    });
+    builder.addCase(updateProfile.rejected, (state, action) => {
       Log.debug('updateProfile.rejected', state, action);
-      // state.currentUser = null;
-    }
+      //state.currentUser = null;
+    });
   }
 });
 

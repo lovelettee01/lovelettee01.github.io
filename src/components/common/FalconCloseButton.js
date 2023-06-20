@@ -12,9 +12,7 @@ const FalconCloseButton = ({
   className,
   ...rest
 }) => {
-  const {
-    config: { isDark }
-  } = useSelector(state => state);
+  const { isDark } = useSelector(state => state.config);
   return (
     <CloseButton
       variant={variant ? variant : isDark ? 'white' : undefined}

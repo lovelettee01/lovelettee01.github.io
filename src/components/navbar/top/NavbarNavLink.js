@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SET_CONFIG } from 'store/slices/Config';
 
 const NavbarNavLink = ({ title, route }) => {
-  const {
-    config: { navbarCollapsed, showBurgerMenu }
-  } = useSelector(state => state);
+  const { navbarCollapsed, showBurgerMenu } = useSelector(
+    state => state.config
+  );
 
   const dispatch = useDispatch();
   const handleClick = () => {

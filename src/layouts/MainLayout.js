@@ -9,9 +9,7 @@ import { useSelector } from 'react-redux';
 const MainLayout = () => {
   const { hash, pathname } = useLocation();
   const isKanban = pathname.includes('kanban');
-  const {
-    config: { isFluid, navbarPosition }
-  } = useSelector(state => state);
+  const { isFluid, navbarPosition } = useSelector(state => state.config);
 
   useEffect(() => {
     setTimeout(() => {

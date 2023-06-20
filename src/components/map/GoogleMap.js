@@ -22,9 +22,7 @@ const GoogleMap = ({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY
   });
 
-  const {
-    config: { isDark }
-  } = useSelector(state => state);
+  const { isDark } = useSelector(state => state.config);
 
   const [showInfoWindow, setShowInfoWindow] = useState(false);
   const [mapStyles, setMapStyles] = useState(mapStyle);

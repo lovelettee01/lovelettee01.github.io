@@ -10,9 +10,7 @@ import Loading from 'components/common/Loading';
 
 const PrivateLayout = () => {
   const { hash, pathname } = useLocation();
-  const {
-    config: { isFluid, navbarPosition }
-  } = useSelector(state => state);
+  const { isFluid, navbarPosition } = useSelector(state => state.config);
 
   useEffect(() => {
     setTimeout(() => {

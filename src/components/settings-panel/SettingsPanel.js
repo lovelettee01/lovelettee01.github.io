@@ -20,16 +20,14 @@ import { SET_CONFIG, RESET } from 'store/slices/Config';
 
 const SettingsPanel = () => {
   const {
-    config: {
-      isFluid,
-      isRTL,
-      isDark,
-      navbarPosition,
-      navbarStyle,
-      showSettingPanel,
-      disabledNavbarPosition
-    }
-  } = useSelector(state => state);
+    isFluid,
+    isRTL,
+    isDark,
+    navbarPosition,
+    navbarStyle,
+    showSettingPanel,
+    disabledNavbarPosition
+  } = useSelector(state => state.config);
   const dispatch = useDispatch();
 
   const [navbars] = useState([

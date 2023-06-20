@@ -5,9 +5,7 @@ import { getColor } from 'helpers/utils';
 import { useSelector } from 'react-redux';
 
 const TinymceEditor = ({ value, handleChange, height = '50vh' }) => {
-  const {
-    config: { isDark, isRTL }
-  } = useSelector(state => state);
+  const { isDark, isRTL } = useSelector(state => state.config);
 
   const editorRef = useRef(null);
   useEffect(() => {

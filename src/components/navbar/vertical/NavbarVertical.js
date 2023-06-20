@@ -17,13 +17,11 @@ import { useSelector } from 'react-redux';
 
 const NavbarVertical = () => {
   const {
-    config: {
-      navbarPosition,
-      navbarStyle,
-      isNavbarVerticalCollapsed,
-      showBurgerMenu
-    }
-  } = useSelector(state => state);
+    navbarPosition,
+    navbarStyle,
+    isNavbarVerticalCollapsed,
+    showBurgerMenu
+  } = useSelector(state => state.config);
 
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;
 

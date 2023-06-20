@@ -5,12 +5,10 @@ import useToggleStyle from './hooks/useToggleStyle';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Main = props => {
-  const { config } = useSelector(state => {
-    return state;
-  });
+  const { isDark, isRTL } = useSelector(state => state.config);
   const dispatch = useDispatch();
 
-  const { isLoaded } = useToggleStyle(config.isRTL, config.isDark, dispatch);
+  const { isLoaded } = useToggleStyle(isRTL, isDark, dispatch);
   if (!isLoaded) {
     return (
       <div
@@ -20,7 +18,7 @@ const Main = props => {
           right: 0,
           bottom: 0,
           left: 0,
-          backgroundColor: config.isDark ? getColor('dark') : getColor('light')
+          backgroundColor: isDark ? getColor('dark') : getColor('light')
         }}
       />
     );

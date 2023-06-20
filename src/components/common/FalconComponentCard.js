@@ -38,9 +38,7 @@ const FalconComponentCardHeader = ({
   noPreview
 }) => {
   const location = useLocation();
-  const {
-    config: { isRTL }
-  } = useSelector(state => state);
+  const { isRTL } = useSelector(state => state.config);
   return (
     <Card.Header className={classNames({ 'bg-light': light }, className)}>
       <Row

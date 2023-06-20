@@ -29,13 +29,8 @@ const Companys = () => {
   const navigate = useNavigate();
   const { breakpoints } = useBreakpoints();
   const { companyLayout } = useParams();
-  const {
-    company: { companys }
-  } = useSelector(s => s);
-
-  const {
-    config: { isNavbarVerticalCollapsed }
-  } = useSelector(state => state);
+  const { companys } = useSelector(s => s.company);
+  const { isNavbarVerticalCollapsed } = useSelector(state => state.config);
   const dispatch = useDispatch();
 
   const companysNavbarVerticalCollapsed = useRef(isNavbarVerticalCollapsed);

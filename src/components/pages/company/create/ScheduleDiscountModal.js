@@ -12,9 +12,7 @@ const ScheduleDiscountModal = ({
   setIsOpenScheduleModal,
   isOpenScheduleModal
 }) => {
-  const {
-    config: { isDark }
-  } = useSelector(state => state);
+  const { isDark } = useSelector(state => state.config);
 
   const [formData, setFormData] = useState({
     startDate: null,

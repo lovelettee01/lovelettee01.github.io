@@ -19,12 +19,8 @@ import Success from './Success';
 import WizardModal from 'components/common/WizardModal';
 
 const RegistMain = ({ variant, validation = true, progressBar = true }) => {
-  const {
-    config: { isRTL },
-    auth: {
-      regist: { step, user }
-    }
-  } = useSelector(state => state);
+  const { isRTL } = useSelector(state => state.config);
+  const { step, user } = useSelector(state => state.auth.regist);
   console.log(`step [${step}]`, user, { variant, validation, progressBar });
 
   const {

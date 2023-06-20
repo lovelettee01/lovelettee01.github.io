@@ -20,9 +20,7 @@ setDefaultLocale('ko');
 
 const App = () => {
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;
-  const {
-    config: { navbarPosition }
-  } = useSelector(state => state);
+  const { navbarPosition } = useSelector(state => state.config);
 
   useEffect(() => {
     if (is.windows()) {

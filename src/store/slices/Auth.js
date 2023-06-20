@@ -131,61 +131,67 @@ export const authSlice = createSlice({
       if (user) state.regist.user = user;
     }
   },
-  extraReducers: {
+  extraReducers: builder => {
     /** 회원가입 **/
-    [signUp.fulfilled]: (state, action) => {
+    builder.addCase(signUp.fulfilled, (state, action) => {
       Log.debug('signUp.fulfilled', state, action);
-      state.isLoggedIn = false;
-    },
-    [signUp.rejected]: (state, action) => {
+      state.isLoggedIn = true;
+    });
+    builder.addCase(signUp.rejected, (state, action) => {
       Log.debug('signUp.rejected', state, action);
       state.isLoggedIn = false;
-    },
+    });
+
     /** 로그인 **/
-    [signIn.fulfilled]: (state, action) => {
+    builder.addCase(signIn.fulfilled, (state, action) => {
       Log.debug('signIn.fulfilled', state, action);
       state.isLoggedIn = true;
-    },
-    [signIn.rejected]: (state, action) => {
+    });
+    builder.addCase(signIn.rejected, (state, action) => {
       Log.debug('signIn.rejected', state, action);
       state.isLoggedIn = false;
-    },
+    });
+
     /** 로그아웃 **/
-    [signOut.fulfilled]: (state, action) => {
+    builder.addCase(signOut.fulfilled, (state, action) => {
       Log.debug('signOut.fulfilled', state, action);
       state.isLoggedIn = false;
-    },
+    });
+
     /** 상태체크 **/
-    [authCheck.fulfilled]: (state, action) => {
+    builder.addCase(authCheck.fulfilled, (state, action) => {
       Log.debug('authCheck.fulfilled', state, action);
       state.isLoggedIn = true;
-    },
-    [authCheck.rejected]: (state, action) => {
+    });
+    builder.addCase(authCheck.rejected, (state, action) => {
       Log.debug('authCheck.rejected', state, action);
       state.isLoggedIn = false;
       clearAllAccessData(false); //기존 Store 삭제
-    },
+    });
+
     /** 비밀번호 변경 **/
-    [passwordChange.fulfilled]: (state, action) => {
+    builder.addCase(passwordChange.fulfilled, (state, action) => {
       Log.debug('passwordChange.fulfilled', state, action);
-    },
-    [passwordChange.rejected]: (state, action) => {
+    });
+    builder.addCase(passwordChange.rejected, (state, action) => {
       Log.debug('passwordChange.rejected', state, action);
-    },
+    });
+
     /** 비밀번호 변경 토큰생성 **/
-    [passwordResetToken.fulfilled]: (state, action) => {
+    builder.addCase(passwordResetToken.fulfilled, (state, action) => {
       Log.debug('passwordResetToken.fulfilled', state, action);
-    },
-    [passwordResetToken.rejected]: (state, action) => {
+    });
+    builder.addCase(passwordResetToken.rejected, (state, action) => {
       Log.debug('passwordResetToken.rejected', state, action);
-    },
+    });
+
     /** 새로운 비밀번호 변경 **/
-    [passwordReset.fulfilled]: (state, action) => {
+    builder.addCase(passwordReset.fulfilled, (state, action) => {
       Log.debug('passwordReset.fulfilled', state, action);
-    },
-    [passwordReset.rejected]: (state, action) => {
+    });
+    builder.addCase(passwordReset.rejected, (state, action) => {
       Log.debug('passwordReset.rejected', state, action);
-    }
+    });
   }
 });
 

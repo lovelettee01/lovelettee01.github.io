@@ -21,9 +21,7 @@ import { SORT_PRODUCT } from 'store/slices/Post';
 
 const Posts = () => {
   const postsDispatch = useDispatch();
-  const {
-    post: { posts }
-  } = useSelector(s => s);
+  const { posts } = useSelector(s => s.post);
 
   const [sortBy, setSortBy] = useState('price');
   const [isAsc, setIsAsc] = useState(true);

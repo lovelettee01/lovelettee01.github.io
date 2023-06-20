@@ -10,9 +10,9 @@ const renderTooltip = props => (
 );
 
 const ToggleButton = () => {
-  const {
-    config: { isNavbarVerticalCollapsed, isFluid, isRTL }
-  } = useSelector(state => state);
+  const { isNavbarVerticalCollapsed, isFluid, isRTL } = useSelector(
+    state => state.config
+  );
   const dispatch = useDispatch();
 
   const handleClick = () => {

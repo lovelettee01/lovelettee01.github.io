@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
 const StarRating = ({ fractions = 2, rating, handleChange, ...rest }) => {
-  const {
-    config: { isRTL }
-  } = useSelector(state => state);
+  const { isRTL } = useSelector(state => state.config);
 
   return (
     <Rating

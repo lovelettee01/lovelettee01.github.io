@@ -58,9 +58,7 @@ CollapseItems.propTypes = {
 };
 
 const NavbarVerticalMenu = ({ routes }) => {
-  const {
-    config: { showBurgerMenu }
-  } = useSelector(state => state);
+  const { showBurgerMenu } = useSelector(state => state.config);
   const dispatch = useDispatch();
 
   const handleNavItemClick = () => {

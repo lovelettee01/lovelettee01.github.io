@@ -14,9 +14,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SET_CONFIG } from 'store/slices/Config';
 
 const NavbarTop = () => {
-  const {
-    config: { showBurgerMenu, navbarPosition, navbarCollapsed }
-  } = useSelector(state => state);
+  const { showBurgerMenu, navbarPosition, navbarCollapsed } = useSelector(
+    state => state.config
+  );
 
   const dispatch = useDispatch();
 

@@ -21,10 +21,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SET_CONFIG } from 'store/slices/Config';
 
 const Companydetails = () => {
-  const {
-    config: { navbarPosition },
-    company: { companys }
-  } = useSelector(state => state);
+  const { navbarPosition } = useSelector(state => state.config);
+  const { companys } = useSelector(state => state.company);
   const dispatch = useDispatch();
 
   const { companyId } = useParams();

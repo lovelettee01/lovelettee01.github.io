@@ -4,9 +4,7 @@ import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 const Bottombar = ({ inViewport }) => {
-  const {
-    config: { navbarCollapsed }
-  } = useSelector(state => state);
+  const { navbarCollapsed } = useSelector(state => state.config);
   return (
     <Card
       className={`bottom-bar rounded-0 d-lg-none ${

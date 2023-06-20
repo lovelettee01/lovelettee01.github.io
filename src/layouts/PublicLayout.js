@@ -10,9 +10,7 @@ import Loading from 'components/common/Loading';
 
 const PublicLayout = () => {
   const { hash, pathname } = useLocation();
-  const {
-    config: { isFluid, navbarPosition }
-  } = useSelector(state => state);
+  const { isFluid, navbarPosition } = useSelector(state => state.config);
 
   useEffect(() => {
     setTimeout(() => {
@@ -42,7 +40,7 @@ const PublicLayout = () => {
       <div className={classNames('content')}>
         <NavbarTop />
         {/*------ Main Routes ------*/}
-        {/* <Outlet /> */}
+        <Outlet />
         <Footer />
       </div>
     </div>

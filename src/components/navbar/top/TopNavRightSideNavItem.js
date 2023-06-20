@@ -9,14 +9,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SET_CONFIG } from 'store/slices/Config';
 
 const TopNavRightSideNavItem = () => {
-  const {
-    auth: { isLoggedIn },
-    user: { currentUser },
-    config: { isDark, isRTL }
-  } = useSelector(state => {
+  const { isLoggedIn } = useSelector(state => {
     console.log(state);
-    return state;
+    return state.auth;
   });
+
+  const { currentUser } = useSelector(state => state.user);
+  const { isDark, isRTL } = useSelector(state => state.config);
   const dispatch = useDispatch();
 
   return (

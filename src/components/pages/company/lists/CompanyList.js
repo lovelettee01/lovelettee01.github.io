@@ -30,9 +30,7 @@ const CompanyList = ({ company }) => {
     review
   } = company;
 
-  const {
-    company: { cartItems, favouriteItems }
-  } = useSelector(s => s);
+  const { cartItems, favouriteItems } = useSelector(s => s.company);
 
   const isInCart = id => !!cartItems.find(cartItem => cartItem.id === id);
   const isInFavouriteItems = id =>

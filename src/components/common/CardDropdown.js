@@ -11,9 +11,7 @@ const CardDropdown = ({
   children,
   icon = 'ellipsis-h'
 }) => {
-  const {
-    config: { isRTL }
-  } = useSelector(state => state);
+  const { isRTL } = useSelector(state => state.config);
 
   return (
     <Dropdown

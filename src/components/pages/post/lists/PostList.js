@@ -27,9 +27,7 @@ const PostList = ({ post, index }) => {
     files
   } = post;
 
-  const {
-    post: { favouriteItems }
-  } = useSelector(s => s);
+  const { favouriteItems } = useSelector(s => s.post);
 
   const isInFavouriteItems = id =>
     !!favouriteItems.find(favouriteItem => favouriteItem.id === id);
