@@ -6,7 +6,6 @@ import reviewer2 from 'assets/img/team/2-thumb.png';
 import reviewer3 from 'assets/img/team/7.jpg';
 import reviewer4 from 'assets/img/team/4-thumb.png';
 import reviewer5 from 'assets/img/team/10.jpg';
-import beachVideo from 'assets/video/beach.mp4';
 import intro from 'assets/img/e-learning/lessons/intro.png';
 import chapter1 from 'assets/img/e-learning/lessons/chapter1.png';
 import chapter2 from 'assets/img/e-learning/lessons/chapter2.png';
@@ -133,7 +132,7 @@ export const companyLessons = [
     isLocked: false,
     attachment: {
       image: intro,
-      src: beachVideo,
+      src: 'https://www.youtube.com/watch?v=Kkrb-ppDSTE',
       type: 'video'
     }
   },
@@ -144,7 +143,7 @@ export const companyLessons = [
     isLocked: true,
     attachment: {
       image: chapter1,
-      src: beachVideo,
+      src: 'https://www.youtube.com/watch?v=Kkrb-ppDSTE',
       type: 'image'
     }
   },
@@ -155,7 +154,7 @@ export const companyLessons = [
     isLocked: true,
     attachment: {
       image: chapter2,
-      src: beachVideo,
+      src: 'https://www.youtube.com/watch?v=Kkrb-ppDSTE',
       type: 'image'
     }
   },
@@ -166,7 +165,7 @@ export const companyLessons = [
     isLocked: true,
     attachment: {
       image: chapter3,
-      src: beachVideo,
+      src: 'https://www.youtube.com/watch?v=Kkrb-ppDSTE',
       type: 'image'
     }
   },
@@ -177,7 +176,7 @@ export const companyLessons = [
     isLocked: true,
     attachment: {
       image: chapter4,
-      src: beachVideo,
+      src: 'https://www.youtube.com/watch?v=Kkrb-ppDSTE',
       type: 'image'
     }
   }

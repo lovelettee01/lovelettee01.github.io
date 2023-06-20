@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Card, Image } from 'react-bootstrap';
-import beach from 'assets/video/beach.mp4';
 import beachPoster from 'assets/video/beach.jpg';
 import FalconCardHeader from 'components/common/FalconCardHeader';
 import FalconLink from 'components/common/FalconLink';
@@ -48,7 +47,10 @@ const LessonItem = ({ lesson, isLast }) => {
       <ModalVideoContent
         show={showModal}
         setShow={setShowModal}
-        attachment={{ image: beachPoster, src: beach }}
+        attachment={{
+          image: beachPoster,
+          src: 'https://www.youtube.com/watch?v=Kkrb-ppDSTE'
+        }}
       />
       <Flex
         key={lesson.id}

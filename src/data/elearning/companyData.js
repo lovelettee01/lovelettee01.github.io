@@ -1,7 +1,6 @@
 import company1 from 'assets/img/e-learning/companys/company1.png';
 import company2 from 'assets/img/e-learning/companys/company2.png';
 import company3 from 'assets/img/e-learning/companys/company3.png';
-import beachVideo from 'assets/video/beach.mp4';
 import beachPoster from 'assets/video/beach.jpg';
 
 export const companyFilters = [
@@ -141,7 +140,7 @@ export const companyData = [
     trainer: '밸런시움',
     thumbnail: {
       image: company1,
-      video: beachVideo,
+      video: 'https://www.youtube.com/watch?v=Kkrb-ppDSTE',
       videoPoster: beachPoster
     },
     totalEnrolled: 92632,
@@ -159,7 +158,7 @@ export const companyData = [
     trainer: '키키쿵',
     thumbnail: {
       image: company2,
-      video: beachVideo,
+      video: 'https://www.youtube.com/watch?v=Kkrb-ppDSTE',
       videoPoster: beachPoster
     },
     totalEnrolled: 92603,
@@ -177,7 +176,7 @@ export const companyData = [
     trainer: '포도나무',
     thumbnail: {
       image: company3,
-      video: beachVideo,
+      video: 'https://www.youtube.com/watch?v=Kkrb-ppDSTE',
       videoPoster: beachPoster
     },
     totalEnrolled: 11000,

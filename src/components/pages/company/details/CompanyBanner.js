@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Button, Card, Col, Image, Row } from 'react-bootstrap';
 import CompanyDetailsBg from 'assets/img/e-learning/company-details-bg.png';
 import playicon from 'assets/img/icons/play.svg';
-import beach from 'assets/video/beach.mp4';
 import beachPoster from 'assets/video/beach.jpg';
 import Background from 'components/common/Background';
 import { Link } from 'react-router-dom';
@@ -36,7 +35,10 @@ const CompanyBanner = ({ company }) => {
                   <ModalVideoContent
                     show={showModal}
                     setShow={setShowModal}
-                    attachment={{ image: beachPoster, src: beach }}
+                    attachment={{
+                      image: beachPoster,
+                      src: 'https://www.youtube.com/watch?v=Kkrb-ppDSTE'
+                    }}
                   />
                 </div>
               </Col>

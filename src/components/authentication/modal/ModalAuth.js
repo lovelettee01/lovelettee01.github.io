@@ -35,7 +35,7 @@ export default function MadalAuth() {
         />
       </Modal.Header>
       <Modal.Body className="p-4">
-        <LoginForm layout="split" hasLabel />
+        <LoginForm layout="simple" hasLabel />
       </Modal.Body>
     </Modal>
   );
