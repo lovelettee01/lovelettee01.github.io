@@ -17,7 +17,8 @@ import {
 
 const axiosInstance = axios.create({
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': serverURL
   },
   baseURL: serverURL,
   timeout: 10000,
@@ -31,7 +32,7 @@ export const callApi = (isAuth = true) => {
 
 let reqInterceptor = null;
 let resInterceptor = null;
-export const callApiWrapper = (props = { isAuth: true, isRes: false }) => {
+export const callApiWrapper = (props = { isAuth: true }) => {
   Log.debug('axiosInstance Call', props);
   axiosInstance.interceptors.request.eject(reqInterceptor);
   axiosInstance.interceptors.response.eject(resInterceptor);

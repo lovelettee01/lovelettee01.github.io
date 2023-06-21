@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logoutImg from 'assets/img/icons/spot-illustrations/45.png';
-
-import { useDispatch } from 'react-redux';
 import { signOut } from 'store/slices/Auth';
-import { useEffect } from 'react';
 import Flex from 'components/common/Flex';
 
 const LogoutContent = ({ layout = '', titleTag: TitleTag }) => {

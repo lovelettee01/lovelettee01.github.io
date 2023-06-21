@@ -11,9 +11,9 @@ import Error500 from 'components/errors/Error500';
 
 import Login from 'components/authentication/simple/Login';
 import Logout from 'components/authentication/simple/Logout';
-//import Registration from 'components/authentication/simple/Registration';
 import RegistMain from 'components/authentication/simple/regist/RegistMain';
 import ForgetPassword from 'components/authentication/simple/ForgetPassword';
+import ConfirmMail from 'components/authentication/simple/ConfirmMail';
 import PasswordReset from 'components/authentication/simple/PasswordReset';
 
 import Companys from 'components/pages/company/lists/Companys';
@@ -22,7 +22,6 @@ import CompanyCreate from 'components/pages/company/create';
 
 import Post from 'components/pages/post/lists/Posts';
 import PostDetails from 'components/pages/post/details/PostDetails';
-//import ProtectedRoute from './ProtectedRoute';
 
 import Profile from 'components/pages/user/profile/Profile';
 import Settings from 'components/pages/user/settings/Settings';
@@ -48,8 +47,9 @@ const WebsiteRoutes = () => {
       <Route element={<AuthLayout />}>
         <Route path="signin" element={<Login />} />
         <Route path="signout" element={<Logout />} />
-        <Route path="password_reset" element={<PasswordReset />} />
         <Route path="password_forgot" element={<ForgetPassword />} />
+        <Route path="confirm_mail" element={<ConfirmMail />} />
+        <Route path="password_reset" element={<PasswordReset />} />
       </Route>
 
       {/* //--- PublicLayout Start  */}
@@ -65,7 +65,6 @@ const WebsiteRoutes = () => {
         <Route path="post/:postLayout" element={<Post />} />
         <Route path="post/details/:postId" element={<PostDetails />} />
       </Route>
-      {/* //--- PublicLayout end  */}
 
       {/* //--- PrivateLayout Start  */}
       <Route element={<PrivateLayout />}>
@@ -79,7 +78,6 @@ const WebsiteRoutes = () => {
         {/* Post */}
         <Route path="post/create" element={<CompanyCreate />} />
       </Route>
-      {/* //--- PrivateLayout end  */}
 
       {/* 이용약관 및 개인정보처리방침  */}
       <Route path="/agree/terms" element={<Terms />} />

@@ -1,6 +1,11 @@
 import Cookie from 'js-cookie';
 import moment from 'moment';
-import { setItemToStore, removeItemToStore } from 'helpers/utils';
+import {
+  setPlainText,
+  getPlainText,
+  setItemToStore,
+  removeItemToStore
+} from 'helpers/utils';
 import { callApi, setAuthrization } from 'helpers/api/reqApi';
 import Log from 'helpers/logger';
 /**
@@ -170,12 +175,21 @@ export const setAccessToken = token => {
  */
 export const setRefreshToken = token => {
   if (token) {
-    Cookie.set('refreshToken', token, {
-      secure: true,
+    Cookie.set('refreshToken', setPlainText(token, true), {
+      //secure: true,
       expires: 1,
       path: '/'
     });
   }
+};
+
+/**
+ * RefreshToken 저장
+ * @param {string} token 토큰정보
+ */
+export const getRefreshToken = () => {
+  const refreshToken = Cookie.get('refreshToken');
+  return getPlainText(refreshToken, true);
 };
 
 /**

@@ -1,12 +1,15 @@
 import axios from 'axios';
-import Cookie from 'js-cookie';
 import moment from 'moment';
 import Log from 'helpers/logger';
 
 import { callApi } from 'helpers/api/reqApi';
 
 import { getItemFromStore } from 'helpers/utils';
-import { setAccessToken, removeAccessToken } from 'apis/auth.service';
+import {
+  setAccessToken,
+  removeAccessToken,
+  getRefreshToken
+} from 'apis/auth.service';
 
 const callRefreshToken = params => {
   // 토큰 갱신 서버통신
@@ -31,8 +34,8 @@ const callRefreshToken = params => {
 const requestRefreshConfig = async reqConfig => {
   let accessToken = getItemFromStore('accessToken', null, { isCrypto: true });
   const expiredToken = getItemFromStore('expiredToken');
-  const refreshToken = null; //Cookie.get('refreshToken');
-  Log.debug(`requestRefreshConfig`, { expiredToken }, reqConfig);
+  const refreshToken = getRefreshToken();
+  Log.debug(`requestRefreshConfig`, { expiredToken, refreshToken }, reqConfig);
   try {
     // 토큰이 만료되었다면
     if (moment(expiredToken).diff(moment()) < 0 && refreshToken) {
@@ -71,7 +74,7 @@ const responseRefreshConfig = response => {
 const responseRefreshErrorHandle = async error => {
   const reqConfig = error.config;
   const status = error.response?.status;
-  const refreshToken = Cookie.get('refreshToken');
+  const refreshToken = getRefreshToken();
   Log.debug('responseRefreshErrorHandle', { status }, { refreshToken }, error);
   if (status === 403 && refreshToken) {
     try {

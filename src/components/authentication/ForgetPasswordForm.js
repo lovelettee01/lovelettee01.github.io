@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Form } from 'react-bootstrap';
 
@@ -9,6 +9,7 @@ import { passwordResetToken } from 'store/slices/Auth';
 import WizardInput from 'components/common/WizardInput';
 
 const ForgetPasswordForm = () => {
+  const navigator = useNavigate();
   const {
     register,
     handleSubmit,
@@ -31,12 +32,7 @@ const ForgetPasswordForm = () => {
           theme: 'colored'
         });
       } else {
-        toast.success(
-          `An email is sent to ${watchEmail} with password reset link`,
-          {
-            theme: 'colored'
-          }
-        );
+        navigator(`/confirm_mail?email=${watchEmail}`);
       }
     });
   };

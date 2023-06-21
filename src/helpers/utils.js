@@ -21,13 +21,13 @@ export const breakpoints = {
 //========================================
 // Local Storage & Session Storage
 //========================================
-const setPlainText = (text, isCrypto = false) => {
+export const setPlainText = (text, isCrypto = false) => {
   const result = text && (isCrypto ? crypto.encrypt(text) : text);
   //console.log('setPlainText', { isCrypto, text, result });
   return result;
 };
 
-const getPlainText = (text, isCrypto = false) => {
+export const getPlainText = (text, isCrypto = false) => {
   const result = text && (isCrypto ? crypto.decrypt(text) : text);
   //console.log('getPlainText', { isCrypto, text, result });
   return result;
