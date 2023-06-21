@@ -3,7 +3,6 @@ import moment from 'moment';
 import { setItemToStore, removeItemToStore } from 'helpers/utils';
 import { callApi, setAuthrization } from 'helpers/api/reqApi';
 import Log from 'helpers/logger';
-
 /**
  * 회원가입
  * @method POST
@@ -17,6 +16,7 @@ const signUp = args => {
       const { data } = res;
       Log.debug(`[auth.service] signIn response`, data);
       if (data.success) {
+        clearAllAccessData(true);
         const accessToken = data.data.accessToken;
         setAuthrization(accessToken); //API Authorization Header 등록
         setAccessToken(accessToken); //Token 정보 저장
@@ -119,8 +119,9 @@ const passwordChange = args => {
  */
 const passwordResetToken = args => {
   Log.info('[auth.service] passwordResetToken', args);
+  const { callback, ...params } = args;
   return callApi(false)
-    .put(`/api/v1/auth/password/reset/token`, args)
+    .put(`/api/v1/auth/password/reset/token?callback=${callback}`, params)
     .then(res => {
       const { data } = res;
       if (data.success) {

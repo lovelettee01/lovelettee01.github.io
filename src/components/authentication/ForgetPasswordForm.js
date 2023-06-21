@@ -1,37 +1,73 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Form } from 'react-bootstrap';
 
-const ForgetPasswordForm = () => {
-  // State
-  const [email, setEmail] = useState('');
+import { passwordResetToken } from 'store/slices/Auth';
+import WizardInput from 'components/common/WizardInput';
 
-  // Handler
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (email) {
-      toast.success(`An email is sent to ${email} with password reset link`, {
-        theme: 'colored'
-      });
-    }
+const ForgetPasswordForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch
+  } = useForm();
+  const watchEmail = watch('email');
+
+  const dispatch = useDispatch();
+  const onSubmitData = data => {
+    const params = {
+      email: data.email,
+      callback: `${location.protocol}//${location.host}/password_reset`
+    };
+    console.log('onSubmitData', params);
+    dispatch(passwordResetToken(params)).then(res => {
+      const resData = res.payload;
+      if (!resData.success) {
+        toast.error(resData.message, {
+          theme: 'colored'
+        });
+      } else {
+        toast.success(
+          `An email is sent to ${watchEmail} with password reset link`,
+          {
+            theme: 'colored'
+          }
+        );
+      }
+    });
   };
 
+  const onError = () => {};
+
   return (
-    <Form className="mt-4" onSubmit={handleSubmit}>
-      <Form.Group className="mb-3">
-        <Form.Control
-          placeholder={'Email address'}
-          value={email}
-          name="email"
-          onChange={({ target }) => setEmail(target.value)}
-          type="email"
-        />
-      </Form.Group>
+    <Form
+      className="mt-4"
+      noValidate
+      onSubmit={handleSubmit(onSubmitData, onError)}
+    >
+      <WizardInput
+        type="email"
+        errors={errors}
+        name="email"
+        formGroupProps={{ className: 'mb-3' }}
+        formControlProps={{
+          ...register('email', {
+            required: 'Email field is required',
+            pattern: {
+              value:
+                /[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})/i,
+              message: 'Email must be valid'
+            }
+          })
+        }}
+      />
 
       <Form.Group className="mb-3">
-        <Button className="w-100" type="submit" disabled={!email}>
+        <Button className="w-100" type="submit" disabled={!watchEmail}>
           Send reset link
         </Button>
       </Form.Group>
@@ -43,11 +79,5 @@ const ForgetPasswordForm = () => {
     </Form>
   );
 };
-
-ForgetPasswordForm.propTypes = {
-  layout: PropTypes.string
-};
-
-ForgetPasswordForm.defaultProps = { layout: 'simple' };
 
 export default ForgetPasswordForm;

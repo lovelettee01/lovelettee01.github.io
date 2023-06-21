@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, CloseButton, Modal } from 'react-bootstrap';
-import { TRUE } from 'sass';
+import { mergeObject } from 'helpers/utils';
 
 const CustomModal = ({
   modal,
@@ -9,13 +9,13 @@ const CustomModal = ({
   title,
   message,
   modalProps,
-  optionProps
+  optionProps = {}
 }) => {
-  const modalOption = Object.assign(
+  const modalOption = mergeObject(
     {
       confirm: false,
       showTitle: true,
-      showClose: TRUE,
+      showClose: true,
       ok: {
         text: '확인',
         handleClick: null

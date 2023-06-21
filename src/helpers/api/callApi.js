@@ -21,7 +21,8 @@ const axiosInstance = axios.create({
   },
   baseURL: serverURL,
   timeout: 10000,
-  params: {}
+  params: {},
+  withCredentials: true
 });
 
 export const callApi = (isAuth = true) => {

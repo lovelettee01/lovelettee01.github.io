@@ -36,6 +36,9 @@ const ConfirmPop = ({ modal, setModal }) => {
           theme: 'colored'
         });
       } else {
+        toast.success('See you Later', {
+          theme: 'colored'
+        });
         navigate('/');
       }
     });

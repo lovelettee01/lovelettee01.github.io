@@ -2,7 +2,8 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import PrivateLayout from '../layouts/PrivateLayout';
 import PublicLayout from '../layouts/PublicLayout';
-import AuthSimpleLayout from '../layouts/AuthSimpleLayout';
+import RegistLayout from '../layouts/RegistLayout';
+import AuthLayout from '../layouts/AuthLayout';
 import ErrorLayout from '../layouts/ErrorLayout';
 
 import Error404 from 'components/errors/Error404';
@@ -11,7 +12,7 @@ import Error500 from 'components/errors/Error500';
 import Login from 'components/authentication/simple/Login';
 import Logout from 'components/authentication/simple/Logout';
 //import Registration from 'components/authentication/simple/Registration';
-import Registration from 'components/authentication/simple/regist/Registration';
+import RegistMain from 'components/authentication/simple/regist/RegistMain';
 import ForgetPassword from 'components/authentication/simple/ForgetPassword';
 import PasswordReset from 'components/authentication/simple/PasswordReset';
 
@@ -38,13 +39,13 @@ const WebsiteRoutes = () => {
         <Route path="errors/500" element={<Error500 />} />
       </Route>
 
-      <Route path="signup" element={<Registration />} />
-      <Route path="/agree/terms" element={<Terms />} />
-      <Route path="/agree/policy" element={<PrivacyPolicy />} />
-      <Route path="/agree/policy2" element={<PrivacyPolicy2 />} />
+      {/* //--- RegistLayout Starts  */}
+      <Route element={<RegistLayout />}>
+        <Route path="signup" element={<RegistMain />} />
+      </Route>
 
       {/* //--- AuthLayout Starts  */}
-      <Route element={<AuthSimpleLayout />}>
+      <Route element={<AuthLayout />}>
         <Route path="signin" element={<Login />} />
         <Route path="signout" element={<Logout />} />
         <Route path="password_reset" element={<PasswordReset />} />
@@ -79,6 +80,11 @@ const WebsiteRoutes = () => {
         <Route path="post/create" element={<CompanyCreate />} />
       </Route>
       {/* //--- PrivateLayout end  */}
+
+      {/* 이용약관 및 개인정보처리방침  */}
+      <Route path="/agree/terms" element={<Terms />} />
+      <Route path="/agree/policy" element={<PrivacyPolicy />} />
+      <Route path="/agree/policy2" element={<PrivacyPolicy2 />} />
 
       {/* <Navigate to="/errors/404" /> */}
       <Route path="*" element={<Navigate to="/errors/404" replace />} />

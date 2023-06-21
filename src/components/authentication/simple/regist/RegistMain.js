@@ -32,7 +32,7 @@ const RegistMain = ({ variant, validation = true, progressBar = true }) => {
     clearErrors
   } = useForm();
 
-  const [modal, setModal] = useState(false);
+  const [modal, showModal] = useState(false);
 
   const navItems = [
     {
@@ -77,7 +77,7 @@ const RegistMain = ({ variant, validation = true, progressBar = true }) => {
     }
   };
 
-  const toggle = () => setModal(!modal);
+  const toggle = () => showModal(!modal);
   const handleNavs = targetStep => {
     if (step !== 3) {
       if (targetStep < step) {
@@ -94,7 +94,7 @@ const RegistMain = ({ variant, validation = true, progressBar = true }) => {
     <>
       <WizardModal
         modal={modal}
-        setModal={setModal}
+        showModal={showModal}
         message={
           <>
             회원가입을 완료했습니다.

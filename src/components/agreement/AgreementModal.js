@@ -25,7 +25,6 @@ const termsType = type => {
 
 const Agreement = ({ modal, showModal, type }) => {
   const typeObj = termsType(type);
-  console.log(typeObj);
   return (
     <CustomModal
       modal={modal}
