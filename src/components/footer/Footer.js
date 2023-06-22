@@ -22,8 +22,18 @@ const Footer = () => {
         <Row className="justify-content-between text-center fs--1 mt-4 mb-3">
           <Col sm="auto">
             <p className="mb-0 text-600">
-              (주) 주주생각
-              <span className="d-none d-sm-inline-block">| </span>{' '}
+              ㈜주주생각 <br className="d-sm-none" />
+              • 사업자 등록번호 : 159-81-02707 • 대표 : 김진수
+              <br className="d-sm-none" />
+              (06644) 서울시 서초구 반포대로 30길 81, 11층 1115A호
+              <br className="d-sm-none" />
+              대표번호 : 02-6953-1363
+            </p>
+          </Col>
+        </Row>
+        <Row className="justify-content-between text-center fs--1 mb-3">
+          <Col sm="auto">
+            <p className="mb-0 text-600">
               <Link
                 onClick={() => {
                   handleAgreeClick('terms');
@@ -31,7 +41,7 @@ const Footer = () => {
               >
                 서비스약관
               </Link>
-              <span className="d-none d-sm-inline-block">| </span>{' '}
+              <span> | </span>{' '}
               <Link
                 onClick={() => {
                   handleAgreeClick('policy');
@@ -39,7 +49,7 @@ const Footer = () => {
               >
                 개인정보 처리방침
               </Link>
-              <span className="d-none d-sm-inline-block">| </span>{' '}
+              <span className=""> | </span>{' '}
               <Link
                 onClick={() => {
                   handleAgreeClick('policy2');
@@ -52,7 +62,7 @@ const Footer = () => {
           <Col sm="auto">
             <p className="mb-0 text-600">
               <br className="d-sm-none" /> {new Date().getFullYear()} &copy;{' '}
-              <a href="https://stoq.kr">회사소개</a>
+              <a href="https://stoq.kr">㈜주주생각</a>
             </p>
           </Col>
         </Row>

@@ -464,3 +464,20 @@ export const mergeObject = (target, source) => {
   Object.assign(target || {}, source);
   return target;
 };
+export const serialiseObject = (obj, isDeep = false) => {
+  let pairs = [];
+  for (let prop in obj) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (!obj.hasOwnProperty(prop)) continue;
+    if (
+      isDeep &&
+      Object.prototype.toString.call(obj[prop]) == '[object Object]'
+    ) {
+      pairs.push(serialiseObject(obj[prop]));
+      continue;
+    }
+    const value = obj[prop];
+    if (value) pairs.push(prop + '=' + encodeURIComponent(value));
+  }
+  return pairs.join('&');
+};

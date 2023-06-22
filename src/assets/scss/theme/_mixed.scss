@@ -170,7 +170,7 @@
 .content {
   min-height: 100vh;
   position: relative;
-  padding-bottom: 6.375rem;
+  padding-bottom: 10.375rem;
   @include media-breakpoint-up(sm) {
     padding-bottom: $footer-height;
   }
