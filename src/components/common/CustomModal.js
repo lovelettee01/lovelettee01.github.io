@@ -32,7 +32,6 @@ const CustomModal = ({
     const {
       target: { id }
     } = e;
-    console.log(id, e);
     if (typeof modalOption[id].handleClick === 'function') {
       modalOption[id].handleClick();
     }

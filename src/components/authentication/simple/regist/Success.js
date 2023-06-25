@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Lottie from 'lottie-react';
-import PropTypes from 'prop-types';
 import { Button, Col, Row } from 'react-bootstrap';
+
+import Lottie from 'lottie-react';
 import celebration from 'assets/img/animated-icons/celebration.json';
 
 const Success = () => {
@@ -32,10 +32,6 @@ const Success = () => {
       </Row>
     </>
   );
-};
-
-Success.propTypes = {
-  success: PropTypes.func.isRequired
 };
 
 export default Success;

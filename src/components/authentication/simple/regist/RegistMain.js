@@ -21,7 +21,6 @@ import WizardModal from 'components/common/WizardModal';
 const RegistMain = ({ variant, validation = true, progressBar = true }) => {
   const { isRTL } = useSelector(state => state.config);
   const { step, user } = useSelector(state => state.auth.regist);
-  console.log(`step [${step}]`, user, { variant, validation, progressBar });
 
   const {
     register,
@@ -52,8 +51,6 @@ const RegistMain = ({ variant, validation = true, progressBar = true }) => {
   const dispatch = useDispatch();
   const onSubmitData = data => {
     const userData = { ...user, ...data };
-    console.log('onSubmitData', userData);
-
     if (step === 2) {
       dispatch(signUp(userData)).then(res => {
         const resData = res.payload;

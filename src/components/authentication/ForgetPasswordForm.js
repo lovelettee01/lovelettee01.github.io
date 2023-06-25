@@ -24,7 +24,6 @@ const ForgetPasswordForm = () => {
       email: data.email,
       callback: `${location.protocol}//${location.host}/password_reset`
     };
-    console.log('onSubmitData', params);
     dispatch(passwordResetToken(params)).then(res => {
       const resData = res.payload;
       if (!resData.success) {

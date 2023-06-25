@@ -120,25 +120,29 @@ const usePagination = (items, itemsPerPage = 5, currentPage = 1) => {
   };
 
   const setItemsPerPage = no => {
-    dispatch({
-      type: 'INIT',
-      payload: {
-        items,
-        itemsPerPage: no,
-        currentPage
-      }
-    });
+    if (items) {
+      dispatch({
+        type: 'INIT',
+        payload: {
+          items,
+          itemsPerPage: no,
+          currentPage
+        }
+      });
+    }
   };
 
   useEffect(() => {
-    dispatch({
-      type: 'INIT',
-      payload: {
-        items,
-        itemsPerPage,
-        currentPage
-      }
-    });
+    if (items) {
+      dispatch({
+        type: 'INIT',
+        payload: {
+          items,
+          itemsPerPage,
+          currentPage
+        }
+      });
+    }
   }, [items]);
 
   return {

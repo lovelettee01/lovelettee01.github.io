@@ -42,8 +42,6 @@ const ProfileSettings = ({ user }) => {
   const dispatch = useDispatch();
   const onSubmitData = data => {
     if (!data?.nationality) data.nationality = 'KOR';
-    console.log('onSubmitData', data);
-
     if (avatar[0]?.base64) {
       data.base64ProfileImage = avatar[0]?.base64;
       delete data.avatar;

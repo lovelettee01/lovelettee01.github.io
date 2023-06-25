@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import crypto from './crypto';
+import moment from 'moment';
 
 dayjs.extend(duration);
 
@@ -480,4 +481,14 @@ export const serialiseObject = (obj, isDeep = false) => {
     if (value) pairs.push(prop + '=' + encodeURIComponent(value));
   }
   return pairs.join('&');
+};
+
+export const dateFormat = (date, format = 'YYYY.MM.DD') => {
+  if (!date) return null;
+  return moment(date).format(format);
+};
+
+export const dateTimeFormat = (date, format = 'YYYY.MM.DD HH:mm:ss') => {
+  if (!date) return null;
+  return moment(date).format(format);
 };

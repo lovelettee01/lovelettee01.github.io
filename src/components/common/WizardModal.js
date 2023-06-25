@@ -36,7 +36,6 @@ const WizardModal = ({
     const {
       target: { id }
     } = e;
-    console.log(id);
     if (typeof modalOption[id].handleClick === 'function') {
       modalOption[id].handleClick();
     }

@@ -123,7 +123,6 @@ export const authSlice = createSlice({
       state.isLoggedIn = false;
     },
     SetRegistInfo: (state, action) => {
-      console.log('SetRegistStep', { state, action });
       const {
         payload: { step, user }
       } = action;

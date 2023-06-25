@@ -1,66 +1,39 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   Button,
   Card,
   Col,
-  Form,
-  Offcanvas,
   OverlayTrigger,
   Row,
   Tooltip
 } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import usePosts from 'hooks/usePosts';
 import usePagination from 'hooks/usePagination';
-import { useBreakpoints } from 'hooks/useBreakpoints';
-
 import Flex from 'components/common/Flex';
 import Loading from 'components/common/Loading';
+import PostList from 'components/pages/post/lists/PostList';
 
-import PostFilters from './PostFilters';
-import PostHeader from './PostHeader';
-import PostList from './PostList';
-import PostGrid from './PostGrid';
+import { postListSelf } from 'store/slices/Post';
 
-import { SET_CONFIG } from 'store/slices/Config';
-
-const Posts = () => {
-  const navigate = useNavigate();
-  const { postLayout } = useParams();
-  const layout = postLayout;
-  const isList = layout === 'list';
-  const isGrid = layout === 'grid';
-
-  useEffect(() => {
-    isList || isGrid || navigate('/errors/404');
-  }, []);
-
-  const [showFilterCanvas, setShowFilterCanvas] = useState(false);
-  const [postPerPage, setPostPerPage] = useState(6);
-  const { breakpoints } = useBreakpoints();
-  const { loading, handleSearch } = usePosts();
+const MyPosts = () => {
   const dispatch = useDispatch();
+  const getMyList = useCallback(() => {
+    dispatch(postListSelf());
+  }, [dispatch]);
 
-  //게시물 조회
   useEffect(() => {
-    handleSearch();
-  }, []);
+    getMyList();
+  }, [dispatch]);
 
+  const loading = useSelector(state => state.post.isLoading);
   const { data } = useSelector(s => s.post.posts);
-  const { isNavbarVerticalCollapsed } = useSelector(state => state.config);
-  const postsNavbarVerticalCollapsed = useRef(isNavbarVerticalCollapsed);
-
-  console.log(`Post Data : ${loading} `, data);
   const {
     paginationState: {
       data: paginatedPosts,
-      totalItems,
-      itemsPerPage,
       currentPage,
       canNextPage,
       canPreviousPage,
@@ -68,37 +41,12 @@ const Posts = () => {
     },
     nextPage,
     prevPage,
-    goToPage,
-    setItemsPerPage
-  } = usePagination(data, postPerPage);
-
-  useEffect(() => {
-    dispatch(SET_CONFIG({ key: 'isNavbarVerticalCollapsed', value: true }));
-
-    return () => {
-      dispatch(
-        SET_CONFIG({
-          key: 'isNavbarVerticalCollapsed',
-          value: postsNavbarVerticalCollapsed.current
-        })
-      );
-    };
-  }, []);
-
+    goToPage
+  } = usePagination(data, 3);
   return (
     <>
       <Row className="g-3">
-        {breakpoints.up('xl') && (
-          <Col xl={3}>
-            <PostFilters />
-          </Col>
-        )}
         <Col xl={9}>
-          {/* Posts Header */}
-          <PostHeader
-            layout={layout}
-            setShowFilterCanvas={setShowFilterCanvas}
-          />
           {/* Posts */}
           {loading ? (
             <Loading />
@@ -106,17 +54,11 @@ const Posts = () => {
             <>
               <Row className="mb-3 g-3">
                 {paginatedPosts.length > 0 ? (
-                  paginatedPosts.map(post =>
-                    layout === 'list' ? (
-                      <Col key={post.id} xs={12}>
-                        <PostList post={post} />
-                      </Col>
-                    ) : (
-                      <Col key={post.id} md={6} xxl={4}>
-                        <PostGrid post={post} />
-                      </Col>
-                    )
-                  )
+                  paginatedPosts.map(post => (
+                    <Col key={post.id} xs={12}>
+                      <PostList post={post} />
+                    </Col>
+                  ))
                 ) : (
                   <Card className="bg-transparent shadow-none">
                     <Card.Body className="border-2 border-dashed border-400 border rounded text-center py-5">
@@ -139,23 +81,23 @@ const Posts = () => {
                 <Card>
                   <Card.Body>
                     <Row className="g-3 flex-center justify-content-sm-between">
-                      <Col xs="auto" as={Flex} alignItems="center">
-                        <small className="d-none d-lg-block me-2">Show:</small>
-                        <Form.Select
-                          size="sm"
-                          value={itemsPerPage}
-                          onChange={({ target }) => {
-                            setItemsPerPage(target.value);
-                            setPostPerPage(target.value);
-                          }}
-                          style={{ maxWidth: '4.875rem' }}
-                        >
-                          <option value={2}>2</option>
-                          <option value={4}>4</option>
-                          <option value={6}>6</option>
-                          <option value={totalItems}>All</option>
-                        </Form.Select>
-                      </Col>
+                      {/*<Col xs="auto" as={Flex} alignItems="center">*/}
+                      {/*  <small className="d-none d-lg-block me-2">Show:</small>*/}
+                      {/*  <Form.Select*/}
+                      {/*    size="sm"*/}
+                      {/*    value={itemsPerPage}*/}
+                      {/*    onChange={({ target }) => {*/}
+                      {/*      setItemsPerPage(target.value);*/}
+                      {/*      setPostPerPage(target.value);*/}
+                      {/*    }}*/}
+                      {/*    style={{ maxWidth: '4.875rem' }}*/}
+                      {/*  >*/}
+                      {/*    <option value={2}>2</option>*/}
+                      {/*    <option value={4}>4</option>*/}
+                      {/*    <option value={6}>6</option>*/}
+                      {/*    <option value={totalItems}>All</option>*/}
+                      {/*  </Form.Select>*/}
+                      {/*</Col>*/}
                       <Col xs="auto" as={Flex}>
                         <div>
                           <OverlayTrigger
@@ -231,18 +173,8 @@ const Posts = () => {
           )}
         </Col>
       </Row>
-      {breakpoints.down('xl') && (
-        <Offcanvas
-          show={showFilterCanvas}
-          onHide={() => setShowFilterCanvas(false)}
-          placement="start"
-          className="offcanvas offcanvas-filter-sidebar"
-        >
-          <PostFilters isCanvas={true} setShow={setShowFilterCanvas} />
-        </Offcanvas>
-      )}
     </>
   );
 };
 
-export default Posts;
+export default MyPosts;

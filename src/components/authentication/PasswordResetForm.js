@@ -31,7 +31,6 @@ const PasswordResetForm = ({ hasLabel }) => {
   const dispatch = useDispatch();
   const onSubmitData = data => {
     const params = { password: data.password, token };
-    console.log('onSubmitData', params);
     dispatch(passwordReset(params)).then(res => {
       const resData = res.payload;
       if (!resData.success) {

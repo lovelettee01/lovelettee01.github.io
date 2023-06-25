@@ -11,15 +11,8 @@ import Flex from 'components/common/Flex';
 
 const LogoutContent = ({ layout = '', titleTag: TitleTag }) => {
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(signOut())
-      .then(res => {
-        console.log(`LoginOut Dispatch Then`, res);
-      })
-      .catch(err => {
-        console.log(`LoginOut Dispatch Catch`, err);
-      });
+    dispatch(signOut());
   }, []);
 
   return (
