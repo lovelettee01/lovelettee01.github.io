@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import classNames from 'classnames';
 import { Button, Card, Col, Image, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import usePostHook from '../usePostHook';
 import Flex from 'components/common/Flex';
 import Hoverbox from 'components/common/Hoverbox';
 import ModalVideoContent from '../ModalVideoContent';
@@ -26,26 +24,35 @@ const PostList = ({ post }) => {
     title,
     textContent,
     postType,
-    community,
+    // community,
     mediaContents,
-    attachedFiles,
-    enableComment,
+    //attachedFiles,
+    //enableComment,
     viewCount,
     likeCount,
     replyCount,
-    liked,
+    //liked,
     activeStatus,
-    vote,
+    //vote,
     isAnnouncement,
     isPublic,
-    isViewed,
-    isVoted,
+    //isViewed,
+    //isVoted,
     votedMemberCount,
     votedShareCount,
     votedShareRatio,
-    createdAt,
-    updatedAt
+    // updatedAt,
+    createdAt
   } = post;
+
+  const isInFavouriteItems = id => {
+    if (id === null) return;
+  };
+  const isInCart = id => {
+    if (id === null) return;
+  };
+  const handleFavouriteClick = () => {};
+  const handleAddToCart = () => {};
 
   return (
     <>
@@ -131,51 +138,58 @@ const PostList = ({ post }) => {
                   >
                     <div className="mb-lg-4 mt-auto mt-lg-0">
                       <h4 className="fs-1 text-warning d-flex align-items-center">
-                        지분율 <span>{votedShareRatio}</span>
-                        {votedMemberCount && (
+                        지분율 :&nbsp;<span>{votedShareRatio || '0'}</span>
+                        {votedShareCount && (
                           <span className="ms-2 fs--1 text-700">
-                            참여자 : {votedMemberCount}명
+                            (참여주식 :{' '}
+                            {votedShareCount
+                              ? votedShareCount?.toLocaleString()
+                              : 0}
+                            주)
                           </span>
                         )}
                       </h4>
                       <p className="mb-0 fs--1 text-800">
-                        {votedShareCount?.toLocaleString()} 참여중
+                        {votedMemberCount
+                          ? votedMemberCount?.toLocaleString()
+                          : 0}{' '}
+                        참여중
                       </p>
                     </div>
-                    <Flex className="mt-3 flex-lg-column gap-2">
-                      {/*<Button*/}
-                      {/*  size="md"*/}
-                      {/*  variant="falcon-default"*/}
-                      {/*  className="fs--1 text-600 white-space-nowrap w-100"*/}
-                      {/*  onClick={handleFavouriteClick}*/}
-                      {/*>*/}
-                      {/*  <FontAwesomeIcon*/}
-                      {/*    icon={*/}
-                      {/*      isInFavouriteItems(id) ? 'heart' : ['far', 'heart']*/}
-                      {/*    }*/}
-                      {/*    className={classNames('', {*/}
-                      {/*      'text-danger': isInFavouriteItems(id)*/}
-                      {/*    })}*/}
-                      {/*  />*/}
-                      {/*  <span className="ms-1 d-none d-lg-inline">*/}
-                      {/*    {isInFavouriteItems(id) ? '관심게시물' : '관심등록'}*/}
-                      {/*  </span>*/}
-                      {/*</Button>*/}
-                      {/*<Button*/}
-                      {/*  size="md"*/}
-                      {/*  variant="primary"*/}
-                      {/*  className="fs--1"*/}
-                      {/*  onClick={handleAddToCart}*/}
-                      {/*>*/}
-                      {/*  <FontAwesomeIcon*/}
-                      {/*    icon={`${*/}
-                      {/*      isInCart(id) ? 'shopping-cart' : 'cart-plus'*/}
-                      {/*    }`}*/}
-                      {/*  />*/}
-                      {/*  <span className="ms-1 d-none d-lg-inline">*/}
-                      {/*    {isInCart(id) ? '참여완료' : '참여하기'}*/}
-                      {/*  </span>*/}
-                      {/*</Button>*/}
+                    <Flex className="mt-3 flex-lg-column gap-2 d-none">
+                      <Button
+                        size="md"
+                        variant="falcon-default"
+                        className="fs--1 text-600 white-space-nowrap w-100"
+                        onClick={handleFavouriteClick}
+                      >
+                        <FontAwesomeIcon
+                          icon={
+                            isInFavouriteItems(id) ? 'heart' : ['far', 'heart']
+                          }
+                          className={classNames('', {
+                            'text-danger': isInFavouriteItems(id)
+                          })}
+                        />
+                        <span className="ms-1 d-none d-lg-inline">
+                          {isInFavouriteItems(id) ? '관심게시물' : '관심등록'}
+                        </span>
+                      </Button>
+                      <Button
+                        size="md"
+                        variant="primary"
+                        className="fs--1"
+                        onClick={handleAddToCart}
+                      >
+                        <FontAwesomeIcon
+                          icon={`${
+                            isInCart(id) ? 'shopping-cart' : 'cart-plus'
+                          }`}
+                        />
+                        <span className="ms-1 d-none d-lg-inline">
+                          {isInCart(id) ? '참여완료' : '참여하기'}
+                        </span>
+                      </Button>
                     </Flex>
                   </Flex>
                 </Col>
@@ -255,8 +269,8 @@ PostList.propTypes = {
     isPublic: PropTypes.bool,
     isViewed: PropTypes.bool,
     isVoted: PropTypes.bool,
-    voteMemberCount: PropTypes.number,
-    votedShardCount: PropTypes.number,
+    votedMemberCount: PropTypes.number,
+    votedShareCount: PropTypes.number,
     votedShareRatio: PropTypes.number,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired

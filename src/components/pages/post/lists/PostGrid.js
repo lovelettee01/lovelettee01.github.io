@@ -17,7 +17,6 @@ import ModalVideoContent from '../ModalVideoContent';
 import PostWriter from './PostWriter';
 import { Link } from 'react-router-dom';
 import PostTags from './PostTags';
-import PostAttach from './PostAttach';
 
 const PostGrid = ({ post }) => {
   const [showModal, setShowModal] = useState(false);
@@ -26,28 +25,37 @@ const PostGrid = ({ post }) => {
     id,
     writer,
     title,
-    textContent,
+    //textContent,
     postType,
-    community,
+    //community,
     mediaContents,
-    attachedFiles,
-    enableComment,
-    viewCount,
-    likeCount,
-    replyCount,
-    liked,
+    //attachedFiles,
+    // enableComment,
+    // viewCount,
+    // likeCount,
+    // replyCount,
+    // liked,
     activeStatus,
-    vote,
+    //vote,
     isAnnouncement,
     isPublic,
-    isViewed,
-    isVoted,
+    //isViewed,
+    //isVoted,
     votedMemberCount,
     votedShareCount,
     votedShareRatio,
-    createdAt,
-    updatedAt
+    //updatedAt,
+    createdAt
   } = post;
+
+  const isInFavouriteItems = id => {
+    if (id === null) return;
+  };
+  const isInCart = id => {
+    if (id === null) return;
+  };
+  const handleFavouriteClick = () => {};
+  const handleAddToCart = () => {};
 
   return (
     <>
@@ -119,59 +127,62 @@ const PostGrid = ({ post }) => {
           <Row className="g-0 mb-3 align-items-end">
             <Col className="ps-3">
               <h4 className="fs-1 text-warning d-flex align-items-center">
-                지분율 <span>{votedShareRatio}</span>
-                {votedMemberCount && (
+                지분율 :&nbsp;<span>{votedShareRatio || '0'}</span>
+                {votedShareCount && (
                   <span className="ms-2 fs--1 text-700">
-                    참여자 : {votedMemberCount}명
+                    (참여주식 :{' '}
+                    {votedShareCount ? votedShareCount?.toLocaleString() : 0}
+                    주)
                   </span>
                 )}
               </h4>
               <p className="mb-0 fs--1 text-800">
-                {votedShareCount?.toLocaleString()} 참여중
+                {votedMemberCount ? votedMemberCount?.toLocaleString() : 0}{' '}
+                참여중
               </p>
             </Col>
-            <Col xs="auto" className="pe-3">
-              {/*<OverlayTrigger*/}
-              {/*  placement="top"*/}
-              {/*  overlay={*/}
-              {/*    <Tooltip style={{ position: 'fixed' }}>*/}
-              {/*      {isInFavouriteItems(id)*/}
-              {/*        ? 'Remove from Wishlist'*/}
-              {/*        : 'Add to Wishlist'}*/}
-              {/*    </Tooltip>*/}
-              {/*  }*/}
-              {/*>*/}
-              {/*  <Button*/}
-              {/*    variant="falcon-default"*/}
-              {/*    size="sm"*/}
-              {/*    onClick={handleFavouriteClick}*/}
-              {/*    className="me-2 hover-danger"*/}
-              {/*  >*/}
-              {/*    <FontAwesomeIcon*/}
-              {/*      icon={isInFavouriteItems(id) ? 'heart' : ['far', 'heart']}*/}
-              {/*      className={`${isInFavouriteItems(id) && 'text-danger'}`}*/}
-              {/*      transform="down-1"*/}
-              {/*    />*/}
-              {/*  </Button>*/}
-              {/*</OverlayTrigger>*/}
-              {/*<OverlayTrigger*/}
-              {/*  placement="top"*/}
-              {/*  overlay={*/}
-              {/*    <Tooltip style={{ position: 'fixed' }}>*/}
-              {/*      {isInCart(id) ? 'Remove from Cart' : 'Add to Cart'}*/}
-              {/*    </Tooltip>*/}
-              {/*  }*/}
-              {/*>*/}
-              {/*  <Button*/}
-              {/*    variant={`${isInCart(id) ? 'primary' : 'falcon-default'}`}*/}
-              {/*    size="sm"*/}
-              {/*    onClick={handleAddToCart}*/}
-              {/*  >*/}
-              {/*    <FontAwesomeIcon*/}
-              {/*      icon={isInCart(id) ? 'shopping-cart' : 'cart-plus'}*/}
-              {/*    />*/}
-              {/*  </Button>*/}
-              {/*</OverlayTrigger>*/}
+            <Col xs="auto" className="pe-3 d-none">
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip style={{ position: 'fixed' }}>
+                    {isInFavouriteItems(id)
+                      ? 'Remove from Wishlist'
+                      : 'Add to Wishlist'}
+                  </Tooltip>
+                }
+              >
+                <Button
+                  variant="falcon-default"
+                  size="sm"
+                  onClick={handleFavouriteClick}
+                  className="me-2 hover-danger"
+                >
+                  <FontAwesomeIcon
+                    icon={isInFavouriteItems(id) ? 'heart' : ['far', 'heart']}
+                    className={`${isInFavouriteItems(id) && 'text-danger'}`}
+                    transform="down-1"
+                  />
+                </Button>
+              </OverlayTrigger>
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip style={{ position: 'fixed' }}>
+                    {isInCart(id) ? 'Remove from Cart' : 'Add to Cart'}
+                  </Tooltip>
+                }
+              >
+                <Button
+                  variant={`${isInCart(id) ? 'primary' : 'falcon-default'}`}
+                  size="sm"
+                  onClick={handleAddToCart}
+                >
+                  <FontAwesomeIcon
+                    icon={isInCart(id) ? 'shopping-cart' : 'cart-plus'}
+                  />
+                </Button>
+              </OverlayTrigger>
             </Col>
           </Row>
         </Card.Body>
@@ -247,8 +258,8 @@ PostGrid.propTypes = {
     isPublic: PropTypes.bool,
     isViewed: PropTypes.bool,
     isVoted: PropTypes.bool,
-    voteMemberCount: PropTypes.number,
-    votedShardCount: PropTypes.number,
+    votedMemberCount: PropTypes.number,
+    votedShareCount: PropTypes.number,
     votedShareRatio: PropTypes.number,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired

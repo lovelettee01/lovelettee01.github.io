@@ -9,11 +9,14 @@ import Flex from 'components/common/Flex';
 import SoftBadge from 'components/common/SoftBadge';
 import usePosts from 'hooks/usePosts';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const PostFilters = ({ setShow, isCanvas }) => {
   const [filterOptions, setFilterOptions] = useState(
     useSelector(state => state.post.filters)
   );
+
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   const { handleFilterSearch } = usePosts();
   const handleFilterOptions = e => {
@@ -62,8 +65,13 @@ const PostFilters = ({ setShow, isCanvas }) => {
               className="ms-2 mt-0 mb-0"
               style={{ fontSize: '12px' }}
               onClick={() => {
-                handleFilterSearch(filterOptions);
-                setShow(false);
+                if (isLoggedIn) {
+                  handleFilterSearch(filterOptions);
+                } else {
+                  toast.error('필터기능은 로그인 이후 사용가능합니다.');
+                }
+
+                if (isCanvas) setShow(false);
               }}
             >
               <FontAwesomeIcon icon="redo-alt" className="me-1 fs--2" />

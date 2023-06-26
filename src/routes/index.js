@@ -55,7 +55,7 @@ const WebsiteRoutes = () => {
       {/* //--- PublicLayout Start  */}
       <Route element={<PublicLayout />}>
         {/* Default */}
-        <Route path="/" element={<Navigate to="/post/list" replace />} />
+        <Route path="/" element={<Navigate to="/post/grid" replace />} />
 
         {/* Company */}
         <Route path="company/:companyLayout" element={<Companys />} />

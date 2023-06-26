@@ -1,13 +1,9 @@
 import React from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 import { Card, Col, Row } from 'react-bootstrap';
-import PostDetailsMedia from './PostDetailsMedia';
-import PostDetailsMain from './PostDetailsMain';
-import PostDetailsFooter from './PostDetailsFooter';
-import Flex from 'components/common/Flex';
 
 const PostDetails = () => {
-  const { postId } = useParams();
+  //const { postId } = useParams();
 
   return (
     <>

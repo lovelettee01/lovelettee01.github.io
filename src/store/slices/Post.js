@@ -8,9 +8,15 @@ export const postList = createAsyncThunk(
   'post/postList',
   async (args, thunkAPI) => {
     try {
-      const data = await PostService.postList(args);
-      Log.debug('[Post] post/postList', data);
-      return data;
+      if (thunkAPI.getState().auth.isLoggedIn) {
+        const data = await PostService.postList(args);
+        Log.debug('[Post] post/postList', data);
+        return data;
+      } else {
+        const data = await PostService.postListPublic(args);
+        Log.debug('[Post] post/postListPublic', data);
+        return data;
+      }
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
     }

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Flex from 'components/common/Flex';
 
-const PostAttach = ({ id, likeCount, replyCount, viewCount }) => {
+const PostAttach = ({ likeCount, replyCount, viewCount }) => {
   return (
     <Row className="flex-1 d-flex align-items-end fw-semi-bold fs--1">
       <Col xs="auto">
@@ -50,7 +50,6 @@ const PostAttach = ({ id, likeCount, replyCount, viewCount }) => {
 };
 
 PostAttach.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   viewCount: PropTypes.number,
   likeCount: PropTypes.number,
   replyCount: PropTypes.number

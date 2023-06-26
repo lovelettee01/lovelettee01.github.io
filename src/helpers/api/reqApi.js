@@ -18,6 +18,7 @@ import Agent from 'agentkeepalive';
 
 export function createHttpAgent() {
   return new Agent({
+    keepAlive: true,
     maxSockets: 100,
     maxFreeSockets: 10,
     timeout: 60000,
@@ -27,6 +28,7 @@ export function createHttpAgent() {
 
 export function createHttpsAgent() {
   return new Agent.HttpsAgent({
+    keepAlive: true,
     maxSockets: 100,
     maxFreeSockets: 10,
     timeout: 60000,

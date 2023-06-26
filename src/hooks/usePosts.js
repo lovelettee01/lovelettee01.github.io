@@ -29,10 +29,11 @@ const usePosts = () => {
 
   const handleFilterSearch = filters => {
     dispatch(SET_FILTER_OPTIONS(filters));
-    search();
+    search(filterParams(filters));
   };
 
   const search = (params = {}) => {
+    //정렬조건
     params = mergeObject(
       {
         orderBy: sortBy,
@@ -42,13 +43,19 @@ const usePosts = () => {
     );
 
     //필터조건
+    params = mergeObject(filterParams(filters), params);
+    dispatch(postList(params));
+  };
+
+  const filterParams = filters => {
+    const params = {};
+    //필터조건
     if (!!filters && filters.length > 0) {
       filters.map(filter => {
         params[filter.name] = filter.value == 'true' || filter.value;
       });
     }
-    console.log(`usePosts >> `, params);
-    dispatch(postList(params));
+    return params;
   };
 
   return {
